@@ -4,17 +4,16 @@ import { Link } from 'react-router-dom';
 const index = () => {
   return (
     <div>
-      <h2 className="font-semibold text-xl h-[100px] flex items-center justify-between px-40 bg-[#7b9e84d1] rounded-s-md ">
+      <h2 className="font-semibold text-xl  w-full h-[100px] flex items-center justify-between px-40 bg-[#7b9e84d1] rounded-md ">
         {' '}
         마이페이지{' '}
       </h2>
 
-      <div style={{ display: 'flex', height: '100vh', gap: 8 }}>
+      <div style={{ display: 'flex', height: '73vh', gap: 4 }}>
         {/* 왼쪽 내용 */}
         <div
           style={{
             flex: 1,
-
             backgroundColor: '#f0f0f0',
             padding: '20px',
           }}
@@ -27,7 +26,6 @@ const index = () => {
               <li>
                 <Link to="/inquiry">1:1 문의 내역</Link>
               </li>
-
               <li>
                 <Link to="/reservation"> 나의 예약</Link>
               </li>

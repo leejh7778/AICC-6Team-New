@@ -50,33 +50,30 @@ function Map() {
         }
       });
 
-       // 지도 줌 인/아웃 시 마커 업데이트 이벤트 핸들러
-       naver.maps.Event.addListener(mapRef.current, "zoom_changed", () => {
+      // 지도 줌 인/아웃 시 마커 업데이트 이벤트 핸들러
+      naver.maps.Event.addListener(mapRef.current, 'zoom_changed', () => {
         if (mapRef.current !== null) {
           checkForMarkersRendering(mapRef.current, marker);
         }
       });
-      
+
       // 지도 드래그 시 마커 업데이트 이벤트 핸들러
-      naver.maps.Event.addListener(mapRef.current, "dragend", () => {
+      naver.maps.Event.addListener(mapRef.current, 'dragend', () => {
         if (mapRef.current !== null) {
           checkForMarkersRendering(mapRef.current, marker);
         }
       });
-    } else { alert('오류')}
+    } else {
+      alert('오류');
+    }
   }, [currentMyLocation]);
 
   return (
-    <div className='flex flex-col items-center justify-center w-full mt-3'>
-        <div id="map" className="w-[80%] h-[600px] mb-10" />
-        <Search/>
+    <div className="flex flex-col items-center justify-center w-full mt-3">
+      <div id="map" className="w-[80%] h-[600px] mb-10" />
+      <Search />
     </div>
-
-
-);
-
-  
-
+  );
 }
 
 export default Map;
