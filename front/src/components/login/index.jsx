@@ -1,48 +1,54 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const index = () => {
+const Home = () => {
   return (
     <div style={{ height: 100 }}>
       <header />
+      <br />
+      <br />
+      <br />
+      <br />
 
-      <h2 className="w-full h-4/5 bg-slate-200 flex justify-center px-2 py-2 text-4xl font-semibold ">
-        Sign-In
+      <h2 className="w-full h-4/5 flex justify-center px-2 py-2 text-4xl font-semibold ">
+        로그인
       </h2>
+      <br />
+      <br />
 
-      <div className="w-full h-4/5 bg-slate-200 flex justify-center px-2 py-2 text-xl mix-blend-normal  ">
-        <label htmlFor="email">
-          <strong>Email: </strong>
-        </label>
+      <div className="w-full  box-border border-2 md:box-content rounded-md border-gray-500  bg-slate-white flex justify-center px-2 py-2 text-xl">
+        <label htmlFor="email"></label>
         <input
           type="email"
-          placeholder="Enter Your Email..."
+          placeholder="이메일을 입력해주세요."
           name="email"
           className="form-control"
         />
       </div>
-      <div className="w-full h-4/5 bg-slate-200 flex justify-center px-2 py-2 text-xl">
-        <label htmlFor="password">
-          <strong>Password: </strong>
-        </label>
+      <br />
+      <div className="w-full  box-border border-2 md:box-content rounded-md border-gray-500  bg-slate-white flex justify-center px-2 py-2 text-xl">
+        <label htmlFor="password"></label>
         <input
           type="password"
-          placeholder="Enter Your Password..."
+          placeholder="비밀번호를 입력해주세요."
           name="password"
           className="form-control "
         />
       </div>
+      <br />
+      <br />
       <button
-        type="submit"
-        className="btn w-full h-4/5 bg-slate-200 flex justify-center px-2 py-2 text-xl"
+        type="surmit"
+        className="btn  cursor-pointer box-border border-2 md:box-content rounded-md border-solid border-gray-400 bg-[#769175]   hover:bg-[#506b54]  w-full  flex justify-center px-2 py-2 text-xl "
       >
         <Link to="/">Sign In</Link>
       </button>
-      <div className="w-full h-4/5 bg-slate-200 flex justify-center px-2 py-2 text-xl">
+      <br />
+      <div className="w-full h-4/5 flex justify-center px-2 py-2 text-xl">
         <Link to="/register">Create Account</Link>
       </div>
     </div>
   );
 };
 
-export default index;
+export default Home;
