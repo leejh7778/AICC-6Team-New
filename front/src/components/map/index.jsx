@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import useGeoloaction from '../../hooks/useGeolocation';
+import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 
 function Map() {
   const mapRef = useRef(null);
@@ -44,6 +45,20 @@ function Map() {
           infoWindow.close();
         } else if (mapRef.current !== null) {
           infoWindow.open(mapRef.current, marker);
+        }
+      });
+
+       // 지도 줌 인/아웃 시 마커 업데이트 이벤트 핸들러
+       naver.maps.Event.addListener(mapRef.current, "zoom_changed", () => {
+        if (mapRef.current !== null) {
+          checkForMarkersRendering(mapRef.current, marker);
+        }
+      });
+      
+      // 지도 드래그 시 마커 업데이트 이벤트 핸들러
+      naver.maps.Event.addListener(mapRef.current, "dragend", () => {
+        if (mapRef.current !== null) {
+          checkForMarkersRendering(mapRef.current, marker);
         }
       });
     }
