@@ -23,7 +23,6 @@ exports.postUser = async (req, res) => {
     return res.status(201).json({ message: 'Account Created Successfully' });
   } catch (error) {
     if (error.code === '23505') {
-      // Postgres의 unique constraint violation error code
       return res
         .status(409)
         .json({ message: 'UserID or Email already exists' });
@@ -72,7 +71,7 @@ exports.loginUser = async (req, res) => {
     res.cookie('token', token, {
       httpOnly: true,
       sameSite: 'None',
-      secure: true, // HTTPS를 사용할 경우에만 쿠키 전송
+      secure: true,
     });
 
     return res.status(200).json({ token: token });

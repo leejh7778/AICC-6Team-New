@@ -4,6 +4,7 @@ const PORT = '8080';
 const app = express();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(
@@ -13,6 +14,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 
 // 로그인 API 엔드포인트
 app.post('/login', async (req, res) => {
