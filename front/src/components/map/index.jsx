@@ -25,6 +25,27 @@ function Map() {
         ),
         map: mapRef.current,
       });
+      const infoWindow = new naver.maps.InfoWindow({
+        content: [
+          '<div style="padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;">',
+          `   <div style="font-weight: bold; margin-bottom: 5px;">여기는 제목</div>`,
+          `   <div style="font-size: 13px;">여기는 내용<div>`,
+          '</div>',
+        ].join(''),
+        maxWidth: 300,
+        anchorSize: {
+          width: 12,
+          height: 14,
+        },
+        borderColor: '#cecdc7',
+      });
+      naver.maps.Event.addListener(marker, 'click', () => {
+        if (infoWindow.getMap()) {
+          infoWindow.close();
+        } else if (mapRef.current !== null) {
+          infoWindow.open(mapRef.current, marker);
+        }
+      });
     }
   }, [currentMyLocation]);
   return <div id="map" className="w-[80%] h-[500px]" />;
