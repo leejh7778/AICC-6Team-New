@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { getTasks } = require('../controllers/getTask');
+const { getTask } = require('../controllers/getTask');
 
-router.get('/get_tasks/:userId', getTasks);
+router.get('/get_task/:reserv_idx', getTask);
 
 module.exports = router;

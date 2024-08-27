@@ -47,6 +47,9 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// app.use(require('./routes/postRoutes'));
+app.use(require('./routes/getRoute'));
+app.use(require('./routes/postRoute'));
+app.use(require('./routes/deleteRoute'));
+app.use(require('./routes/updateRoute'));
 
 app.listen(PORT, () => console.log(`Server running on ${PORT}`)); // 서버 실행 시 메시지
