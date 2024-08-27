@@ -4,21 +4,18 @@ import axios from 'axios';
 
 const Register = () => {
   const [values, setValues] = useState({
-    userID: '',
+    userid: '',
     password: '',
     username: '',
     email: '',
   });
 
   const navigate = useNavigate();
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      !values.userID ||
+      !values.userid ||
       !values.password ||
       !values.username ||
       !values.email
@@ -60,9 +57,9 @@ const Register = () => {
             <input
               type="text"
               placeholder="아이디를 입력해 주세요 "
-              name="userID"
+              name="userid"
               className="form-control"
-              onChange={handleChange}
+              onChange={(e) => setValues({ ...values, userid: e.target.value })}
             />
           </div>
           <br />
@@ -73,7 +70,9 @@ const Register = () => {
               placeholder="비밀번호를 입력해 주세요 "
               name="password"
               className="form-control"
-              onChange={handleChange}
+              onChange={(e) =>
+                setValues({ ...values, password: e.target.value })
+              }
             />
           </div>
           <br />
@@ -84,7 +83,9 @@ const Register = () => {
               placeholder="이름을 입력해 주세요 "
               name="username"
               className="form-control"
-              onChange={handleChange}
+              onChange={(e) =>
+                setValues({ ...values, username: e.target.value })
+              }
             />
           </div>
           <br />
@@ -95,7 +96,7 @@ const Register = () => {
               placeholder="이메일을 입력해주세요"
               name="email"
               className="form-control"
-              onChange={handleChange}
+              onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
           </div>
           <br />
