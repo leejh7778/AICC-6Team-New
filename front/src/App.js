@@ -33,7 +33,7 @@ function App() {
             <Route path="/reservstion" element={<Reservation />} />
           </Routes>
         </div>
-        <div className="footer w-full mt-5">
+        <div className="footer w-full mt-0">
           <Footer />
         </div>
       </div>

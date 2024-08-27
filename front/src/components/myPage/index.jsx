@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 const index = () => {
   return (
     <div>
-      <h2 className="font-semibold text-xl h-[100px] flex items-center justify-between px-40 bg-[#7b9e84d1] rounded-s-md ">
-        {' '}
-        마이페이지{' '}
-      </h2>
+    <PageTitle title="MyPage" className="p-7"/>
 
       <div style={{ display: 'flex', height: '100vh', gap: 8 }}>
         {/* 왼쪽 내용 */}

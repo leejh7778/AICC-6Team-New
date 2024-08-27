@@ -69,6 +69,7 @@ function Map() {
   return (
     <div className='flex flex-col items-center justify-center w-full mt-3'>
         <div id="map" className="w-[80%] h-[600px] mb-10" />
+        <div>dkdkdkdk</div>
         <Search/>
     </div>
 

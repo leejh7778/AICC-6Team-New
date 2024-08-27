@@ -16,15 +16,15 @@ const Navibar = () => {
   <img src={PetLogo} alt="" className='w-20 h-20' />
  </div>
  <h2 className="font-semibold text-xl">
-    <Link to="/" className='font-Kr'>파트라슈</Link>
+    <Link to="/" className='font-Kr text-cyan-700 '>파트라슈</Link>
  </h2>
 </div>
 
 <div className='naviMenu flex px-10  '>
-  <span className='font-Kr font-bold hover:font-bold '>
+  <span className='font-Kr font-bold text-green-600 hover:text-green-800 '>
   <Link to='/map'>병원찾기</Link>
   </span>
-    <span className='font-Kr font-bold hover:font-bold '> 
+    <span className='font-Kr font-bold text-green-600 hover:text-green-800  '> 
   <Link to='/community'>커뮤니티</Link>
    </span>
  </div>
