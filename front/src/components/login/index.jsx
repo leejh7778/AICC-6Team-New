@@ -39,7 +39,7 @@ const Home = () => {
       <br />
       <button
         type="surmit"
-        className="btn  cursor-pointer box-border border-2 md:box-content rounded-md border-solid border-gray-400 bg-[#769175]   hover:bg-[#506b54]  w-full  flex justify-center px-2 py-2 text-xl "
+        className="btn  cursor-pointer box-border border-2 md:box-content rounded-md border-solid border-gray-400 bg-[#769175]   hover:bg-[#657a69]  w-full  flex justify-center px-2 py-2 text-xl "
       >
         <Link to="/">Sign In</Link>
       </button>
