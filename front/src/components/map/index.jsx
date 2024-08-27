@@ -18,7 +18,7 @@ function Map() {
         zoomControlOptions: { position: 9 },
       };
       mapRef.current = new naver.maps.Map('map', mapOptions);
-      new naver.maps.Marker({
+      const marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(
           currentMyLocation.lat,
           currentMyLocation.lng
