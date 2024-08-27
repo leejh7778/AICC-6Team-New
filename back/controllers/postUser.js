@@ -4,16 +4,16 @@ const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 
 exports.postUser = async (req, res) => {
-  const { userID, username, email, password } = req.body;
+  const { userid, username, email, password } = req.body;
 
-  if (!userID || !username || !email || !password) {
+  if (!userid || !username || !email || !password) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
     // 비밀번호 해시화
     const hash = await bcrypt.hash(password, saltRounds);
-    const values = [userID, hash, username, email];
+    const values = [userid, hash, username, email];
 
     await database.query(
       'INSERT INTO hospuser (userID, password, username, email) VALUES ($1, $2, $3, $4)',
@@ -32,9 +32,9 @@ exports.postUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-  const { userID, password } = req.body;
+  const { userid, password } = req.body;
 
-  if (!userID || !password) {
+  if (!userid || !password) {
     return res
       .status(400)
       .json({ message: 'UserID and Password are required' });
@@ -63,7 +63,7 @@ exports.loginUser = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { userID: user.userID, username: user.username, email: user.email },
+      { userID: user.userid, username: user.username, email: user.email },
       process.env.SECRET_KEY,
       { expiresIn: '1d' }
     );

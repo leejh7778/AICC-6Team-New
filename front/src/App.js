@@ -6,12 +6,12 @@ import Register from './components/register/index';
 import Mypage from './components/myPage/index';
 import Map from './components/map';
 import Community from './components/community';
-import Inquiry from './components/inquiry/index';
-import Reservation from './components/resevation/index';
-
+import Inquiry from './components/inquiry';
+import Reservation from './components/reservation/index';
 import Header from './components/Header';
 import Navibar from './components/Navibar';
 import Footer from './components/Footer';
+
 function App() {
   return (
     <BrowserRouter>
@@ -30,7 +30,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/inquiry" element={<Inquiry />} />
-            <Route path="/reservstion" element={<Reservation />} />
+            <Route path="/reservation" element={<Reservation />} />
           </Routes>
         </div>
         <div className="footer w-full mt-0">

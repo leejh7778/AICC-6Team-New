@@ -4,43 +4,25 @@ import { Link } from 'react-router-dom';
 const index = () => {
   return (
     <div>
-
-
       <h2 className="font-semibold text-xl  w-full h-[100px] flex items-center justify-between px-40 bg-[#7b9e84d1] rounded-md ">
         {' '}
-        마이페이지{' '}
+        예약확인{' '}
       </h2>
 
-      <div style={{ display: 'flex', height: '73vh', gap: 4 }}>
-        {/* 왼쪽 내용 */}
-        <div
-          style={{
-            flex: 1,
-            backgroundColor: '#f0f0f0',
-            padding: '20px',
-          }}
-        >
-          <h2
-            className="font-semibold text-center text justify-normal-center
-          "
-          >
-            <ul>
-              <li>
-                <Link to="/inquiry">1:1 문의 내역</Link>
-              </li>
-              <li>
-                <Link to="/reservation"> 나의 예약</Link>
-              </li>
-            </ul>
-          </h2>
-        </div>
-
-        {/* 오른쪽 내용 */}
+      <div style={{ display: 'flex', height: '73vh' }}>
         <div style={{ flex: 4, backgroundColor: '#e0e0e0', padding: '20px' }}>
-          <h2 className="article-title"> 내역</h2>
+          <h2 className="article-title"> 예약 현황</h2>
           <div className="section-list">
             <ul>
               <li>
+                <h2
+                  className="font-semibold text-center text justify-normal-center
+          "
+                >
+                  <ul>
+                    <Link />
+                  </ul>
+                </h2>
                 <a href="#"></a>data
               </li>
             </ul>{' '}
@@ -51,6 +33,13 @@ const index = () => {
               optio // voluptatem! At, ullam culpa. //{' '}
             </p>
           </div>
+          <br />
+          <br />
+          <ul>
+            <li>
+              <Link to="/">메인으로 돌아가기 </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
