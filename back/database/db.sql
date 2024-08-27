@@ -1,11 +1,11 @@
 -- 테이블 생성(회원가입)
-CREATE TABLE hospUser (
+CREATE TABLE hospuser (
     user_idx UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    userName VARCHAR(100) NOT NULL,
-    email TEXT NOT NULL,
-    pn TEXT NOT NULL,
+    -- pn TEXT NOT NULL,
     userID VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL
+    password VARCHAR(100) NOT NULL,
+    userName VARCHAR(100) NOT NULL,
+    email TEXT NOT NULL
 );
 
 -- 테이블 생성(병원조회)

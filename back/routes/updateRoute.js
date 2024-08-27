@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const {
-  updateCompletedTask,
+  // updateCompletedTask,
   updateTask,
 } = require('../controllers/updateTask');
 
-router.patch('/update_completed_task', updateCompletedTask);
+// router.patch('/update_completed_task', updateCompletedTask);
 
 router.put('/update_task', updateTask);
 
