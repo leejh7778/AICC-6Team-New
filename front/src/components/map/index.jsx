@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import useGeoloaction from '../../hooks/useGeolocation';
 import checkForMarkersRendering from '../../util/checkForMarkersRendering';
+import Search from './Search';
 
 function Map() {
   const mapRef = useRef(null);
@@ -8,7 +9,7 @@ function Map() {
   const { currentMyLocation } = useGeoloaction();
 
   useEffect(() => {
-    if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
+    if (currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
       const mapOptions = {
         center: new naver.maps.LatLng(37.48097121950012, 126.8794883707286),
         logoControl: false,
@@ -16,6 +17,7 @@ function Map() {
         scaleControl: true,
         tileDuration: 200,
         zoom: 14,
+        zoomControlOptions: true,
         zoomControlOptions: { position: 9 },
       };
       mapRef.current = new naver.maps.Map('map', mapOptions);
@@ -61,9 +63,20 @@ function Map() {
           checkForMarkersRendering(mapRef.current, marker);
         }
       });
-    }
+    } else { alert('오류')}
   }, [currentMyLocation]);
-  return <div id="map" className="w-[80%] h-[500px]" />;
+
+  return (
+    <div className='flex flex-col items-center justify-center w-full mt-3'>
+        <div id="map" className="w-[80%] h-[600px] mb-10" />
+        <Search/>
+    </div>
+
+
+);
+
+  
+
 }
 
 export default Map;

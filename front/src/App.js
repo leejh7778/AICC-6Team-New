@@ -15,14 +15,13 @@ import Footer from './components/Footer';
 function App() {
   return (
     <BrowserRouter>
-      <div className="z-0 flex flex-col justify-between h-auto items-center">
+      <div className="z-0 flex flex-col justify-between items-center">
         <nav className="z-10 header w-full backdrop-blur-sm">
           <Header />
-
           <Navibar />
         </nav>
 
-        <div className="container w-[80%] flex justify-center items-center relative">
+        <div className="w-[80%] flex justify-center items-center">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/map" element={<Map />} />
