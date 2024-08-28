@@ -10,7 +10,8 @@ function Map() {
   const [hospitals, setHospitals] = useState([]);
 
   useEffect(() => {
-    fetch('/hospitals')
+    // 병원 데이터 가져오기
+    fetch('http://localhost:8080/hospitals')
       .then((res) => {
         if (!res.ok) {
           throw new Error('Network response was not ok.');
@@ -26,6 +27,7 @@ function Map() {
 
   useEffect(() => {
     if (currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
+      // 지도 초기화
       const mapOptions = {
         center: new naver.maps.LatLng(
           currentMyLocation.lat,
@@ -39,6 +41,7 @@ function Map() {
       };
       mapRef.current = new naver.maps.Map('map', mapOptions);
 
+      // 현재 위치 마커 추가
       const currentMarker = new naver.maps.Marker({
         position: new naver.maps.LatLng(
           currentMyLocation.lat,
@@ -47,6 +50,8 @@ function Map() {
         map: mapRef.current,
         title: '현재 위치',
       });
+
+      // 병원 마커 추가
 
       const hospitalMarkers = hospitals.map((hospital) => {
         const hospitalMarker = new naver.maps.Marker({
@@ -66,6 +71,7 @@ function Map() {
           borderColor: '#cecdc7',
         });
 
+        // 마커 클릭 이벤트
         naver.maps.Event.addListener(hospitalMarker, 'click', () => {
           if (infoWindow.getMap()) {
             infoWindow.close();
@@ -77,6 +83,7 @@ function Map() {
         return hospitalMarker;
       });
 
+      // 마커 업데이트 핸들러
       const handleMapUpdates = () => {
         if (mapRef.current) {
           checkForMarkersRendering(mapRef.current, currentMarker);
@@ -86,6 +93,7 @@ function Map() {
         }
       };
 
+      // 지도 줌 및 드래그 이벤트 핸들러
       naver.maps.Event.addListener(
         mapRef.current,
         'zoom_changed',

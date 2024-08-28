@@ -14,16 +14,13 @@ const Search = () => {
     fetchData(); // 컴포넌트가 마운트될 때 데이터 가져오기 함수 호출
   }, []); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때만 실행되도록 설정
 
-
   return (
     <div>
       <h1>Search Results</h1>
-
     </div>
   );
 };
 
 export default Search;
-
 
 // http://localhost:8080/hospitals
