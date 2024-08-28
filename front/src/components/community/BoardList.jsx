@@ -1,19 +1,39 @@
 import React from 'react'
-// import axios from "axios";
+import { subCommuData } from '../../constants/data'
+import { Link } from 'react-router-dom'
+
 
 
 const BoardList = () => {
-//   const getBoardList = async () => {
-//     const resp = (await axios.get('//엔드포인트')).data
-//     console.log(resp.data) //위는 데이터 확인용
-//   }
-
-
-
-
 
   return (
-    <div>BoardList</div>
+<div className=''>
+  <ul>
+  {
+    subCommuData.map((item, idx) =>(
+      <li  key={idx}>
+        <Link to={`/community/${idx}`}>
+      <div className='block m-3 cursor-pointer  '>
+   
+        <div className=' flex bg-[#f4f9f7] py-5 rounded-lg '>
+
+        
+       <div className='px-5'>
+        <img src={item.image} alt="" className='rounded-lg' />
+       </div>
+      <div className='px-3 font-Kr'>
+        <h3 className='font-bold text-lg'>{item.title}</h3>
+        <br/>
+        <p className='text-sm'>{item.subtitle}</p>
+      </div>
+      </div>
+      </div>
+      </Link>
+      </li>
+    ))
+  }
+  </ul>
+</div>
   )
 }
 

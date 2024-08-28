@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { mainImage } from '../../constants/data';
 import { SlArrowLeftCircle } from "react-icons/sl";
 import { SlArrowRightCircle } from "react-icons/sl";
@@ -13,6 +13,9 @@ function Slider({ slideIndex, moveToPrevSlide, moveToNextSlide }) {
         </div>
     );
 }
+
+
+
 
 const Mainsection = () => {
     const [slideIndex, setSlideIndex] = useState(0);
@@ -41,6 +44,7 @@ const Mainsection = () => {
                 moveToPrevSlide={moveToPrevSlide}
                 moveToNextSlide={moveToNextSlide}
             />
+        
             
         </div>
     );

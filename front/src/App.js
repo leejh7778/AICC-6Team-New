@@ -11,6 +11,9 @@ import Reservation from './components/reservation/index';
 import Header from './components/Header';
 import Navibar from './components/Navibar';
 import Footer from './components/Footer';
+import InBoard from './components/community/InBoard';
+
+
 
 function App() {
   return (
@@ -26,6 +29,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/map" element={<Map />} />
             <Route path="/community" element={<Community />} />
+            <Route path="/community/:idx" element={<InBoard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/mypage" element={<Mypage />} />

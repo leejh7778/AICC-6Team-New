@@ -17,8 +17,7 @@ function Map() {
         scaleControl: true,
         tileDuration: 200,
         zoom: 14,
-        zoomControlOptions: true,
-        zoomControlOptions: { position: 9 },
+   
       };
       mapRef.current = new naver.maps.Map('map', mapOptions);
       const marker = new naver.maps.Marker({
