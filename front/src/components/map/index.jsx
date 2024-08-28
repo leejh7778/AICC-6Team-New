@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import useGeoloaction from '../../hooks/useGeolocation';
 import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 import Search from './Search';
-import proj4 from 'proj4';
+
 
 function Map() {
   const mapRef = useRef(null);
