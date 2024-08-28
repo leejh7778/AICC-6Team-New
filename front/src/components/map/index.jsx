@@ -11,14 +11,16 @@ function Map() {
   useEffect(() => {
     if (currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
       const mapOptions = {
-        center: new naver.maps.LatLng(37.48097121950012, 126.8794883707286),
+        center: new naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
         logoControl: false,
         mapDataControl: false,
         scaleControl: true,
         tileDuration: 200,
         zoom: 14,
-   
+        zoomControl: true, // 줌 컨트롤 표시
+        zoomControlOptions: { position: 9 },
       };
+
       mapRef.current = new naver.maps.Map('map', mapOptions);
       const marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(
@@ -65,11 +67,11 @@ function Map() {
     } else {
       alert('오류');
     }
-  }, [currentMyLocation]);
+  }, [mapRef,currentMyLocation]);
 
   return (
     <div className='flex flex-col items-center justify-center w-full mt-3'>
-        <div id="map" className="w-[80%] h-[600px] mb-10" />
+        <div id="map" className="w-[80%] h-[61.3vh] mb-10" />
         <Search/>
     </div>
   );
