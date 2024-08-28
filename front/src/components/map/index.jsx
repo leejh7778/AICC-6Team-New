@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useGeoloaction from '../../hooks/useGeolocation';
+import useGeolocation from '../../hooks/useGeolocation';
 import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 import Search from './Search';
 
 function Map() {
   const mapRef = useRef(null);
   const { naver } = window;
-  const { currentMyLocation } = useGeoloaction();
+  const { currentMyLocation } = useGeolocation();
   const [hospitals, setHospitals] = useState([]);
+  const [hospitalMarkers, setHospitalMarkers] = useState([]);
 
   useEffect(() => {
     // 병원 데이터 가져오기
@@ -52,11 +53,11 @@ function Map() {
       });
 
       // 병원 마커 추가
-
-      const hospitalMarkers = hospitals.map((hospital) => {
-        const hospitalMarker = new naver.maps.Marker({
-          position: new naver.maps.LatLng(hospital.hosp_y, hospital.hosp_x),
-          map: mapRef.current,
+      const markers = hospitals.map((hospital) => {
+        const latlng = new naver.maps.LatLng(hospital.hosp_y, hospital.hosp_x);
+        const marker = new naver.maps.Marker({
+          position: latlng,
+          map: null, // 처음에는 모든 마커를 숨겨둠
           title: hospital.hosp_name,
         });
 
@@ -72,33 +73,28 @@ function Map() {
         });
 
         // 마커 클릭 이벤트
-        naver.maps.Event.addListener(hospitalMarker, 'click', () => {
+        naver.maps.Event.addListener(marker, 'click', function () {
           if (infoWindow.getMap()) {
             infoWindow.close();
           } else {
-            infoWindow.open(mapRef.current, hospitalMarker);
+            infoWindow.open(mapRef.current, marker);
           }
         });
 
-        return hospitalMarker;
+        return marker;
       });
 
-      // 마커 업데이트 핸들러
+      setHospitalMarkers(markers); // 마커 상태 저장
+
+      // 초기 마커 렌더링
+      checkForMarkersRendering(mapRef.current, markers);
+
+      // 지도 줌 및 드래그 이벤트 핸들러 - 화면 내 마커만 업데이트
       const handleMapUpdates = () => {
-        if (mapRef.current) {
-          checkForMarkersRendering(mapRef.current, currentMarker);
-          hospitalMarkers.forEach((marker) => {
-            checkForMarkersRendering(mapRef.current, marker);
-          });
-        }
+        checkForMarkersRendering(mapRef.current, markers);
       };
 
-      // 지도 줌 및 드래그 이벤트 핸들러
-      naver.maps.Event.addListener(
-        mapRef.current,
-        'zoom_changed',
-        handleMapUpdates
-      );
+      naver.maps.Event.addListener(mapRef.current, 'zoom_changed', handleMapUpdates);
       naver.maps.Event.addListener(mapRef.current, 'dragend', handleMapUpdates);
     } else {
       alert('현재 위치 정보를 가져오는 데 실패했습니다.');
