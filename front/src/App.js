@@ -7,6 +7,8 @@ import Mypage from './components/myPage/index';
 import Map from './components/map';
 import Community from './components/community';
 import Inquiry from './components/inquiry';
+import PostDetail from './components/inquiry/postDetail';
+import PostForm from './components/inquiry/postForm';
 import Reservation from './components/reservation/index';
 import Header from './components/Header';
 import Navibar from './components/Navibar';
@@ -34,6 +36,11 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/inquiry" element={<Inquiry />} />
+
+            <Route path="/postDetail" component={PostDetail} />
+            <Route path="/postForm" component={PostForm} />
+            <Route path="/edit/:id" component={PostForm} />
+
             <Route path="/reservation" element={<Reservation />} />
           </Routes>
         </div>

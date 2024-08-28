@@ -64,3 +64,6 @@ CREATE TABLE inquiryInfo (
     hosp_idx UUID REFERENCES hosp(hosp_idx),                
     descriptionI TEXT NOT NULL
 );
+
+
+SELECT *FROM inquiryInfo;
