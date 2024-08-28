@@ -102,7 +102,7 @@ const Register = () => {
           <br />
           <button
             type="submit"
-            className="btn w-full h-4/5 flex justify-center px-2 py-2 text-xl text-gray-600"
+            className="btn w-full h-4/5 flex justify-center px-2 py-2 text-xl hover:text-[#A6948A]"
           >
             가입하기
           </button>

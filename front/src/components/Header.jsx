@@ -10,14 +10,14 @@ const Header = () => {
         </h2>
       </div>
 
-      <div className="menu flex px-4 ">
-        <h2 className=" px-2">
-          <Link to="/login">로그인 | </Link>
+      <div className="menu flex px-4 font-Kr font-bold  ">
+        <h2 className=" px-2  text-[#afafaf] hover:text-[#A6948A]">
+          <Link to="/login">로그인 |</Link>
         </h2>
-        <h2 className=" flex px-2 ">
+        <h2 className=" flex px-2   text-[#afafaf] hover:text-[#A6948A]">
           <Link to="/register">회원가입 | </Link>
         </h2>
-        <h2 className="flex px-1">
+        <h2 className="flex px-1  text-[#afafaf] hover:text-[#A6948A]">
           <Link to="/myPage">마이페이지 </Link>
         </h2>
       </div>

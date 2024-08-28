@@ -7,7 +7,10 @@ function PostList({ posts, onSelectPost }) {
 
   return (
     <div>
-      <h2>게시판 리스트</h2>
+      <h2 className=" font-Kr  border-b-black border-b-2 p-3 font-semibold ">
+        {' '}
+        1:1 문의
+      </h2>
       <ul style={styles.list}>
         {posts.map((post) => (
           <li
