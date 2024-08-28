@@ -66,4 +66,3 @@ CREATE TABLE inquiryInfo (
 );
 
 
-SELECT *FROM inquiryInfo;
