@@ -3,7 +3,7 @@ import { footers } from '../constants/data'
 const FooterContents = () => {
     
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-between">
         {
             footers.map((item, idx)=>(
                 <div className=" px-4 py-2 ">

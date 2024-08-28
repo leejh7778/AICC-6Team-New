@@ -28,7 +28,7 @@ function Map() {
 
   useEffect(() => {
     if (currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
-      // 지도 초기화
+   
       const mapOptions = {
         center: new naver.maps.LatLng(
           currentMyLocation.lat,
@@ -87,7 +87,7 @@ function Map() {
       setHospitalMarkers(markers); // 마커 상태 저장
 
       // 초기 마커 렌더링
-      checkForMarkersRendering(mapRef.current, markers);
+      // checkForMarkersRendering(mapRef.current, markers);
 
       // 지도 줌 및 드래그 이벤트 핸들러 - 화면 내 마커만 업데이트
       const handleMapUpdates = () => {
