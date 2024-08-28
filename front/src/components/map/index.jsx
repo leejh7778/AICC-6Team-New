@@ -38,7 +38,10 @@ function Map() {
         mapDataControl: false,
         scaleControl: true,
         tileDuration: 200,
-        zoom: 14,
+        zoom: 16,
+        minZoom:13,
+        zoomControl: true,
+        zoomControlOptions: { position: 9 },
       };
       mapRef.current = new naver.maps.Map('map', mapOptions);
 
