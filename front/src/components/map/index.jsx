@@ -28,16 +28,14 @@ function Map() {
   useEffect(() => {
     if (currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
       const mapOptions = {
-        center: new naver.maps.LatLng(
-          currentMyLocation.lat,
-          currentMyLocation.lng
-        ),
+        center: new naver.maps.LatLng(37.48097121950012, 126.8794883707286),
         logoControl: false,
         mapDataControl: false,
         scaleControl: true,
         tileDuration: 200,
         zoom: 14,
       };
+
       mapRef.current = new naver.maps.Map('map', mapOptions);
 
       const currentMarker = new naver.maps.Marker({
@@ -108,7 +106,7 @@ function Map() {
     } else {
       alert('현재 위치 정보를 가져오는 데 실패했습니다.');
     }
-  }, [currentMyLocation, hospitals]);
+  }, [currentMyLocation]);
 
   return (
     <div className="flex flex-col items-center justify-center w-full mt-3">

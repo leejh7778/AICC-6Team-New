@@ -9,7 +9,7 @@ const InBoard = () => {
   const [board, setBoard] = useState({});
   useEffect(() => {
     const fetchBoardData = () => {
-      const index = parseInt(idx); // 배열의 인덱스는 0부터 시작하므로 -1
+      const index = parseInt(idx);
       console.log(`Parsed index: ${index}`);
       if (index >= 0 && index < commuData.length) {
         setBoard(commuData[index]);
