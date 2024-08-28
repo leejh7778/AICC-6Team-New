@@ -4,6 +4,12 @@ import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 import Search from './Search';
 
 
+// EPSG:2097 (Bessel 중부원점TM) 좌표계 정의
+proj4.defs(
+  'EPSG:2097',
+  '+proj=tmerc +lat_0=38 +lon_0=127.0028902777778 +k=1 +x_0=200000 +y_0=500000 +ellps=bessel +units=m +no_defs'
+);
+
 function Map() {
   const mapRef = useRef(null);
   const { naver } = window;
@@ -28,14 +34,16 @@ function Map() {
   useEffect(() => {
     if (currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
       const mapOptions = {
-        center: new naver.maps.LatLng(37.48097121950012, 126.8794883707286),
+        center: new naver.maps.LatLng(
+          currentMyLocation.lat,
+          currentMyLocation.lng
+        ),
         logoControl: false,
         mapDataControl: false,
         scaleControl: true,
         tileDuration: 200,
         zoom: 14,
       };
-
       mapRef.current = new naver.maps.Map('map', mapOptions);
 
       const currentMarker = new naver.maps.Marker({
@@ -50,8 +58,15 @@ function Map() {
       const hospitalMarkers = hospitals
         .map((hospital) => {
           try {
+            // Bessel 중부원점TM 좌표 (EPSG:2097)를 WGS84 (EPSG:4326) 좌표계로 변환
+            const [convertedLng, convertedLat] = proj4(
+              'EPSG:2097',
+              'EPSG:4326',
+              [hospital.hosp_x, hospital.hosp_y]
+            );
+
             const hospitalMarker = new naver.maps.Marker({
-              position: new naver.maps.LatLng(hospital.hosp_y, hospital.hosp_x), // 변환된 좌표 사용
+              position: new naver.maps.LatLng(convertedLat, convertedLng),
               map: mapRef.current,
               title: hospital.hosp_name,
             });
@@ -81,7 +96,7 @@ function Map() {
 
             return hospitalMarker;
           } catch (error) {
-            console.error('Error with hospital marker:', error);
+            console.error('Error converting coordinates:', error);
             return null;
           }
         })
@@ -106,7 +121,7 @@ function Map() {
     } else {
       alert('현재 위치 정보를 가져오는 데 실패했습니다.');
     }
-  }, [currentMyLocation]);
+  }, [currentMyLocation, hospitals]);
 
   return (
     <div className="flex flex-col items-center justify-center w-full mt-3">

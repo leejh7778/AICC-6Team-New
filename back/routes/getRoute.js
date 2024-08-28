@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/hospitals', async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT hosp_name, hosp_x, hosp_y, hosp_add FROM hospitals'
+      'SELECT hosp_name, hosp_add, hosp_post, hosp_pn hosp_x, hosp_y FROM hosp'
     );
     res.status(200).json(result.rows);
   } catch (error) {

@@ -5,11 +5,16 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-const pool = require('./database/database');
+const pool = require('./database/database'); // 데이터베이스 풀 설정
 const JWT_SECRET = process.env.JWT_SECRET;
 const proj4 = require('proj4');
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000', // 프론트엔드 URL 설정
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -41,7 +46,7 @@ app.post('/login', async (req, res) => {
   } catch (error) {
     console.error('Error during login:', error);
     return res
-      .status(500)
+      .status(501)
       .json({ message: 'Login failed. Please try again later.' });
   }
 });
@@ -55,20 +60,25 @@ proj4.defs(
 // 병원 데이터 가져오기 엔드포인트
 app.get('/hospitals', async (req, res) => {
   try {
+    console.log('Fetching hospital data...');
     const result = await pool.query(
-      'SELECT hosp_name, hosp_x, hosp_y, hosp_add FROM hospitals'
+      'SELECT hosp_name, hosp_add, hosp_post, hosp_pn, hosp_x, hosp_y FROM hosp'
     );
+    console.log(`Fetched ${result.rows.length} hospitals`);
+
     const hospitals = result.rows.map((hospital) => {
-      // Bessel 중부원점TM 좌표를 WGS84 좌표계로 변환
+      console.log(`Processing hospital: ${hospital.hosp_name}`);
       const [lng, lat] = proj4('EPSG:2097', 'EPSG:4326', [
-        hospital.hosp_x,
-        hospital.hosp_y,
+        parseFloat(hospital.hosp_x),
+        parseFloat(hospital.hosp_y),
       ]);
       return {
         hosp_name: hospital.hosp_name,
+        hosp_add: hospital.hosp_add,
+        hosp_post: hospital.hosp_post,
+        hosp_pn: hospital.hosp_pn,
         hosp_x: lng, // 변환된 경도
         hosp_y: lat, // 변환된 위도
-        hosp_add: hospital.hosp_add,
       };
     });
     res.status(200).json(hospitals);
@@ -77,9 +87,10 @@ app.get('/hospitals', async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch hospital data.' });
   }
 });
-app.use(require('./routes/getRoute'));
+
+// 기타 라우트 설정
 app.use(require('./routes/postRoute'));
 app.use(require('./routes/deleteRoute'));
 app.use(require('./routes/updateRoute'));
 
-app.listen(PORT, () => console.log(`Server running on ${PORT}`)); // 서버 실행 시 메시지
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
