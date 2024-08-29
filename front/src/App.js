@@ -21,13 +21,13 @@ import ReservationForm from './components/reservation/ReservationForm';
 function App() {
   return (
     <BrowserRouter>
-      <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px]">
-        <nav className="z-10 header w-full backdrop-blur-sm ">
+      <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px] ">
+        <nav className="z-10 header w-full backdrop-blur-sm mb-5">
           <Header />
           <Navibar />
         </nav>
 
-        <div className="w-[80%] flex justify-center items-center">
+        <div className="w-[80%] flex justify-center items-center ">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/map" element={<Map />} />
@@ -49,7 +49,7 @@ function App() {
             <Route path="/ReservationForm" element={ReservationForm} />
           </Routes>
         </div>
-        <div className="footer w-full mt-0 position:">
+        <div className="w-full mt-0">
           <Footer />
         </div>
       </div>

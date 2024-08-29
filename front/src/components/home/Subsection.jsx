@@ -7,14 +7,14 @@ import dall2 from '../../assets/newimage/DALL2.webp'
 const Subsection = () => {
   return (
     <div className="flex flex-col items-center mt-6 lg:mt-20 gap-10">
-      <div className='my-10'>
-      <h2 className="text-4xl lg:text-7xl sm:text-6xl font-En tracking-tighter bg-gradient-to-l from-green-400 to bg-green-800 text-transparent bg-clip-text  font-semibold text-center ">For your pet's health</h2>
+      <div className='my-10 rounded-lg'>
+      <h2 className="text-3xl lg:text-6xl sm:text-5xl font-En tracking-tighter bg-gradient-to-l from-green-400 to bg-green-800 text-transparent bg-clip-text  font-semibold text-center ">For your pet's health</h2>
       <br/>
-      <h2 className="text-4xl lg:text-7xl sm:text-6xl font-En tracking-tighter bg-gradient-to-r from-green-400 to bg-green-800 text-transparent bg-clip-text  font-semibold text-center ">and</h2>
+      <h2 className="text-3xl lg:text-6xl sm:text-5xl font-En tracking-tighter bg-gradient-to-r from-green-400 to bg-green-800 text-transparent bg-clip-text  font-semibold text-center ">and</h2>
       <br/>
-<h2 className='text-4xl lg:text-7xl sm:text-6xl font-En tracking-tighter bg-gradient-to-l from-green-400 to bg-green-800 text-transparent bg-clip-text  font-semibold text-center' > happiness</h2>
+<h2 className='text-3xl lg:text-6xl sm:text-5xl font-En tracking-tighter bg-gradient-to-l from-green-400 to bg-green-800 text-transparent bg-clip-text  font-semibold text-center' > happiness</h2>
       <br/>
-       <h2 className="text-4xl lg:text-7xl sm:text-6xl font-En tracking-tighter bg-gradient-to-r from-green-400 to bg-green-800 text-transparent bg-clip-text  font-semibold text-center ">The best choice</h2>
+       <h2 className="text-3xl lg:text-6xl sm:text-5xl font-En tracking-tighter bg-gradient-to-r from-green-400 to bg-green-800 text-transparent bg-clip-text  font-semibold text-center ">The best choice</h2>
       </div>
       
       <img src={dall1} alt="" className='img w-3/4 rounded-lg' />
