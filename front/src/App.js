@@ -31,15 +31,9 @@ function App() {
 
   return (
     <BrowserRouter>
-<<<<<<< HEAD
-      <div className="z-0 flex flex-col justify-between items-center min-h-screen">
+      <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px]">
         <nav className="z-10 header w-full backdrop-blur-sm">
           <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-=======
-      <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px]">
-        <nav className="z-10 header w-full backdrop-blur-sm ">
-          <Header />
->>>>>>> 3a86b0d3f49751aacba10bfb75e313b4a101bc78
           <Navibar />
         </nav>
 
@@ -61,7 +55,8 @@ function App() {
             <Route path="/ReservationForm" element={<ReservationForm />} />
           </Routes>
         </div>
-        <div className="footer w-full mt-0 position:">
+
+        <div className="footer w-full mt-0">
           <Footer />
         </div>
       </div>

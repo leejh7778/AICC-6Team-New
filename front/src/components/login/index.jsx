@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
+  const [userid, setUserid] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 여기에 실제 로그인 로직을 추가
-    onLogin();
-    navigate('/');
+
+    try {
+      const response = await fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userid, password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        onLogin(); // 로그인 상태 변경
+        navigate('/'); // 홈으로 이동
+      } else {
+        setErrorMessage(data.message); // 오류 메시지 설정
+      }
+    } catch (error) {
+      setErrorMessage('서버와 통신 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -18,13 +40,18 @@ const Login = ({ onLogin }) => {
       </h2>
       <br />
       <br />
+      {errorMessage && (
+        <div className="text-red-500 text-center mb-4">{errorMessage}</div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
           <label htmlFor="userid"></label>
           <input
-            type="id"
+            type="text"
             placeholder="아이디를 입력해주세요."
-            name="id"
+            name="userid"
+            value={userid}
+            onChange={(e) => setUserid(e.target.value)}
             className="form-control w-full text-center focus:inline focus:outline-blue-500"
           />
         </div>
@@ -35,6 +62,8 @@ const Login = ({ onLogin }) => {
             type="password"
             placeholder="비밀번호를 입력해주세요."
             name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="form-control w-full text-center focus:inline focus:outline-blue-500"
           />
         </div>
