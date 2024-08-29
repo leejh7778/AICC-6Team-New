@@ -22,7 +22,7 @@ import ReservationForm from './components/reservation/ReservationForm';
 function App() {
   return (
     <BrowserRouter>
-      <div className="z-0 flex flex-col justify-between items-center">
+      <div className="z-0 flex flex-col justify-between items-center min-w-[970px]">
         <nav className="z-10 header w-full backdrop-blur-sm">
           <Header />
           <Navibar />

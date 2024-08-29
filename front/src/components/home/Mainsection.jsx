@@ -8,10 +8,8 @@ import { FaRegArrowAltCircleDown } from "react-icons/fa";
 // 확인하면서 다시보자
 function Slider({ slideIndex, moveToPrevSlide, moveToNextSlide }) {
     return (
-        <div className='flex'>
-            {/* <button onClick={moveToPrevSlide}> <SlArrowLeft /> </button> */}
-            <img src={mainImage[slideIndex].image} alt="" className=' rounded-md  ' onClick={moveToNextSlide} />
-            {/* <button onClick={moveToNextSlide}><SlArrowRight /></button> */}
+        <div>
+            <img src={mainImage[slideIndex].image} alt="" className=' rounded-md cursor-pointer  ' onClick={moveToNextSlide} />
         </div>
     );
 }
@@ -39,14 +37,24 @@ const Mainsection = () => {
     };
 
     return (
-    <div className='w-full flex flex-col items-center justify-center bg-[#f4f9f7] rounded-lg py-10 '>
-     <div className=" w-[80%]  flex items-center justify-center h-[400px]">
-      <div className='flex justify-center items-center '>
-       <Link to="/community">
-         <img src={DallMain} alt="" />
+    <div className='w-full flex flex-col items-center justify-center rounded-lg py-5 '>
+        <div className='mb-10 mb:text-3xl lg:text-4xl'>
+     <p className='font-En font-semibold bg-gradient-to-r from-green-500 to bg-green-800 text-transparent bg-clip-text'>
+            Click <span className='bg-gradient-to-r from-green-500 to bg-green-800 text-transparent bg-clip-text'>
+                 for your 
+            </span> Family
+        </p>
+     </div>
+     <div className=" w-[80%]  flex flex-col items-center justify-center">
+            <div className='flex justify-center items-center gap-x-10 h-4/5'>
+        <Slider slideIndex={slideIndex} moveToPrevSlide={moveToPrevSlide} moveToNextSlide={moveToNextSlide}/> 
+        <Link to="/community">
+         <img src={DallMain} alt="DallMain"  className='rounded-lg '/>
         </Link>
-       </div>
-        <Slider slideIndex={slideIndex} moveToPrevSlide={moveToPrevSlide} moveToNextSlide={moveToNextSlide}/>  
+     
+             </div>
+   
+        
      </div>
     </div>
     );

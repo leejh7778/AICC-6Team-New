@@ -5,9 +5,11 @@ import Subsection from './Subsection'
 
 
 
+
 const Home = () => {
   return (
-    <div className='container'>
+    <div className='container bg-[#f1f3ea]'>
+
 <Mainsection/>
 <Subsection/>
 
