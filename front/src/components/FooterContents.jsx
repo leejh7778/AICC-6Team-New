@@ -5,7 +5,7 @@ const FooterContents = () => {
   return (
     <div className="w-full flex justify-center">
       {footers.map((item, idx) => (
-        <div className=" px-4 py-2 ">
+        <div key={idx} className=" px-4 py-2 ">
           <div className="  rounded-md p-6 font-Kr">
             <div key={idx} className="flex justify-between">
               <div className="py-5 px-5">
