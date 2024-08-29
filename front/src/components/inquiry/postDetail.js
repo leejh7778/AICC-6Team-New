@@ -9,13 +9,21 @@ function PostDetail({ posts }) {
   if (!post) {
     return <div>게시글을 찾을 수 없습니다.</div>;
   }
+  const handleEdit = () => {
+    navigate(`/edit/${post.id}`);
+  };
+
+  const handleBackToList = () => {
+    navigate('/');
+  };
 
   return (
     <div>
-      <h2>{post.title}</h2>
+      <h2>{post.name}</h2>
+      <h2>{post.email}</h2>
       <p>{post.summary}</p>
-      <button onClick={() => navigate(`/edit/${post.id}`)}>수정하기</button>
-      <button onClick={() => navigate('/')}>목록으로</button>
+      <button onClick={handleEdit}>수정하기</button>
+      <button onClick={handleBackToList}>목록으로</button>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <div className=" w-full h-[30px] bg-slate-0 flex items-baseline justify-between px-20 py-2  ">
-      <div className="  hover:text-gray-600">
+      <div className="  hover:text-gray-600 font-Kr">
         <h2 className="font-semibold text-xl">
           <Link to="/"></Link>
         </h2>

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 function PostForm({ posts, setPosts }) {
   const { id } = useParams();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const isEditing = !!id;
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
@@ -29,7 +29,7 @@ function PostForm({ posts, setPosts }) {
     } else {
       setPosts([...posts, { id: posts.length + 1, title, summary }]);
     }
-    history.push('/');
+    navigate('/');
   };
 
   return (
@@ -53,7 +53,12 @@ function PostForm({ posts, setPosts }) {
         </div>
         <button type="submit">{isEditing ? '수정하기' : '작성하기'}</button>
       </form>
-      <button onClick={() => history.push('/')}>취소</button>
+      <button
+        onClick={() => navigate('/')}
+        className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+      >
+        취소
+      </button>
     </div>
   );
 }

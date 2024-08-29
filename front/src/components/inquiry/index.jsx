@@ -17,6 +17,7 @@ function Board() {
   //게시글 선텍 시 해당 게시글의 상세보기 페이지로 이동
   const handleSelectPost = (postId) => {
     navigate(`/post/${postId}`); // navigate로 경로 이동
+    console.log(`게시글 ID: ${postId} 선택됨`);
   };
 
   // 모달을 열기 위한 함수
@@ -31,9 +32,9 @@ function Board() {
   // 글 작성 페이지로 이동하는 함수
 
   return (
-    <div className="w-full text-2xl font-semibold">
+    <div className="w-full font-Kr text-2xl font-bold">
       <div>
-        <div className="font-Kr font-bold">
+        <div className="font-bold">
           <PageTitle title={title} />
         </div>
 
@@ -46,13 +47,18 @@ function Board() {
         )}
 
         {/* 글 작성하기 버튼 (모달 열기) */}
-        <button
-          onClick={handleCreateNewPost}
-          className="mt-5 mb-4 py-2 px-5 bg-[#819c87d1] text-white rounded-md hover:bg-[#c3d1c7d1] focus:outline-none"
-        >
-          글 작성하기
-        </button>
+        <div className="flex justify-end mt-4">
+          <button
+            onClick={handleCreateNewPost}
+            className="mt-5 mb-4 py-2 px-3 bg-[#819c87d1] text-white rounded-md shadow hover:bg-[#c3d1c7d1] focus:outline-none "
+          >
+            글 작성하기
+          </button>
+        </div>
       </div>
+      {isModalOpen && (
+        <PostModal onClose={handleCloseModal} setPosts={setPosts} />
+      )}
     </div>
   );
 }

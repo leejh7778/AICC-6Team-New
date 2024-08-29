@@ -32,17 +32,19 @@ const styles = {
     listStyleType: 'none',
     padding: 0,
     margin: 0,
+    // fontSize: '20px',
   },
   listItem: {
     padding: '10px',
-    margin: '10px 0',
+    margin: '5px 0',
     border: '1px solid #ddd',
     borderRadius: '4px',
     cursor: 'pointer',
+    fontSize: '17px',
   },
   title: {
-    margin: '0 0 5px 0',
-    fontSize: '18px',
+    margin: '0 0 3px 0',
+    fontSize: '20px',
   },
   summary: {
     margin: 0,

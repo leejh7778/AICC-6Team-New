@@ -1,49 +1,51 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import ReservationList from './ReservationList';
+import ReservationModal from './ReservationModal';
+import PageTitle from '../PageTitle';
 
-const index = () => {
+function ReservationBoard() {
+  const title = '1:1 문의';
+
+  const [reservations, setReservations] = useState([]); // 예약 목록 상태 관리
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태 관리
+
+  const handleCreateNewReservation = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+
   return (
-    <div>
-      <h2 className="font-semibold text-xl  w-full h-[100px] flex items-center justify-between px-40 bg-[#7b9e84d1] rounded-md ">
-        {' '}
-        예약확인{' '}
-      </h2>
-
-      <div style={{ display: 'flex', height: '73vh' }}>
-        <div style={{ flex: 4, backgroundColor: '#e0e0e0', padding: '20px' }}>
-          <h2 className="article-title"> 예약 현황</h2>
-          <div className="section-list">
-            <ul>
-              <li>
-                <h2
-                  className="font-semibold text-center text justify-normal-center
-          "
-                >
-                  <ul>
-                    <Link />
-                  </ul>
-                </h2>
-                <a href="#"></a>data
-              </li>
-            </ul>{' '}
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi
-              aliquam, aperiam veniam, pariatur porro repellendus inventore ut,
-              // odit itaque quasi explicabo assumenda qui laboriosam sequi
-              optio // voluptatem! At, ullam culpa. //{' '}
-            </p>
-          </div>
-          <br />
-          <br />
-          <ul>
-            <li>
-              <Link to="/">메인으로 돌아가기 </Link>
-            </li>
-          </ul>
-        </div>
+    <div className=" w-full font-Kr text-2xl font-bold ">
+      {/* max-w-4xl mx-auto p-4 */}
+      <div className="font-bold">
+        <PageTitle title={title} />
       </div>
+
+      {/* 예약 페이지 제목 */}
+      <h1 className="font-Kr  border-b-black border-b-2 p-3 font-semibold">
+        예약 페이지
+      </h1>
+
+      {/* 예약 목록 */}
+      <ReservationList reservations={reservations} />
+
+      {/* 예약하기 버튼 */}
+      <div className="flex justify-end mt-4">
+        <button
+          onClick={handleCreateNewReservation}
+          className="bg-[#819c87d1] text-white px-4 py-2 rounded-md shadow hover:bg-[#c3d1c7d1]"
+        >
+          예약하기
+        </button>
+      </div>
+
+      {/* 모달 컴포넌트 */}
+      {isModalOpen && (
+        <ReservationModal
+          onClose={handleCloseModal}
+          setReservations={setReservations}
+        />
+      )}
     </div>
   );
-};
+}
 
-export default index;
+export default ReservationBoard;
