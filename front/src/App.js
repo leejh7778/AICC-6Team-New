@@ -10,7 +10,6 @@ import Inquiry from './components/inquiry';
 import PostDetail from './components/inquiry/postDetail';
 import PostForm from './components/inquiry/postForm';
 import Reservation from './components/reservation/index';
-import RevApp from './components/reservation/RevApp';
 import Header from './components/Header';
 import Navibar from './components/Navibar';
 import Footer from './components/Footer';
@@ -22,8 +21,8 @@ import ReservationForm from './components/reservation/ReservationForm';
 function App() {
   return (
     <BrowserRouter>
-      <div className="z-0 flex flex-col justify-between items-center">
-        <nav className="z-10 header w-full backdrop-blur-sm">
+      <div className="z-0 flex flex-col justify-between items-center min-h-screen">
+        <nav className="z-10 header w-full backdrop-blur-sm ">
           <Header />
           <Navibar />
         </nav>
@@ -50,7 +49,7 @@ function App() {
             <Route path="/ReservationForm" element={ReservationForm} />
           </Routes>
         </div>
-        <div className="footer w-full mt-0">
+        <div className="footer w-full mt-0 position:">
           <Footer />
         </div>
       </div>

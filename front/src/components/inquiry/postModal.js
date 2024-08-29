@@ -37,8 +37,11 @@ const PostModal = ({ onClose, setPosts }) => {
       ></div>
 
       {/* 모달 내용 */}
-      <div className="relative bg-white p-6 rounded-lg w-1/3 shadow-lg z-10">
-        <h2 className="text-xl font-bold mb-4">새 글 작성</h2>
+      <div className="relative bg-white text-xl p-6 rounded-lg w-1/3 shadow-lg z-10 font-kr ">
+        <h2 className="font-Kr font-bold mb-4 text-4xl justify-center">
+          {' '}
+          Contack Us
+        </h2>
         <input
           type="name"
           placeholder="이름을 입력하세요"
@@ -57,18 +60,18 @@ const PostModal = ({ onClose, setPosts }) => {
           placeholder="문의 내용을 입력하세요."
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
-          className="w-full h-[380px] p-2 mb-4 border border-gray-300 rounded"
+          className="w-full h-[260px] p-2 mb-4 border border-gray-300 rounded"
         ></textarea>
-        <div className="flex justify-end">
+        <div className="flex justify-end ">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-300 text-gray-800 rounded mr-2"
+            className="px-3 py-1.5 bg-gray-300 text-gray-800 text-xl rounded mr-2"
           >
             닫기
           </button>
           <button
             onClick={handleSavePost}
-            className="px-4 py-2 bg-blue-500 text-white rounded"
+            className="px-3 py-1.5  bg-[#acbd9b] text-white  text-xl rounded mr-2"
           >
             저장하기
           </button>
