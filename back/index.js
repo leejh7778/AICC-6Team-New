@@ -1,56 +1,108 @@
 const express = require('express');
 const cors = require('cors');
-const PORT = '8080';
-const app = express();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-const pool = require('./database/database'); // 데이터베이스 풀 설정
+const pool = require('./database/database');
 const JWT_SECRET = process.env.JWT_SECRET;
 const proj4 = require('proj4');
+const bodyParser = require('body-parser');
+
+const PORT = '8080';
+const app = express();
 
 app.use(
   cors({
-    origin: 'http://localhost:3000', // 프론트엔드 URL 설정
+    origin: 'http://localhost:3000',
     credentials: true,
   })
 );
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
 
 // 로그인 API 엔드포인트
 app.post('/login', async (req, res) => {
-  const { userID, password } = req.body;
+  const { userid, password } = req.body;
 
   try {
     const result = await pool.query(
-      'SELECT * FROM hospUser WHERE userID = $1',
-      [userID]
+      'SELECT * FROM hospuser WHERE userid = $1',
+      [userid]
     );
 
-    if (result.rowCount === 0) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+    if (result.rows.length > 0) {
+      const user = result.rows[0];
+      const match = await bcrypt.compare(password, user.password);
+
+      if (match) {
+        const token = jwt.sign({ userid: user.userid }, JWT_SECRET, {
+          expiresIn: '1h',
+        });
+        res.json({ success: true, token });
+      } else {
+        res.json({
+          success: false,
+          message: '아이디 또는 비밀번호가 일치하지 않습니다.',
+        });
+      }
+    } else {
+      res.json({
+        success: false,
+        message: '아이디 또는 비밀번호가 일치하지 않습니다.',
+      });
     }
-
-    const user = result.rows[0];
-    const match = await bcrypt.compare(password, user.password);
-
-    if (!match) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    const token = jwt.sign({ userID: user.userID }, JWT_SECRET, {
-      expiresIn: '1h',
-    });
-    return res.status(200).json({ token });
-  } catch (error) {
-    console.error('Error during login:', error);
-    return res
-      .status(501)
-      .json({ message: 'Login failed. Please try again later.' });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ success: false, message: '서버 오류가 발생했습니다.' });
   }
 });
 
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+};
+
+// 마이페이지 API 엔드포인트
+app.get('/mypage', authenticateToken, async (req, res) => {
+  const { userid } = req.user;
+
+  try {
+    const result = await pool.query(
+      'SELECT * FROM hospuser WHERE userid = $1',
+      [userid]
+    );
+
+    if (result.rows.length > 0) {
+      const user = result.rows[0];
+      res.json({
+        success: true,
+        user: {
+          userid: user.userid,
+          name: user.name,
+          email: user.email,
+        },
+      });
+    } else {
+      res.json({ success: false, message: '사용자 정보를 찾을 수 없습니다.' });
+    }
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ success: false, message: '서버 오류가 발생했습니다.' });
+  }
+});
 // EPSG:2097 (Bessel 중부원점TM) 좌표계 정의
 proj4.defs(
   'EPSG:2097',

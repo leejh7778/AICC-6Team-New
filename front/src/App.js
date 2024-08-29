@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import React, { useState } from 'react';
 import Home from './components/home';
 import Login from './components/login/index';
 import Register from './components/register/index';
@@ -19,11 +19,21 @@ import ReservationModal from './components/reservation/ReservationModal';
 import ReservationForm from './components/reservation/ReservationForm';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <BrowserRouter>
-      <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px] ">
-        <nav className="z-10 header w-full backdrop-blur-sm mb-5">
-          <Header />
+      <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px]">
+        <nav className="z-10 header w-full backdrop-blur-sm">
+          <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           <Navibar />
         </nav>
 
@@ -33,23 +43,20 @@ function App() {
             <Route path="/map" element={<Map />} />
             <Route path="/community" element={<Community />} />
             <Route path="/community/:idx" element={<InBoard />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/mypage" element={<Mypage />} />
-
             <Route path="/inquiry" element={<Inquiry />} />
-            <Route path="/postDetail" component={PostDetail} />
-            <Route path="/postForm" component={PostForm} />
-            <Route path="/edit/:id" component={PostForm} />
-
+            <Route path="/postDetail" element={<PostDetail />} />
+            <Route path="/postForm" element={<PostForm />} />
+            <Route path="/edit/:id" element={<PostForm />} />
             <Route path="/register" element={<Register />} />
-
             <Route path="/reservation" element={<Reservation />} />
-
-            <Route path="/ReservationModal" element={ReservationModal} />
-            <Route path="/ReservationForm" element={ReservationForm} />
+            <Route path="/ReservationModal" element={<ReservationModal />} />
+            <Route path="/ReservationForm" element={<ReservationForm />} />
           </Routes>
         </div>
-        <div className="w-full mt-0">
+
+        <div className="footer w-full mt-0">
           <Footer />
         </div>
       </div>
