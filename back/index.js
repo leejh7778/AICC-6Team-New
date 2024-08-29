@@ -16,40 +16,40 @@ app.use(
   })
 );
 app.use(express.json());
-// app.use(cookieParser());
+app.use(cookieParser());
 
-// // 로그인 API 엔드포인트
-// app.post('/login', async (req, res) => {
-//   const { userID, password } = req.body;
+// 로그인 API 엔드포인트
+app.post('/login', async (req, res) => {
+  const { userID, password } = req.body;
 
-//   try {
-//     const result = await pool.query(
-//       'SELECT * FROM hospUser WHERE userID = $1',
-//       [userID]
-//     );
+  try {
+    const result = await pool.query(
+      'SELECT * FROM hospUser WHERE userID = $1',
+      [userID]
+    );
 
-//     if (result.rowCount === 0) {
-//       return res.status(401).json({ message: 'Invalid credentials' });
-//     }
+    if (result.rowCount === 0) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
 
-//     const user = result.rows[0];
-//     const match = await bcrypt.compare(password, user.password);
+    const user = result.rows[0];
+    const match = await bcrypt.compare(password, user.password);
 
-//     if (!match) {
-//       return res.status(401).json({ message: 'Invalid credentials' });
-//     }
+    if (!match) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
 
-//     const token = jwt.sign({ userID: user.userID }, JWT_SECRET, {
-//       expiresIn: '1h',
-//     });
-//     return res.status(200).json({ token });
-//   } catch (error) {
-//     console.error('Error during login:', error);
-//     return res
-//       .status(501)
-//       .json({ message: 'Login failed. Please try again later.' });
-//   }
-// });
+    const token = jwt.sign({ userID: user.userID }, JWT_SECRET, {
+      expiresIn: '1h',
+    });
+    return res.status(200).json({ token });
+  } catch (error) {
+    console.error('Error during login:', error);
+    return res
+      .status(501)
+      .json({ message: 'Login failed. Please try again later.' });
+  }
+});
 
 // EPSG:2097 (Bessel 중부원점TM) 좌표계 정의
 proj4.defs(

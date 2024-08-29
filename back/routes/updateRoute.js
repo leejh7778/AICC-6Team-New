@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const {
-  // updateCompletedTask,
-  updateTask,
-} = require('../controllers/updateTask');
+const { updateReserv, updateInq } = require('../controllers/updateTask');
 
-// router.patch('/update_completed_task', updateCompletedTask);
+// 예약 항목 업데이트
+router.put('/reservations/:reserv_idx', updateReserv);
 
-router.put('/update_task', updateTask);
+// 문의 항목 업데이트
+router.put('/inquiries/:inq_idx', updateInq);
 
 module.exports = router;
