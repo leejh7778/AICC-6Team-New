@@ -72,13 +72,13 @@ import { LuCalendarCheck } from 'react-icons/lu';
 
 const MyPage = () => {
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className=" flex  flex-col items-center justify-start mb-9 text-3xl font-bold text-center mt-[-100px] ">
+    <div className="max-w-4xl mx-auto p-6 ">
+      <h1 className=" f-full  flex justify-center mt-20 px-2  text-4xl font-semibold ">
         마이페이지
       </h1>
       <br />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-9">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-9 mt-10">
         {/* 1:1 문의 카드 */}
         <div className="flex flex-col p-8 bg-[#f1f3ea] rounded-lg shadow-lg hover:shadow-2xl transition-shadow  w-80 h-48 ">
           <div className="flex items-center justify-between mb-4">
@@ -107,7 +107,7 @@ const MyPage = () => {
             href="/reservation"
             className="mt-2 text-sm text-blue-500 underline"
           >
-            예약 하ㄹ 바로가기 →
+            예약 바로가기 →
           </a>
         </div>
       </div>
