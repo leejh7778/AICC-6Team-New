@@ -9,27 +9,31 @@ function Map() {
   const { currentMyLocation } = useGeolocation();
   const [hospitals, setHospitals] = useState([]);
   const [hospitalMarkers, setHospitalMarkers] = useState([]);
-  const [selectedHospital, setSelectedHospital] = useState(null); // 선택된 병원 상태
+  const [selectedHospital, setSelectedHospital] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // 병원 데이터를 가져오는 함수
+  const fetchHospitals = async () => {
+    try {
+      const res = await fetch('http://localhost:8080/hospitals');
+      if (!res.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      const data = await res.json();
+      console.log('Fetched hospital data:', data);
+      setHospitals(data);
+    } catch (err) {
+      console.error('Error fetching hospital data:', err);
+      alert('병원 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  };
+
   useEffect(() => {
-    // 병원 데이터 가져오기
-    fetch('http://localhost:8080/hospitals')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok.');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log('Fetched hospital data:', data);
-        setHospitals(data);
-      })
-      .catch((err) => console.error('Error fetching hospital data:', err));
+    fetchHospitals(); // 병원 데이터 가져오기
   }, []);
 
   useEffect(() => {
-    if (currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
+    if (naver && currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
       const mapOptions = {
         center: new naver.maps.LatLng(
           currentMyLocation.lat,
@@ -42,7 +46,7 @@ function Map() {
         zoom: 16,
         minZoom: 13,
         zoomControl: true,
-        zoomControlOptions: { position: 9 },
+        zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT },
       };
       mapRef.current = new naver.maps.Map('map', mapOptions);
 
@@ -60,6 +64,7 @@ function Map() {
       const markers = hospitals.map((hospital) => {
         const latlng = new naver.maps.LatLng(hospital.hosp_y, hospital.hosp_x);
         const marker = new naver.maps.Marker({
+          key: hospital.hosp_id, // 고유한 key 추가
           position: latlng,
           map: null, // 처음에는 모든 마커를 숨겨둠
           title: hospital.hosp_name,
@@ -90,9 +95,12 @@ function Map() {
 
         // 인포윈도우의 DOM이 준비되면 버튼 클릭 이벤트 추가
         naver.maps.Event.addListener(infoWindow, 'domready', function () {
-          document
-            .querySelector('.reserv-button')
-            .addEventListener('click', () => handleReservationClick(hospital));
+          const reservButton = document.querySelector('.naver_map_infowindow .reserv-button');
+          if (reservButton) {
+            reservButton.addEventListener('click', () => handleReservationClick(hospital));
+          } else {
+            console.warn('Reservation button not found in the DOM.');
+          }
         });
 
         return marker;
@@ -111,10 +119,12 @@ function Map() {
         handleMapUpdates
       );
       naver.maps.Event.addListener(mapRef.current, 'dragend', handleMapUpdates);
+    } else if (!naver) {
+      alert('Naver Maps API를 불러오지 못했습니다.');
     } else {
       alert('현재 위치 정보를 가져오는 데 실패했습니다.');
     }
-  }, [currentMyLocation, hospitals]);
+  }, [naver, currentMyLocation, hospitals]);
 
   const handleReservationClick = (hospital) => {
     setSelectedHospital(hospital);
@@ -136,3 +146,4 @@ function Map() {
 }
 
 export default Map;
+
