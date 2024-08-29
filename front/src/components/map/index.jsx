@@ -12,6 +12,8 @@ function Map() {
   const [selectedHospital, setSelectedHospital] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const infoWindowRef = useRef(null);
+
   // 병원 데이터를 가져오는 함수
   const fetchHospitals = async () => {
     try {
@@ -20,7 +22,7 @@ function Map() {
         throw new Error('Network response was not ok.');
       }
       const data = await res.json();
-      console.log('Fetched hospital data:', data);
+      // console.log('Fetched hospital data:', data);
       setHospitals(data);
     } catch (err) {
       console.error('Error fetching hospital data:', err);
@@ -43,8 +45,8 @@ function Map() {
         mapDataControl: false,
         scaleControl: true,
         tileDuration: 200,
-        zoom: 16,
-        minZoom: 13,
+        zoom: 7,
+        // minZoom: 13,
         zoomControl: true,
         zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT },
       };
@@ -72,7 +74,7 @@ function Map() {
 
         const infoWindow = new naver.maps.InfoWindow({
           content: `
-            <div style="padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;">
+            <div style="padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;" class="info-box">
               <div style="font-weight: bold; margin-bottom: 5px;">${hospital.hosp_name}</div>
               <div style="font-size: 13px;">${hospital.hosp_add} ${hospital.hosp_post}</div>
               <div style="font-size: 13px;">${hospital.hosp_pn}</div>
@@ -80,9 +82,25 @@ function Map() {
               <button class="inquiry-button">1대1 문의</button>
             </div>`,
           maxWidth: 300,
-          anchorSize: { width: 12, height: 14 },
+          anchorSize: { width: 50, height: 50 },
           borderColor: '#cecdc7',
         });
+
+        infoWindowRef.current = infoWindow;
+
+      const contentElement = infoWindowRef.current.getContentElement();
+      console.log(contentElement)
+
+          // 콘텐츠 요소 내의 클릭 가능한 버튼이나 요소들에 대해 이벤트 리스너 추가
+      const clickableElements = contentElement.querySelectorAll('.reserv-button'); // 클래스명이 'clickable'인 요소들
+      console.log(clickableElements)
+
+      clickableElements.forEach(element => {
+        element.addEventListener('click', function() {
+          alert('aaa'); // 클릭된 요소 출력
+        });
+      });
+
 
         // 마커 클릭 이벤트
         naver.maps.Event.addListener(marker, 'click', function () {
@@ -95,18 +113,49 @@ function Map() {
 
         // 인포윈도우의 DOM이 준비되면 버튼 클릭 이벤트 추가
         naver.maps.Event.addListener(infoWindow, 'domready', function () {
-          const reservButton = document.querySelector('.naver_map_infowindow .reserv-button');
-          if (reservButton) {
-            reservButton.addEventListener('click', () => handleReservationClick(hospital));
-          } else {
-            console.warn('Reservation button not found in the DOM.');
-          }
-        });
+          // const reservButton = document.querySelector('#reserve-btn');
+
+          // reservButton.addEventListener('click', function(){
+          //   alert('aaa')
+          // })
+
+          // console.log(reservButton)
+
+          // if (reservButton) {
+          //   // reservButton.addEventListener('click', () => handleReservationClick(hospital));
+          //   reservButton.addEventListener('click', () => {
+          //     alert("aaa")
+          //   });
+          // } else {
+          //   console.warn('Reservation button not found in the DOM.');
+          // }
+
+          
+
+          });
 
         return marker;
       });
 
       setHospitalMarkers(markers); // 마커 상태 저장
+
+      
+
+      // clickableElements.forEach(element => {
+      //   element.addEventListener('click', function() {
+      //     console.log(this); // 클릭된 요소 출력
+      //   });
+      // });
+
+      // // 예시로 'reserve-btn'이라는 ID를 가진 요소에 이벤트 리스너 추가
+      // const reserveBtn = contentElement.querySelector('.reserv-button');
+      // if (reserveBtn) {
+      //   reserveBtn.addEventListener('click', function() {
+      //     console.log('Reserve button clicked!');
+      //   });
+      // }
+
+      
 
       // 지도 줌 및 드래그 이벤트 핸들러 - 화면 내 마커만 업데이트
       const handleMapUpdates = () => {
