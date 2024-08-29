@@ -28,7 +28,10 @@ const Subsection = () => {
 반려동물의 행복이 곧 우리의 행복입니다.
 </p>
   <img src={dall2} alt="" className='img w-3/4 rounded-lg' />
-
+<h1 className='text-green-700 text-4xl font-Kr py-20'>
+사랑을 넘는 생명
+<span className='text-green-600'>: 반려동물과 함께하는 세상</span>
+</h1>
     </div>
   )
 }
