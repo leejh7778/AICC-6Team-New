@@ -1,18 +1,7 @@
-const express = require('express');
-const pool = require('../database/database');
-const router = express.Router();
+const router = require('express').Router(); // api path를 전달해 주는 메서드
+const { getReserv, getInquiry } = require('../controllers/getTask');
 
-// 병원 데이터 가져오기
-router.get('/hospitals', async (req, res) => {
-  try {
-    const result = await pool.query(
-      'SELECT hosp_name, hosp_add, hosp_post, hosp_pn hosp_x, hosp_y FROM hosp'
-    );
-    res.status(200).json(result.rows);
-  } catch (error) {
-    console.error('Error fetching hospital data:', error);
-    res.status(500).json({ message: 'Failed to fetch hospital data.' });
-  }
-});
+router.get('/get_reserv', getReserv); // 컨트롤러 함수 연결 - :은 정해지지 않은 문자열 표시
+router.get('/get_inquiry', getInquiry);
 
-module.exports = router;
+module.exports = router; // router 모듈 내보내기

@@ -97,7 +97,11 @@ function Map() {
         checkForMarkersRendering(mapRef.current, markers);
       };
 
-      naver.maps.Event.addListener(mapRef.current, 'zoom_changed', handleMapUpdates);
+      naver.maps.Event.addListener(
+        mapRef.current,
+        'zoom_changed',
+        handleMapUpdates
+      );
       naver.maps.Event.addListener(mapRef.current, 'dragend', handleMapUpdates);
     } else {
       alert('현재 위치 정보를 가져오는 데 실패했습니다.');
