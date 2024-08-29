@@ -1,25 +1,66 @@
 const database = require('../database/database');
 
-exports.updateTask = async (req, res) => {
-  const { userName, pn, date, dog, cat, etc, descriptionR, reserv_idx } =
-    req.body;
+const updateItem = async (req, res, column, value, fields, successMessage) => {
+  const setClause = Object.keys(fields)
+    .map((key, index) => `${key} = $${index + 2}`)
+    .join(', ');
 
-  if (!reserv_idx) {
-    return res.status(400).json({ message: 'reserv_idx is required' });
-  }
+  const values = [value, ...Object.values(fields)];
 
   try {
     const result = await database.query(
-      'UPDATE task SET username = $1, pn = $2, date = $3, dog = $4, cat = $5, etc = $6, descriptionR = $7 WHERE reserv_idx = $8',
-      [userName, pn, date, dog, cat, etc, descriptionR, reserv_idx]
+      `UPDATE task SET ${setClause} WHERE ${column} = $1`,
+      values
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ message: 'Task not found' });
+      return res.status(404).json({ message: 'Item not found' });
     }
 
-    return res.status(200).json({ message: 'Task Updated Successfully' });
+    return res.status(200).json({ message: successMessage });
   } catch (error) {
-    return res.status(500).json({ message: 'Update Failed: ' + error.message });
+    return res.status(500).json({ message: `Update failed: ${error.message}` });
   }
+};
+
+exports.updateReserv = async (req, res) => {
+  const reserv_idx = req.params.reserv_idx;
+  const { username, pn, date, dog, cat, etc, descriptionR } = req.body;
+
+  const fields = { username, pn, date, dog, cat, etc, descriptionR };
+
+  // 전달된 값만 업데이트
+  const filteredFields = Object.fromEntries(
+    Object.entries(fields).filter(([_, value]) => value !== undefined)
+  );
+
+  await updateItem(
+    req,
+    res,
+    'reserv_idx',
+    reserv_idx,
+    filteredFields,
+    'Reservation Updated Successfully'
+  );
+};
+
+exports.updateInq = async (req, res) => {
+  const inq_idx = req.params.inq_idx;
+  const { username, pn, descriptionI } = req.body;
+
+  const fields = { username, pn, descriptionI };
+
+  // 전달된 값만 업데이트
+  const filteredFields = Object.fromEntries(
+    Object.entries(fields).filter(([_, value]) => value !== undefined)
+  );
+
+  await updateItem(
+    req,
+    res,
+    'inq_idx',
+    inq_idx,
+    filteredFields,
+    'Inquiry Updated Successfully'
+  );
 };

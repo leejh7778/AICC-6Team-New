@@ -1,6 +1,10 @@
 const router = require('express').Router();
-const { postReserv, postInq } = require('../controllers/postTask');
-const { postUser, loginUser } = require('../controllers/postUser');
+const {
+  postReserv,
+  postInq,
+  postUser,
+  loginUser,
+} = require('../controllers/postTask');
 
 router.post('/post_reserv', postReserv);
 router.post('/post_inq', postInq);
