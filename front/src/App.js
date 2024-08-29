@@ -31,7 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px]">
+      <div className="z-0 flex flex-col justify-between items-center min-h-[120vh">
         <nav className="z-10 header w-full backdrop-blur-sm">
           <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           <Navibar />
@@ -55,8 +55,7 @@ function App() {
             <Route path="/ReservationForm" element={<ReservationForm />} />
           </Routes>
         </div>
-
-        <div className="footer w-full mt-0">
+        <div className="footer w-full mt-0 position:">
           <Footer />
         </div>
       </div>
