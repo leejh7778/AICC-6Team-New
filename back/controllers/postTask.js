@@ -10,7 +10,7 @@ exports.postReserv = async (req, res) => {
 
   try {
     await database.query(
-      'INSERT INTO task (reserv_idx, username, pn, date, dog, cat, etc, descriptionR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+      'INSERT INTO reserv (reserv_idx, username, pn, date, dog, cat, etc, descriptionR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
       [reserv_idx, username, pn, date, dog, cat, etc, descriptionR]
     );
 
@@ -28,7 +28,7 @@ exports.postInq = async (req, res) => {
 
   try {
     await database.query(
-      'INSERT INTO task (inq_idx, username, pn, descriptionI) VALUES ($1, $2, $3, $4)',
+      'INSERT INTO inquiry (inq_idx, username, pn, descriptionI) VALUES ($1, $2, $3, $4)',
       [inq_idx, username, pn, descriptionI]
     );
 
