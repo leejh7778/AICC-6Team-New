@@ -50,7 +50,7 @@ function Board() {
         <div className="flex justify-end mt-4">
           <button
             onClick={handleCreateNewPost}
-            className="mt-5 mb-4 py-2 px-3 bg-[#819c87d1] text-white rounded-md shadow hover:bg-[#c3d1c7d1] focus:outline-none "
+            className="mt-5 mb-4 py-1.5 px-2 bg-[#acbd9b] text-white text-xl rounded-md shadow hover:bg-[#c3d1c7d1] focus:outline-none "
           >
             글 작성하기
           </button>

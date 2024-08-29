@@ -42,11 +42,7 @@ const Register = () => {
   return (
     <div>
       <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <h2 className="w-full h-4/5 flex justify-center px-2 py-2 text-4xl font-semibold">
+        <h2 className="w-full h-4/5 flex justify-center px-2  text-4xl font-semibold">
           회원가입
         </h2>
         <br />
@@ -58,7 +54,7 @@ const Register = () => {
               type="text"
               placeholder="아이디를 입력해 주세요 "
               name="userid"
-              className="form-control"
+              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
               onChange={(e) => setValues({ ...values, userid: e.target.value })}
             />
           </div>
@@ -69,7 +65,7 @@ const Register = () => {
               type="password"
               placeholder="비밀번호를 입력해 주세요 "
               name="password"
-              className="form-control"
+              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
               onChange={(e) =>
                 setValues({ ...values, password: e.target.value })
               }
@@ -82,7 +78,7 @@ const Register = () => {
               type="text"
               placeholder="이름을 입력해 주세요 "
               name="username"
-              className="form-control"
+              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
               onChange={(e) =>
                 setValues({ ...values, username: e.target.value })
               }
@@ -95,14 +91,14 @@ const Register = () => {
               type="email"
               placeholder="이메일을 입력해주세요"
               name="email"
-              className="form-control"
+              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
               onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
           </div>
           <br />
           <button
-            type="submit"
-            className="btn w-full h-4/5 flex justify-center px-2 py-2 text-xl hover:text-[#A6948A]"
+            type="surmit"
+            className="btn  cursor-pointer box-border border-2 md:box-content rounded-md  border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea]  hover:bg-[#f1f3ea]  w-full  flex justify-center px-2 py-2 text-xl "
           >
             가입하기
           </button>
