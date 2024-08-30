@@ -15,7 +15,7 @@ const Navibar = () => {
         </h2>
       </div>
 
-      <div className="naviMenu flex px-10  ">
+      <div className="naviMenu flex px-10  felx-glow">
         <span className="font-Kr font-bold text-green-600 hover:text-green-800 ">
           <Link to="/map">병원찾기</Link>
         </span>

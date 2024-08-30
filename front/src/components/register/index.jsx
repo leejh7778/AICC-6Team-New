@@ -44,7 +44,7 @@ const Register = () => {
       <div>
         <br />
 
-        <h2 className="w-full  flex justify-center mt-20 px-2  text-4xl font-semibold ">
+        <h2 className="w-full  flex justify-center px-2  text-4xl font-semibold ">
           회원가입
         </h2>
         <br />

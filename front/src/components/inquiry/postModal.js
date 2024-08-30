@@ -2,27 +2,27 @@ import React, { useState } from 'react';
 
 const PostModal = ({ onClose, setPosts }) => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [pn, setpn] = useState('');
   const [summary, setSummary] = useState('');
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 간단한 이메일 유효성 검사 정규식
-    return emailRegex.test(email);
+  const validatepn = (pn) => {
+    const pnRegex = /^01[016789]-?\d{3,4}-?\d{4}$/;
+    return pnRegex.test(pn);
   };
 
   const handleSavePost = () => {
-    if (name.trim() === '' || email.trim() === '' || summary.trim() === '') {
+    if (name.trim() === '' || pn.trim() === '' || summary.trim() === '') {
       alert('빈칸이 없는지 확인해주세요!');
       return;
     }
-    if (!validateEmail(email)) {
-      alert('유효한 이메일 주소를 입력해주세요.');
+    if (!validatepn(pn)) {
+      alert('유효한 연락처를 입력해주세요.');
       return;
     }
 
     setPosts((prevPosts) => [
       ...prevPosts,
-      { id: prevPosts.length + 1, name, email, summary },
+      { id: prevPosts.length + 1, name, pn, summary },
     ]);
 
     onClose(); // 모달 닫기
@@ -39,21 +39,20 @@ const PostModal = ({ onClose, setPosts }) => {
       {/* 모달 내용 */}
       <div className="relative bg-white text-xl p-6 rounded-lg w-1/3 shadow-lg z-10 font-kr ">
         <h2 className="font-Kr font-bold mb-4 text-4xl justify-center">
-          {' '}
           Contack Us
         </h2>
         <input
-          type="name"
+          type="text"
           placeholder="이름을 입력하세요"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full p-2 mb-4 border border-gray-300 rounded"
         />
         <input
-          type="email"
-          placeholder="이메일을 입력하세요"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="pn"
+          placeholder="연락처를 입력하세요"
+          value={pn}
+          onChange={(e) => setpn(e.target.value)}
           className="w-full p-2 mb-4 border border-gray-300 rounded"
         />
         <textarea

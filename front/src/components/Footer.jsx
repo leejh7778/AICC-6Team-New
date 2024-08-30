@@ -3,7 +3,7 @@ import { FaSquareFacebook } from 'react-icons/fa6';
 import { FaInstagramSquare } from 'react-icons/fa';
 const Footer = () => {
   return (
-    <footer className=" mt-5 border-t border-neutral-700 flex justify-center">
+    <footer className=" mt-5 border-t border-neutral-700 flex justify-center text-gray-700 ">
       <div className="w-[90%] h-8 px-5 flex justify-between items-center text-sm">
         <div>
           <a href="#">
@@ -23,5 +23,6 @@ const Footer = () => {
     </footer>
   );
 };
+// w-full flex mt-0 justify-center  text-gray-700 text-center p-4 bottom-0 left-0 flex-grow
 
 export default Footer;
