@@ -7,9 +7,9 @@ const Header = ({ isLoggedIn, onLogout }) => {
       <div className="flex-grow"></div>{' '}
       {/* 좌측 공간 확보를 위해 flex-grow 사용 */}
       <div className="menu flex px-4 font-Kr font-bold items-baseline">
-        <h2 className="px-2 text-[#d4d6cc] hover:text-[#aaae9f]">
+        {/* <h2 className="px-2 text-[#d4d6cc] hover:text-[#aaae9f]">
           <Link to="/">홈</Link>
-        </h2>
+        </h2> */}
 
         {isLoggedIn ? (
           <>
@@ -30,6 +30,9 @@ const Header = ({ isLoggedIn, onLogout }) => {
             </h2>
             <h2 className="flex px-2 text-[#d4d6cc] hover:text-[#aaae9f]">
               <Link to="/register">회원가입 | </Link>
+            </h2>
+            <h2 className="flex px-2 text-[#d4d6cc] hover:text-[#aaae9f]">
+              <Link to="/Mypage">마이페이지 </Link>
             </h2>
           </>
         )}
