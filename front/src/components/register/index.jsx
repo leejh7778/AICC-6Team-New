@@ -44,7 +44,7 @@ const Register = () => {
       <div>
         <br />
 
-        <h2 className="w-full  flex justify-center px-2  text-4xl font-semibold ">
+        <h2 className=" font-Kr w-full  flex justify-center px-2  text-4xl font-semibold ">
           회원가입
         </h2>
         <br />
@@ -56,7 +56,7 @@ const Register = () => {
               type="text"
               placeholder="아이디를 입력해 주세요 "
               name="userid"
-              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
+              className="form-control w-full text-center focus:inline focus:outline-blue-500"
               onChange={(e) => setValues({ ...values, userid: e.target.value })}
             />
           </div>
