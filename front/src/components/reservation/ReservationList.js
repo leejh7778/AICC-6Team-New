@@ -12,8 +12,12 @@ function ReservationList({ reservations }) {
             <h2 className="text-xl font-semibold mb-2">{reservation.name}</h2>
 
             <p className="text-gray-700">전화번호: {reservation.number}</p>
+            <p className="text-gray-700"> 이메일: {reservation.email}</p>
+
             <p className="text-gray-700">날짜: {reservation.date}</p>
-            <p className="text-gray-700">시간: {reservation.time}</p>
+            <p className="text-gray-700">
+              반려동물: {reservation.selectedPetType}
+            </p>
             <p className="text-gray-700">메모: {reservation.notes}</p>
           </div>
           {/* 예약 수정/삭제 버튼 */}
