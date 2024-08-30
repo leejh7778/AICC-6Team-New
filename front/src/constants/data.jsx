@@ -14,6 +14,10 @@ import DallMini2 from '../assets/image/DallMini2.webp'
 import DallMini3 from '../assets/image/DallMini3.webp'
 import DallMini4 from '../assets/image/DallMini4.webp'
 
+import ShopItem1 from '../assets/shopItem/Dog.webp'
+import ShopItem2 from '../assets/shopItem/Cat.webp'
+import ShopItem3 from '../assets/shopItem/Food.webp'
+
 
 
 
@@ -79,6 +83,23 @@ export const subCommuData = [
    
 ]
 
+export const shopItem = [
+    {
+        image: ShopItem1,
+        price:"20,000￦"
+    },
+    {
+        image: ShopItem2,
+        price:"15,000￦"
+    },
+    {
+        image: ShopItem3,
+        price:"50,000￦"
+    },
+    
+    
+    
+]
 
 
 

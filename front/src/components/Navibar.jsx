@@ -4,9 +4,9 @@ import PetLogo from '../assets/logoimage/파트라슈.png';
 const Navibar = () => {
   return (
     <div className="z-10 h-auto flex items-center justify-between px-10 ">
-      <div className="logoAndHome flex items-center pl-10 ">
+      <div className="logoAndHome flex items-center ">
           <Link to="/" className="font-Kr flex justify-center items-center text-cyan-700 ">
-          <img src={PetLogo} alt="" className=" w-[30%] h-[30%]" />
+          <img src={PetLogo} alt="" className=" w-[20%] h-[20%]" />
           <span className='text-base lg:text-lg font-bold'>해피펫</span>
           </Link>
        

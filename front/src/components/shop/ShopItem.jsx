@@ -2,7 +2,7 @@ import React from 'react'
 
 const ShopItem = () => {
   return (
-    <div>ShopItem</div>
+    <div className='bg-[#f1f3ea] rounded-lg'>ShopItem</div>
   )
 }
 
