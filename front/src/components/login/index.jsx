@@ -34,7 +34,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="font-Kr">
+    <div className="font-Kr w-72   ">
       <h2 className="w-full  flex justify-center  px-2  text-4xl font-semibold ">
         로그인
       </h2>

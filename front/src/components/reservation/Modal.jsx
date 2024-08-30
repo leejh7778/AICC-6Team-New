@@ -36,7 +36,7 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
   };
 
   return (
-    <div className="modal font-Kr font-En">
+    <div className="modal font-Kr,En">
       <div className="modal-content"> 
         <h2 className='text-3xl font-semibold pb-5' >예약하기</h2>
         <h2 className='font-semibold text-lg pb-5 text-center'>{hospitalName}</h2>

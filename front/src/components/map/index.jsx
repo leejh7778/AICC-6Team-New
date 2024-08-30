@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import useGeolocation from '../../hooks/useGeolocation';
 import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 import ReservationForm from '../reservation/Modal';
+import PageTitle from '../PageTitle';
 
 function Map() {
   const mapRef = useRef(null);
@@ -68,7 +69,7 @@ function Map() {
         const marker = new naver.maps.Marker({
           key: hospital.hosp_id, // 고유한 key 추가
           position: latlng,
-          map: null, // 처음에는 모든 마커를 숨겨둠
+          // map: null, // 처음에는 모든 마커를 숨겨둠
           title: hospital.hosp_name,
         });
 
@@ -119,24 +120,6 @@ function Map() {
       setHospitalMarkers(markers); // 마커 상태 저장
 
       
-
-      // clickableElements.forEach(element => {
-      //   element.addEventListener('click', function() {
-      //     console.log(this); // 클릭된 요소 출력
-      //   });
-      // });
-
-      // // 예시로 'reserve-btn'이라는 ID를 가진 요소에 이벤트 리스너 추가
-      // const reserveBtn = contentElement.querySelector('.reserv-button');
-      // if (reserveBtn) {
-      //   reserveBtn.addEventListener('click', function() {
-      //     console.log('Reserve button clicked!');
-      //   });
-      // }
-
-      
-
-      // 지도 줌 및 드래그 이벤트 핸들러 - 화면 내 마커만 업데이트
       const handleMapUpdates = () => {
         checkForMarkersRendering(mapRef.current, markers);
       };
@@ -160,8 +143,9 @@ function Map() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full mt-3">
-      <div id="map" className="w-[80%] h-[600px] mb-10" />
+    <div className="container flex flex-col  justify-center  w-full mt-3">
+      <PageTitle title="Map" className="p-7 w-[80%]"/>
+      <div id="map" className="w-full h-[600px] mb-10 rounded-lg"  />
       {isModalOpen && selectedHospital && (
         <ReservationForm
           onClose={() => setIsModalOpen(false)}
@@ -170,6 +154,7 @@ function Map() {
         />
       )}
     </div>
+    
   );
 }
 

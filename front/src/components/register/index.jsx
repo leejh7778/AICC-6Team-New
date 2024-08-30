@@ -40,7 +40,7 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className='w-72 '>
       <div>
         <br />
 

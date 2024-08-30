@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Header = ({ isLoggedIn, onLogout }) => {
   return (
-    <div className="w-full h-[30px] bg-slate-0 flex justify-between items-baseline px-20 py-2">
+    <div className="w-full h-[30px] bg-slate-0 flex justify-between items-baseline px-20 py-2 text-xs lg:text-base">
       <div className="flex-grow"></div>{' '}
       {/* 좌측 공간 확보를 위해 flex-grow 사용 */}
       <div className="menu flex px-4 font-Kr font-bold items-baseline">
@@ -19,7 +19,7 @@ const Header = ({ isLoggedIn, onLogout }) => {
             >
               로그아웃
             </h2>
-            <h2 className="flex px-2 text-[#d4d6cc] hover:text-[#aaae9f]">
+            <h2 className="flex px-2  text-[#d4d6cc] hover:text-[#aaae9f]">
               <Link to="/mypage">마이페이지</Link>
             </h2>
           </>

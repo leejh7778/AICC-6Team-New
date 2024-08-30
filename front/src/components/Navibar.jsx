@@ -4,23 +4,23 @@ import PetLogo from '../assets/logoimage/파트라슈.png';
 const Navibar = () => {
   return (
     <div className="z-10 h-auto flex items-center justify-between px-10 ">
-      <div className="logoAndHome flex items-center ">
-        <div className="logo">
-          <img src={PetLogo} alt="" className="w-20 h-20" />
-        </div>
-        <h2 className="font-semibold text-xl">
-          <Link to="/" className="font-Kr text-cyan-700 ">
-            파트라슈
+      <div className="logoAndHome flex items-center pl-10 ">
+          <Link to="/" className="font-Kr flex justify-center items-center text-cyan-700 ">
+          <img src={PetLogo} alt="" className=" w-[30%] h-[30%]" />
+          <span className='text-base lg:text-lg font-bold'>해피펫</span>
           </Link>
-        </h2>
+       
       </div>
 
-      <div className="naviMenu flex px-10  felx-glow">
-        <span className="font-Kr font-bold text-green-600 hover:text-green-800 ">
+      <div className="naviMenu w-1/3 flex items-center  felx-glow gap-x-20 text-base lg:text-lg font-bold">
+        <span className=" font-Kr   text-green-600 hover:text-green-800 ">
           <Link to="/map">병원찾기</Link>
         </span>
-        <span className="font-Kr font-bold text-green-600 hover:text-green-800  ">
+        <span className="font-Kr  text-green-600 hover:text-green-800  ">
           <Link to="/community">커뮤니티</Link>
+        </span>
+        <span className="font-En   text-green-600 hover:text-green-800  ">
+          <Link to="/shop">SHOP</Link>
         </span>
       </div>
     </div>

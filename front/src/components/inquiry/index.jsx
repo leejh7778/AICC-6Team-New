@@ -31,9 +31,12 @@ function Board() {
   // 글 작성 페이지로 이동하는 함수
 
   return (
-    <div className="w-full  font-Kr text-2xl font-bold  ">
-      <PageTitle title="1:1문의" className="p-7" />
+    <div className="w-full flex flex-col justify-between  font-Kr text-2xl font-bold  ">
       <div>
+      <PageTitle title="1:1문의" className="p-7" />
+      </div>
+ 
+      <div className='min-h-[60vh]'>
         <div className="font-bold"></div>
 
         {/* 게시글 리스트 */}

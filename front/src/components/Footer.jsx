@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="w-[90%] h-8 px-5 flex justify-between items-center text-sm">
         <div>
           <a href="#">
-            <span className="font-semibold font-Kr">파트라슈 </span>
+            <span className="font-semibold font-Kr"> 회사 </span>
             <span className="font-En">Email : contact@patrasya.com</span>
           </a>
         </div>
