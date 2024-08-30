@@ -12,7 +12,7 @@ function ReservationList({ reservations }) {
             <h2 className="text-xl font-semibold mb-2">{reservation.name}</h2>
 
             <p className="text-gray-700">전화번호: {reservation.number}</p>
-            <p className="text-gray-700"> 이메일: {reservation.email}</p>
+            <p className="text-gray-700"> 이메일: {reservation.enai}</p>
 
             <p className="text-gray-700">날짜: {reservation.date}</p>
             <p className="text-gray-700">

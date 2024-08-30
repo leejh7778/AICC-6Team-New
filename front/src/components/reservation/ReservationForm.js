@@ -23,7 +23,7 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('http://localhost:8080/post_reserv', {
+      await axios.post('http://localhost:8080/reservation', {
         ...formData,
         user_idx: hospitalId, // 사용자 ID를 설정 (병원 ID는 실제로 사용자의 ID로 대체)
       });

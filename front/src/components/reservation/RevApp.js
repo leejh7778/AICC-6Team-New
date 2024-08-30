@@ -31,7 +31,7 @@ function App() {
                 <strong>날짜:</strong> {reservation.date}
               </p>
               <p>
-                <strong>반련동물:</strong> {reservation.selectedPetType}
+                <strong>반련동물:</strong> {reservation.petType}
               </p>
               <p>
                 <strong>메모:</strong> {reservation.notes}
