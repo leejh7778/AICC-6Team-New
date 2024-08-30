@@ -16,7 +16,7 @@ const PostModal = ({ onClose, setPosts }) => {
       return;
     }
     if (!validatepn(pn)) {
-      alert('유효한 이메일을 입력해주세요.');
+      alert('유효한 연락처를 입력해주세요.');
       return;
     }
 
