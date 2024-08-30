@@ -49,8 +49,8 @@ const PostModal = ({ onClose, setPosts }) => {
           className="w-full p-2 mb-4 border border-gray-300 rounded"
         />
         <input
-          type="email"
-          placeholder="이메일을 입력하세요"
+          type="pn"
+          placeholder="연락처를 입력하세요"
           value={pn}
           onChange={(e) => setpn(e.target.value)}
           className="w-full p-2 mb-4 border border-gray-300 rounded"
