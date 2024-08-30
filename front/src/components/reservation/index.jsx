@@ -18,7 +18,7 @@ function ReservationBoard() {
 
       {/* 예약 페이지 제목 */}
 
-      <h1 className="font-Kr w-[100%] border-b-gray-300 border-b-2 p-3 mt-4 font-semibold">
+      <h1 className="font-Kr w-[100%] border-b-gray-600 border-b-2 p-3 mt-4 font-semibold">
         예약 문의
       </h1>
       <div className="flex justify-end mt-10">

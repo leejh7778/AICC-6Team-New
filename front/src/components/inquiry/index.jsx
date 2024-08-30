@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PostList from '../inquiry/postList';
-import PageTitle from '../PageTitle';
+
 import PostModal from '../inquiry/postModal'; // 모달 컴포넌트 임포트
 
 function Board() {
@@ -32,28 +32,26 @@ function Board() {
 
   return (
     <div className="w-full  font-Kr text-2xl font-bold  ">
-      <PageTitle title="1:1문의" className="p-7" />
-      <div>
-        <div className="font-bold"></div>
+      <div className="font-bold"></div>
 
-        {/* 게시글 리스트 */}
-        <PostList posts={posts} onSelectPost={handleSelectPost} />
+      {/* 게시글 리스트 */}
+      <PostList posts={posts} onSelectPost={handleSelectPost} />
 
-        {/* 모달 컴포넌트 렌더링 */}
-        {isModalOpen && (
-          <PostModal onClose={handleCloseModal} setPosts={setPosts} />
-        )}
+      {/* 모달 컴포넌트 렌더링 */}
+      {isModalOpen && (
+        <PostModal onClose={handleCloseModal} setPosts={setPosts} />
+      )}
 
-        {/* 글 작성하기 버튼 (모달 열기) */}
-        <div className="flex justify-end mt-10">
-          <button
-            onClick={handleCreateNewPost}
-            className="mt-5 mb-4 py-1.5 px-2 bg-[#acbd9b] text-white text-2xl rounded-md shadow hover:bg-[#c3d1c7d1] focus:outline-none "
-          >
-            글 작성하기
-          </button>
-        </div>
+      {/* 글 작성하기 버튼 (모달 열기) */}
+      <div className="flex justify-end mt-10">
+        <button
+          onClick={handleCreateNewPost}
+          className="mt-5 mb-4 py-1.5 px-2 bg-[#acbd9b] text-white text-2xl rounded-md shadow hover:bg-[#c3d1c7d1] focus:outline-none "
+        >
+          글 작성하기
+        </button>
       </div>
+
       {isModalOpen && (
         <PostModal onClose={handleCloseModal} setPosts={setPosts} />
       )}

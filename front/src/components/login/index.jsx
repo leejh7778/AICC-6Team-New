@@ -48,7 +48,7 @@ const Login = ({ onLogin }) => {
           <label htmlFor="userid"></label>
           <input
             type="text"
-            placeholder="아이디를 입력해주세요."
+            placeholder="아이디를 입력해주세요"
             name="userid"
             value={userid}
             onChange={(e) => setUserid(e.target.value)}
@@ -60,7 +60,7 @@ const Login = ({ onLogin }) => {
           <label htmlFor="password"></label>
           <input
             type="password"
-            placeholder="비밀번호를 입력해주세요."
+            placeholder="비밀번호를 입력해주세요"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
