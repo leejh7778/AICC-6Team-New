@@ -101,11 +101,11 @@ function Map() {
         infoWindowRef.current = infoWindow;
 
       const contentElement = infoWindowRef.current.getContentElement();
-      console.log(contentElement)
+      // console.log(contentElement)
 
          // 콘텐츠 요소 내의 클릭 가능한 버튼이나 요소들에 대해 이벤트 리스너 추가 
       const clickableElements = contentElement.querySelectorAll('.reserv-button'); // 클래스명이 'clickable'인 요소들
-      console.log(clickableElements)
+      // console.log(clickableElements)
 
       clickableElements.forEach(element => {
         element.addEventListener('click', function() {
