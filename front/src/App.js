@@ -31,13 +31,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="z-0 flex flex-col justify-between items-center min-h-[120vh">
+      <div className="z-0 flex flex-col justify-between items-center min-h-full h-auto">
         <nav className="z-10 header w-full backdrop-blur-sm">
           <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           <Navibar />
         </nav>
 
-        <div className="w-[80%] flex justify-center items-center ">
+        <div className="w-[80%] flex flex-col justify-center items-center ">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/map" element={<Map />} />
@@ -54,10 +54,11 @@ function App() {
             <Route path="/ReservationModal" element={<ReservationModal />} />
             <Route path="/ReservationForm" element={<ReservationForm />} />
           </Routes>
+       
         </div>
-        <div className="footer w-full mt-0 position:">
+        <footer className="footer translate-y-[-100%] h-5 w-full mt-2 relative-">
           <Footer />
-        </div>
+        </footer>
       </div>
     </BrowserRouter>
   );

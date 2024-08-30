@@ -114,7 +114,7 @@ app.get('/hospitals', async (req, res) => {
   try {
     console.log('Fetching hospital data...');
     const result = await pool.query(
-      'SELECT hosp_name, hosp_add, hosp_post, hosp_pn, hosp_x, hosp_y FROM hosp limit 10'
+      'SELECT hosp_name, hosp_add, hosp_post, hosp_pn, hosp_x, hosp_y FROM hosp limit 500'
     );
     console.log(`Fetched ${result.rows.length} hospitals`);
 

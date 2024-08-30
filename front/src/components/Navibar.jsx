@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PetLogo from '../assets/logoimage/PetLogo_t.png';
+import PetLogo from '../assets/logoimage/파트라슈.png';
 const Navibar = () => {
   return (
     <div className="z-10 h-auto flex items-center justify-between px-10 ">

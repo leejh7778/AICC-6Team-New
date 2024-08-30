@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './modal.css';
 
 function ReservationForm({ onClose, hospitalId, hospitalName }) {
   const [formData, setFormData] = useState({
@@ -35,13 +36,15 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h2>예약하기</h2>
+    <div className="modal font-Kr font-En">
+      <div className="modal-content"> 
+        <h2 className='text-3xl font-semibold pb-5' >예약하기</h2>
+        <h2 className='font-semibold text-lg pb-5 text-center'>{hospitalName}</h2>
         <form>
-          <div>
+        <div className='inputLabel text-center flex flex-col'>
+          <div >
             <label>
-              이름:
+              이름:&nbsp;&nbsp;&nbsp;
               <input
                 type="text"
                 name="username"
@@ -72,7 +75,7 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
               />
             </label>
           </div>
-          <div>
+          <div className='checkbox'>
             <label>
               강아지
               <input
@@ -111,7 +114,8 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
               />
             </label>
           </div>
-          <div className="modal-actions">
+        </div>
+          <div className="modal-actions font-semibold">
             <button type="button" onClick={handleSubmit}>
               예약하기
             </button>

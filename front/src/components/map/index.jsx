@@ -45,7 +45,7 @@ function Map() {
         mapDataControl: false,
         scaleControl: true,
         tileDuration: 200,
-        zoom: 7,
+        zoom: 14,
         // minZoom: 13,
         zoomControl: true,
         zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT },
@@ -82,25 +82,11 @@ function Map() {
               <button class="inquiry-button">1대1 문의</button>
             </div>`,
           maxWidth: 300,
-          anchorSize: { width: 50, height: 50 },
+          anchorSize: { width: 12, height: 14 },
           borderColor: '#cecdc7',
         });
 
-        infoWindowRef.current = infoWindow;
-
-      const contentElement = infoWindowRef.current.getContentElement();
-      console.log(contentElement)
-
-          // 콘텐츠 요소 내의 클릭 가능한 버튼이나 요소들에 대해 이벤트 리스너 추가
-      const clickableElements = contentElement.querySelectorAll('.reserv-button'); // 클래스명이 'clickable'인 요소들
-      console.log(clickableElements)
-
-      clickableElements.forEach(element => {
-        element.addEventListener('click', function() {
-          alert('aaa'); // 클릭된 요소 출력
-        });
-      });
-
+        
 
         // 마커 클릭 이벤트
         naver.maps.Event.addListener(marker, 'click', function () {
@@ -110,29 +96,22 @@ function Map() {
             infoWindow.open(mapRef.current, marker);
           }
         });
+        
+        infoWindowRef.current = infoWindow;
 
-        // 인포윈도우의 DOM이 준비되면 버튼 클릭 이벤트 추가
-        naver.maps.Event.addListener(infoWindow, 'domready', function () {
-          // const reservButton = document.querySelector('#reserve-btn');
+      const contentElement = infoWindowRef.current.getContentElement();
+      console.log(contentElement)
 
-          // reservButton.addEventListener('click', function(){
-          //   alert('aaa')
-          // })
+         // 콘텐츠 요소 내의 클릭 가능한 버튼이나 요소들에 대해 이벤트 리스너 추가 
+      const clickableElements = contentElement.querySelectorAll('.reserv-button'); // 클래스명이 'clickable'인 요소들
+      console.log(clickableElements)
 
-          // console.log(reservButton)
+      clickableElements.forEach(element => {
+        element.addEventListener('click', function() {
+          handleReservationClick(hospital); // 클릭된 요소 출력
+        });
+      });
 
-          // if (reservButton) {
-          //   // reservButton.addEventListener('click', () => handleReservationClick(hospital));
-          //   reservButton.addEventListener('click', () => {
-          //     alert("aaa")
-          //   });
-          // } else {
-          //   console.warn('Reservation button not found in the DOM.');
-          // }
-
-          
-
-          });
 
         return marker;
       });
