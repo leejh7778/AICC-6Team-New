@@ -42,42 +42,35 @@ function App() {
   };
 
   return (
+    <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px]">
+      <nav className="z-10 header w-full backdrop-blur-sm">
+        <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+        <Navibar />
+      </nav>
 
-
-      <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px]">
-
-        <nav className="z-10 header w-full backdrop-blur-sm">
-          <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-          <Navibar />
-        </nav>
-
-
-        <div className="w-[80%] flex justify-center items-center">
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/map" element={<Map />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/community/:idx" element={<InBoard />} />
-            <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/mypage" element={<Mypage />} />
-            <Route path="/inquiry" element={<Inquiry />} />
-            <Route path="/postDetail" element={<PostDetail />} />
-            <Route path="/postForm" element={<PostForm />} />
-            <Route path="/edit/:id" element={<PostForm />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/reservation" element={<Reservation />} />
-            <Route path="/ReservationModal" element={<ReservationModal />} />
-            <Route path="/ReservationForm" element={<ReservationForm />} />
-            <Route path="/About" element={<About />} />
-          </Routes>
-       
-        </div>
-        <footer className="footer translate-y-[-100%] h-5 w-full mt-2 relative-">
-          <Footer />
-        </footer>
+      <div className="w-[80%] flex justify-center items-center">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/community/:idx" element={<InBoard />} />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/inquiry" element={<Inquiry />} />
+          <Route path="/postDetail" element={<PostDetail />} />
+          <Route path="/postForm" element={<PostForm />} />
+          <Route path="/edit/:id" element={<PostForm />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/reservation" element={<Reservation />} />
+          <Route path="/ReservationModal" element={<ReservationModal />} />
+          <Route path="/ReservationForm" element={<ReservationForm />} />
+          <Route path="/About" element={<About />} />
+        </Routes>
       </div>
-
+      <footer className="footer translate-y-[-100%] h-5 w-full mt-2 relative-">
+        <Footer />
+      </footer>
+    </div>
   );
 }
 

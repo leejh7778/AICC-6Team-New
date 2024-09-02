@@ -6,25 +6,41 @@ const Register = () => {
   const [values, setValues] = useState({
     userid: '',
     password: '',
+    confirmPassword: '', // 비밀번호 확인 필드 추가
     username: '',
     email: '',
   });
 
+  const [passwordError, setPasswordError] = useState(''); // 비밀번호 확인 오류 메시지 상태 추가
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (
       !values.userid ||
       !values.password ||
+      !values.confirmPassword || // 비밀번호 확인 필드도 체크
       !values.username ||
       !values.email
     ) {
       alert('입력값을 확인해주세요.');
       return;
     }
+
+    if (values.password !== values.confirmPassword) {
+      // 비밀번호 일치 여부 확인
+      setPasswordError('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
     axios
-      .post('http://localhost:8080/register', values)
+      .post('http://localhost:8080/register', {
+        userid: values.userid,
+        password: values.password,
+        username: values.username,
+        email: values.email,
+      })
       .then((res) => {
         if (res.status === 201) {
           navigate('/login');
@@ -34,81 +50,88 @@ const Register = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert('회원가입 중 오류가 발생했습니다.');
       });
   };
 
   return (
-    <div className="w-2/4 flex justify-center items-centers">
+    <div className="w-72 ">
       <div>
         <br />
 
-        {/* a {
-  color: #333;
-  font-size: 14px;
-  text-decoration: none;
-  margin: 15px 0;
-} */}
-
-        <h2 className=" font-Kr   flex justify-center px-2  text-4xl font-semibold ">
+        <h2 className=" font-Kr w-full  flex justify-center px-2  text-4xl font-semibold ">
           회원가입
         </h2>
         <br />
         <br />
         <form onSubmit={handleSubmit}>
-          <div
-            className="w-[500px] 
-            bg-gray-200 border-gray-500 bg-slate-white  py-3 text-xl mb-3"
-          >
-            <label htmlFor="userid"></label>
+          <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
+            <label htmlFor="username"></label>
             <input
-              type="userid"
+              type="text"
               placeholder="아이디를 입력해 주세요 "
               name="userid"
-              className="form-control w-full text-center focus:outline  focus:outline-blue-500  bg-gray-200 "
+              className="form-control w-full text-center focus:inline focus:outline-blue-500"
               onChange={(e) => setValues({ ...values, userid: e.target.value })}
             />
           </div>
-
-          <div className="w-[500px] bg-gray-200 border-gray-500 bg-slate-white  py-3 text-xl mb-3 ">
+          <br />
+          <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
             <label htmlFor="password"></label>
             <input
               type="password"
               placeholder="비밀번호를 입력해 주세요 "
               name="password"
-              className="form-control w-full text-center focus:outline  focus:outline-blue-500 bg-gray-200 "
+              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
               onChange={(e) =>
                 setValues({ ...values, password: e.target.value })
               }
             />
           </div>
-
-          <div className="w-[500px]  bg-gray-200 border-gray-500 bg-slate-white  px-1 py-3 text-xl mb-3">
+          <br />
+          <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
+            <label htmlFor="confirmPassword"></label>
+            <input
+              type="password"
+              placeholder="비밀번호를 다시 입력해 주세요 "
+              name="confirmPassword"
+              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
+              onChange={(e) =>
+                setValues({ ...values, confirmPassword: e.target.value })
+              }
+            />
+          </div>
+          <br />
+          {passwordError && (
+            <div className="text-red-500 text-center mb-4">{passwordError}</div>
+          )}
+          <div className="w-full  box-border border-2 md:box-content rounded-md border-gray-500  bg-slate-white flex justify-center px-2 py-2 text-xl">
             <label htmlFor="name"></label>
             <input
               type="text"
               placeholder="이름을 입력해 주세요 "
               name="username"
-              className="form-control w-full text-center focus:outline    focus:outline-blue-500 bg-gray-200 "
+              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
               onChange={(e) =>
                 setValues({ ...values, username: e.target.value })
               }
             />
           </div>
-
-          <div className="w-[500px] bg-gray-200 border-gray-500 bg-slate-white  px-1 py-3 text-xl mb-6">
+          <br />
+          <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
             <label htmlFor="email"></label>
             <input
               type="email"
               placeholder="이메일을 입력해주세요"
               name="email"
-              className=" box-border form-control w-full text-center focus:outline    focus:outline-blue-500 bg-gray-200 "
+              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
               onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
           </div>
-
+          <br />
           <button
-            type="surmit"
-            className="btn  cursor-pointer md:box-content  border-solid border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea] hover:bg-[#f1f3ea] w-full flex justify-center  py-2 text-xl"
+            type="submit" // 이 부분에서 오타 수정 (surmit -> submit)
+            className="btn  cursor-pointer box-border border-2 md:box-content rounded-md  border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea]  hover:bg-[#f1f3ea]  w-full  flex justify-center px-2 py-2 text-xl "
           >
             가입하기
           </button>
