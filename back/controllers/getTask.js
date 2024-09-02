@@ -30,10 +30,16 @@ const getItemsByUserId = async (req, res, tableName) => {
 
 // 예약 정보를 가져오는 함수
 exports.getReserv = async (req, res) => {
+  const reserv_idx = req.params.reserv_idx;
+  console.log(reserv_idx);
+  await getItems(req, res, 'reserv_idx', reserv_idx);
   await getItemsByUserId(req, res, 'reserv'); // 'reserv' 테이블에서 조회
 };
 
 // 1:1 문의 정보를 가져오는 함수
 exports.getInq = async (req, res) => {
+  const inq_idx = req.params.inq_idx;
+  console.log(inq_idx);
+  await getItems(req, res, 'inq_idx', inq_idx);
   await getItemsByUserId(req, res, 'inquiry'); // 'inquiry' 테이블에서 조회
 };
