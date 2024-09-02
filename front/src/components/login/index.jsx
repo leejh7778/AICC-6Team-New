@@ -35,7 +35,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="font-Kr w-72   ">
+    <div className="font-Kr w-70   ">
       <h2 className="w-full  flex justify-center  px-2  text-4xl font-semibold ">
         로그인
       </h2>
@@ -45,7 +45,7 @@ const Login = ({ onLogin }) => {
         <div className="text-red-500 text-center mb-4">{errorMessage}</div>
       )}
       <form onSubmit={handleSubmit}>
-        <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
+        <div className="w-[500px] bg-gray-200 border-gray-500 bg-slate-white  px-1 py-3 text-xl mb-4">
           <label htmlFor="userid"></label>
           <input
             type="text"
@@ -53,11 +53,11 @@ const Login = ({ onLogin }) => {
             name="userid"
             value={userid}
             onChange={(e) => setUserid(e.target.value)}
-            className="form-control w-full text-center focus:inline focus:outline-blue-500"
+            className="box-border form-control w-full text-center focus:outline    focus:outline-blue-500 bg-gray-200"
           />
         </div>
-        <br />
-        <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
+
+        <div className="w-[500px] bg-gray-200 border-gray-500 bg-slate-white  px-1 py-3 text-xl mb-6">
           <label htmlFor="password"></label>
           <input
             type="password"
@@ -65,13 +65,13 @@ const Login = ({ onLogin }) => {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="form-control w-full text-center focus:inline focus:outline-blue-500"
+            className="box-border form-control w-full text-center focus:outline    focus:outline-blue-500 bg-gray-200"
           />
         </div>
-        <br />
+
         <button
           type="submit"
-          className="btn cursor-pointer box-border border-2 md:box-content rounded-md border-solid border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea] hover:bg-[#f1f3ea] w-full flex justify-center px-2 py-2 text-xl"
+          className="btn cursor-pointer md:box-content  border-solid border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea] hover:bg-[#f1f3ea] w-full flex justify-center  py-2 text-xl"
         >
           로그인
         </button>

@@ -3,9 +3,8 @@ import useGeolocation from '../../hooks/useGeolocation';
 import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 import ReservationForm from '../reservation/Modal';
 import PageTitle from '../PageTitle';
-import marker from '../../assets/image/marker.png'
+import marker from '../../assets/image/marker.png';
 import PostModal from '../inquiry/postModal';
-
 
 function Map() {
   const mapRef = useRef(null);
@@ -17,13 +16,15 @@ function Map() {
   const [isModalOpenR, setIsModalOpenR] = useState(false);
   const [isModalOpenI, setIsModalOpenI] = useState(false);
   const infoWindowRef = useRef(null);
-  const mycenter = new naver.maps.LatLng( currentMyLocation.lat,currentMyLocation.lng);
-
+  const mycenter = new naver.maps.LatLng(
+    currentMyLocation.lat,
+    currentMyLocation.lng
+  );
 
   // 병원 데이터를 가져오는 함수
   const fetchHospitals = async () => {
     try {
-      const res = await fetch('http://localhost:8080/hospitals');
+      const res = await fetch('http://localhost:8080/map');
       if (!res.ok) {
         throw new Error('Network response was not ok.');
       }
@@ -39,9 +40,13 @@ function Map() {
   useEffect(() => {
     fetchHospitals(); // 병원 데이터 가져오기
   }, []);
- 
+
   useEffect(() => {
-    if (naver && currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
+    if (
+      naver &&
+      currentMyLocation.lat !== null &&
+      currentMyLocation.lng !== null
+    ) {
       const mapOptions = {
         center: new naver.maps.LatLng(
           currentMyLocation.lat,
@@ -59,22 +64,23 @@ function Map() {
       mapRef.current = new naver.maps.Map('map', mapOptions);
 
       // 현재 위치 마커 추가
-      new naver.maps.Marker({
-        position: new naver.maps.LatLng(
-          currentMyLocation.lat,
-          currentMyLocation.lng
-        ),
-        map: mapRef.current,
-        title: '현재 위치',
-        icon: {
-          url: `${marker}`,
-          size: new naver.maps.Size(100, 115),
-          origin: new naver.maps.Point(0, 0),
-          anchor: new naver.maps.Point(25, 26)
-      }
-        
-        
-      },[mapRef]);
+      new naver.maps.Marker(
+        {
+          position: new naver.maps.LatLng(
+            currentMyLocation.lat,
+            currentMyLocation.lng
+          ),
+          map: mapRef.current,
+          title: '현재 위치',
+          icon: {
+            url: `${marker}`,
+            size: new naver.maps.Size(100, 115),
+            origin: new naver.maps.Point(0, 0),
+            anchor: new naver.maps.Point(25, 26),
+          },
+        },
+        [mapRef]
+      );
 
       // 병원 마커 추가
       const markers = hospitals.map((hospital) => {
@@ -100,8 +106,6 @@ function Map() {
           borderColor: '#cecdc7',
         });
 
-        
-
         // 마커 클릭 이벤트
         naver.maps.Event.addListener(marker, 'click', function () {
           if (infoWindow.getMap()) {
@@ -110,33 +114,34 @@ function Map() {
             infoWindow.open(mapRef.current, marker);
           }
         });
-        
+
         infoWindowRef.current = infoWindow;
 
-      const contentElement = infoWindowRef.current.getContentElement();
-      // console.log(contentElement)
+        const contentElement = infoWindowRef.current.getContentElement();
+        // console.log(contentElement)
 
-         // 콘텐츠 요소 내의 클릭 가능한 버튼이나 요소들에 대해 이벤트 리스너 추가 
-      const clickableElementsR = contentElement.querySelectorAll('.reserv-button'); // 클래스명이 'clickable'인 요소들
-      const clickableElementsI = contentElement.querySelectorAll('.inquiry-button'); 
+        // 콘텐츠 요소 내의 클릭 가능한 버튼이나 요소들에 대해 이벤트 리스너 추가
+        const clickableElementsR =
+          contentElement.querySelectorAll('.reserv-button'); // 클래스명이 'clickable'인 요소들
+        const clickableElementsI =
+          contentElement.querySelectorAll('.inquiry-button');
 
-      clickableElementsR.forEach(element => {
-        element.addEventListener('click', function() {
-          handleReservationClickR(hospital); // 클릭된 요소 출력
+        clickableElementsR.forEach((element) => {
+          element.addEventListener('click', function () {
+            handleReservationClickR(hospital); // 클릭된 요소 출력
+          });
         });
-      });
-      clickableElementsI.forEach(element => {
-        element.addEventListener('click', function() {
-          handleReservationClickI(hospital); // 클릭된 요소 출력
+        clickableElementsI.forEach((element) => {
+          element.addEventListener('click', function () {
+            handleReservationClickI(hospital); // 클릭된 요소 출력
+          });
         });
-      });
 
         return marker;
       });
 
       setHospitalMarkers(markers); // 마커 상태 저장
 
-      
       const handleMapUpdates = () => {
         checkForMarkersRendering(mapRef.current, markers);
       };
@@ -163,20 +168,11 @@ function Map() {
     setIsModalOpenI(true);
   };
 
-  // const [address, setAddress] = useState("");
-  // const [roadAddress, setRoadAddress] = useState("");
-  // const handleChange = (e) =>{
-  //   const{address,value} = e.target;
-  //   const newAddress = {address:value};
-  //   setAddress(newAddress);
-  // };
-
   return (
     <div className="container flex flex-col  justify-center  w-full mt-3">
-      <PageTitle title="Map" className="p-7 w-[80%]"/>
+      <PageTitle title="Map" className="p-7 w-[80%]" />
       <div id="map" className="w-full h-[600px] mb-10 rounded-lg" />
-      {
-      isModalOpenR && selectedHospital && (
+      {isModalOpenR && selectedHospital && (
         <ReservationForm
           onClose={() => setIsModalOpenR(false)}
           hospitalId={selectedHospital.hosp_id} // 병원 ID 전달
@@ -184,17 +180,14 @@ function Map() {
         />
       )}
 
-       {
-       isModalOpenI && selectedHospital && (
+      {isModalOpenI && selectedHospital && (
         <PostModal
           onClose={() => setIsModalOpenI(false)}
           setPosts={selectedHospital.hosp_name} // 병원 이름 전달
         />
       )}
     </div>
-    
   );
 }
 
 export default Map;
-

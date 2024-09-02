@@ -95,7 +95,7 @@ const Register = () => {
             />
           </div>
 
-          <div className="w-[500px] bg-gray-200 border-gray-500 bg-slate-white  px-1 py-3 text-xl mb-4">
+          <div className="w-[500px] bg-gray-200 border-gray-500 bg-slate-white  px-1 py-3 text-xl mb-6">
             <label htmlFor="email"></label>
             <input
               type="email"
@@ -108,7 +108,7 @@ const Register = () => {
 
           <button
             type="surmit"
-            className="btn  flex justify-center box-border cursor-pointer border-2 rounded-md  border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea]  hover:bg-[#f1f3ea]  w-[50%]  py-2 text-xl "
+            className="btn  cursor-pointer md:box-content  border-solid border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea] hover:bg-[#f1f3ea] w-full flex justify-center  py-2 text-xl"
           >
             가입하기
           </button>
