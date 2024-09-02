@@ -23,7 +23,7 @@ function Map() {
   // 병원 데이터를 가져오는 함수
   const fetchHospitals = async () => {
     try {
-      const res = await fetch('http://localhost:8080/hospitals');
+      const res = await fetch('http://localhost:8080/map');
       if (!res.ok) {
         throw new Error('Network response was not ok.');
       }
@@ -38,7 +38,7 @@ function Map() {
   useEffect(() => {
     fetchHospitals(); // 병원 데이터 가져오기
   }, []);
- 
+
   useEffect(() => {
     if (naver && currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
       const initialLat = lat !== null ? lat : currentMyLocation.lat;
