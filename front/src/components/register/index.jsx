@@ -6,17 +6,21 @@ const Register = () => {
   const [values, setValues] = useState({
     userid: '',
     password: '',
+    confirmPassword: '', // 비밀번호 확인 필드 추가
     username: '',
     email: '',
   });
 
+  const [passwordError, setPasswordError] = useState(''); // 비밀번호 확인 오류 메시지 상태 추가
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (
       !values.userid ||
       !values.password ||
+      !values.confirmPassword || // 비밀번호 확인 필드도 체크
       !values.username ||
       !values.email
     ) {
@@ -24,8 +28,19 @@ const Register = () => {
       return;
     }
 
+    if (values.password !== values.confirmPassword) {
+      // 비밀번호 일치 여부 확인
+      setPasswordError('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
     axios
-      .post('http://localhost:8080/register', values)
+      .post('http://localhost:8080/register', {
+        userid: values.userid,
+        password: values.password,
+        username: values.username,
+        email: values.email,
+      })
       .then((res) => {
         if (res.status === 201) {
           navigate('/login');
@@ -40,7 +55,7 @@ const Register = () => {
   };
 
   return (
-    <div className='w-72 '>
+    <div className="w-72 ">
       <div>
         <br />
 
@@ -74,6 +89,22 @@ const Register = () => {
             />
           </div>
           <br />
+          <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
+            <label htmlFor="confirmPassword"></label>
+            <input
+              type="password"
+              placeholder="비밀번호를 다시 입력해 주세요 "
+              name="confirmPassword"
+              className="form-control w-full text-center focus:inline  focus:outline-blue-500"
+              onChange={(e) =>
+                setValues({ ...values, confirmPassword: e.target.value })
+              }
+            />
+          </div>
+          <br />
+          {passwordError && (
+            <div className="text-red-500 text-center mb-4">{passwordError}</div>
+          )}
           <div className="w-full  box-border border-2 md:box-content rounded-md border-gray-500  bg-slate-white flex justify-center px-2 py-2 text-xl">
             <label htmlFor="name"></label>
             <input
@@ -99,7 +130,7 @@ const Register = () => {
           </div>
           <br />
           <button
-            type="surmit"
+            type="submit" // 이 부분에서 오타 수정 (surmit -> submit)
             className="btn  cursor-pointer box-border border-2 md:box-content rounded-md  border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea]  hover:bg-[#f1f3ea]  w-full  flex justify-center px-2 py-2 text-xl "
           >
             가입하기

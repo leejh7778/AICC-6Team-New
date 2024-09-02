@@ -25,10 +25,11 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
     try {
       await axios.post("http://localhost:8080/post_reserv", {
         ...formData,
-        user_idx: hospitalId, // 사용자 ID를 설정 (병원 ID는 실제로 사용자의 ID로 대체)
+        user_idx: hospitalId,
       });
       alert('예약이 성공적으로 완료되었습니다.');
-      onClose();
+      onClose(); // 모달 닫기
+      window.location.reload(); // 페이지를 새로고침하여 예약 목록을 갱신
     } catch (error) {
       console.error('예약 실패:', error);
       alert('예약 중 오류가 발생했습니다.');
