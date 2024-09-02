@@ -3,6 +3,8 @@ import useGeolocation from '../../hooks/useGeolocation';
 import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 import ReservationForm from '../reservation/Modal';
 import PageTitle from '../PageTitle';
+import marker from '../../assets/image/marker.png'
+
 
 function Map() {
   const mapRef = useRef(null);
@@ -61,7 +63,15 @@ function Map() {
         ),
         map: mapRef.current,
         title: '현재 위치',
-      });
+        icon: {
+          url: `${marker}`,
+          size: new naver.maps.Size(100, 115),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(25, 26)
+      }
+        
+        
+      },[mapRef]);
 
       // 병원 마커 추가
       const markers = hospitals.map((hospital) => {
@@ -104,14 +114,20 @@ function Map() {
       // console.log(contentElement)
 
          // 콘텐츠 요소 내의 클릭 가능한 버튼이나 요소들에 대해 이벤트 리스너 추가 
-      const clickableElements = contentElement.querySelectorAll('.reserv-button'); // 클래스명이 'clickable'인 요소들
-      // console.log(clickableElements)
+      const clickableElementsR = contentElement.querySelectorAll('.reserv-button'); // 클래스명이 'clickable'인 요소들
+      const clickableElementsI = contentElement.querySelectorAll('inquiry-button'); 
 
-      clickableElements.forEach(element => {
+      clickableElementsR.forEach(element => {
         element.addEventListener('click', function() {
           handleReservationClick(hospital); // 클릭된 요소 출력
         });
       });
+      clickableElementsI.forEach(element => {
+        element.addEventListener('click', function() {
+          handleReservationClick(hospital); // 클릭된 요소 출력
+        });
+      });
+
 
 
         return marker;

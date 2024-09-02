@@ -17,7 +17,7 @@ import InBoard from './components/community/InBoard';
 
 import ReservationModal from './components/reservation/ReservationModal';
 import ReservationForm from './components/reservation/ReservationForm';
-import Shop from './components/shop';
+import About from './components/about';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
@@ -58,7 +58,7 @@ function App() {
             <Route path="/reservation" element={<Reservation />} />
             <Route path="/ReservationModal" element={<ReservationModal />} />
             <Route path="/ReservationForm" element={<ReservationForm />} />
-            <Route path="/Shop" element={<Shop />} />
+            <Route path="/About" element={<About />} />
           </Routes>
        
         </div>
