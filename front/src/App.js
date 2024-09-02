@@ -42,11 +42,7 @@ function App() {
   };
 
   return (
-    <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px]">
-      <nav className="z-10 header w-full backdrop-blur-sm">
-        <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-        <Navibar />
-      </nav>
+
 
       <div className="z-0 flex flex-col justify-between items-center min-h-screen min-w-[970px]">
 
@@ -82,10 +78,6 @@ function App() {
         </footer>
       </div>
 
-      <footer className="footer translate-y-[-100%] h-5 w-full mt-2 relative-">
-        <Footer />
-      </footer>
-    </div>
   );
 }
 
