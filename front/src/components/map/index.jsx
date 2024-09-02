@@ -23,7 +23,7 @@ function Map() {
   // 병원 데이터를 가져오는 함수
   const fetchHospitals = async () => {
     try {
-      const res = await fetch('http://localhost:8080/map');
+      const res = await fetch('http://localhost:8080/hospitals');
       if (!res.ok) {
         throw new Error('Network response was not ok.');
       }
