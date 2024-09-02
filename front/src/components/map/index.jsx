@@ -163,11 +163,18 @@ function Map() {
     setIsModalOpenI(true);
   };
 
-  
+  // const [address, setAddress] = useState("");
+  // const [roadAddress, setRoadAddress] = useState("");
+  // const handleChange = (e) =>{
+  //   const{address,value} = e.target;
+  //   const newAddress = {address:value};
+  //   setAddress(newAddress);
+  // };
+
   return (
     <div className="container flex flex-col  justify-center  w-full mt-3">
       <PageTitle title="Map" className="p-7 w-[80%]"/>
-      <div id="map" className="w-full h-[600px] mb-10 rounded-lg"  />
+      <div id="map" className="w-full h-[600px] mb-10 rounded-lg" />
       {
       isModalOpenR && selectedHospital && (
         <ReservationForm

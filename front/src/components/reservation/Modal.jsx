@@ -47,7 +47,7 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
   }
  let availabaleDay = `${year}-${month}-${day}`;
   return (
-    <div className="modal font-Kr">
+    <div className="modal font-Kr" onClick={onClose}> 
       <div className="modal-content min-h-[476px] max-w-[550px]">
         <h2 className="text-3xl font-semibold pb-5">예약하기</h2>
         <div className=''>
