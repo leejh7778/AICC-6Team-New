@@ -16,7 +16,7 @@ function ReservationList({ reservations }) {
 
             <p className="text-gray-700">날짜: {reservation.date}</p>
             <p className="text-gray-700">
-              반려동물: {reservation.selectedPetType}
+              npn 반려동물: {reservation.selectedPetType}
             </p>
             <p className="text-gray-700">메모: {reservation.notes}</p>
           </div>
