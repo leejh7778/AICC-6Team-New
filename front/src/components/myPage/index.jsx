@@ -6,11 +6,15 @@ import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
   const [reservations, setReservations] = useState([]);
+  const [inquiries, setInquiries] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 로그인 상태 확인
     const token = localStorage.getItem('token');
+    const userid = localStorage.getItem('userid');
+    const reservIdx = localStorage.getItem('reserv_idx');
+    const inqIdx = localStorage.getItem('inq_idx');
+
     if (!token) {
       // 로그인이 되어 있지 않으면 로그인 페이지로 이동
       navigate('/login');
@@ -21,15 +25,13 @@ const MyPage = () => {
     const fetchReservations = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/get_reserv/${localStorage.getItem(
-            'reserv_idx'
-          )}`, // 엔드포인트 수정
+          `http://localhost:8080/get_reserv/${reservIdx}`, // 예약 엔드포인트
           {
             headers: {
-              Authorization: `Bearer ${token}`, // 토큰을 헤더에 포함
+              Authorization: `Bearer ${token}`,
             },
             params: {
-              user_id: localStorage.getItem('userid'), // 사용자 ID를 로컬 스토리지에서 가져옴
+              user_id: userid,
             },
           }
         );
@@ -39,7 +41,28 @@ const MyPage = () => {
       }
     };
 
+    // 1:1 문의 데이터를 서버에서 받아옴
+    const fetchInquiries = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/get_inquiry/${inqIdx}`, // 문의 엔드포인트
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            params: {
+              user_id: userid,
+            },
+          }
+        );
+        setInquiries(response.data);
+      } catch (error) {
+        console.error('문의 데이터를 불러오는데 실패했습니다:', error);
+      }
+    };
+
     fetchReservations();
+    fetchInquiries();
   }, [navigate]);
 
   return (
@@ -56,6 +79,19 @@ const MyPage = () => {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold">1:1 문의</h2>
             <PiChatDots className="w-14 h-14" />
+          </div>
+          <div className="mt-4">
+            {inquiries.length > 0 ? (
+              <ul>
+                {inquiries.map((inquiry, index) => (
+                  <li key={index} className="mb-2">
+                    {inquiry.date} - {inquiry.title}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>문의 내역이 없습니다.</p>
+            )}
           </div>
         </a>
 
