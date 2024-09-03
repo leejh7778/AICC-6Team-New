@@ -23,6 +23,10 @@ const Login = ({ onLogin }) => {
       const data = await response.json();
 
       if (data.success) {
+        // 로그인 성공 시 토큰 또는 사용자 정보를 로컬 스토리지에 저장
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userid', userid);
+
         onLogin(); // 로그인 상태 변경
         navigate('/'); // 홈으로 이동
       } else {
@@ -30,7 +34,6 @@ const Login = ({ onLogin }) => {
       }
     } catch (error) {
       setErrorMessage('서버와 통신 중 오류가 발생했습니다.');
-      console.error('에러 발생:', error);
     }
   };
 
