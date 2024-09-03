@@ -23,111 +23,109 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('http://localhost:8080/post_reserv', {
+      await axios.post('http://localhost:8080/reservation', {
         ...formData,
-        user_idx: hospitalId,
+        user_idx: hospitalId, // 사용자 ID를 설정 (병원 ID는 실제로 사용자의 ID로 대체)
       });
       alert('예약이 성공적으로 완료되었습니다.');
-      onClose(); // 모달 닫기
-      window.location.reload(); // 페이지를 새로고침하여 예약 목록을 갱신
+      onClose();
     } catch (error) {
       console.error('예약 실패:', error);
       alert('예약 중 오류가 발생했습니다.');
     }
   };
-  let today = new Date();
-  let year = today.getFullYear();
-  let month = today.getMonth() + 1;
-  let day = today.getDate();
-  if (month < 10) {
-    month = '0' + month;
-  }
-  if (day < 10) {
-    day = '0' + day;
-  }
-  let availabaleDay = `${year}-${month}-${day}`;
+
   return (
     <div className="modal font-Kr">
-      <div className="modal-content min-h-[476px] max-w-[550px]">
+      <div className="modal-content">
         <h2 className="text-3xl font-semibold pb-5">예약하기</h2>
-        <div className="">
-          <h2 className="font-semibold text-lg pb-5 text-center">
-            {hospitalName}
-          </h2>
-          <form className="flex flex-col justify-start">
-            <div className="inputLabel flex flex-col">
-              <div>
-                <label>
-                  이름:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </label>
+        <h2 className="font-semibold text-lg pb-5 text-center">
+          {hospitalName}
+        </h2>
+        <form>
+          <div className="inputLabel text-center flex flex-col">
+            <div>
+              <label>
+                이름:&nbsp;&nbsp;&nbsp;
                 <input
                   type="text"
                   name="username"
                   value={formData.username}
                   onChange={handleChange}
                 />
-              </div>
-              <div>
-                <label>전화번호:&nbsp;</label>
+              </label>
+            </div>
+            <div>
+              <label>
+                전화번호:
                 <input
                   type="text"
                   name="pn"
                   value={formData.pn}
                   onChange={handleChange}
                 />
-              </div>
-              <div>
-                <label>방문일자:&nbsp;</label>
+              </label>
+            </div>
+            <div>
+              <label>
+                방문일자:
                 <input
                   type="date"
                   name="date"
-                  min={availabaleDay}
                   value={formData.date}
                   onChange={handleChange}
                 />
-              </div>
-              <div className="checkbox text-center pr-6">
-                <label>강아지</label>
+              </label>
+            </div>
+            <div className="checkbox">
+              <label>
+                강아지
                 <input
                   type="checkbox"
                   name="dog"
                   checked={formData.dog}
                   onChange={handleChange}
                 />
-                <label>고양이</label>
+              </label>
+              <label>
+                고양이
                 <input
                   type="checkbox"
                   name="cat"
                   checked={formData.cat}
                   onChange={handleChange}
                 />
-                <label>기타</label>
+              </label>
+              <label>
+                기타
                 <input
                   type="checkbox"
                   name="etc"
                   checked={formData.etc}
                   onChange={handleChange}
                 />
-              </div>
-              <div>
-                <label>진료내용:&nbsp;</label>
+              </label>
+            </div>
+            <div>
+              <label>
+                진료내용:
                 <textarea
                   name="descriptionR"
                   value={formData.descriptionR}
                   onChange={handleChange}
                 />
-              </div>
+              </label>
             </div>
-            <div className="modal-actions font-semibold">
-              <button type="button" onClick={handleSubmit}>
-                예약하기
-              </button>
-              <button type="button" onClick={onClose}>
-                취소
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div className="modal-actions font-semibold">
+            <button type="button" onClick={handleSubmit}>
+              예약하기
+            </button>
+            <button type="button" onClick={onClose}>
+              취소
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
