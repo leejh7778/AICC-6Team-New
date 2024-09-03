@@ -6,6 +6,7 @@ import PageTitle from '../PageTitle';
 import marker from '../../assets/image/marker.png';
 import PostModal from '../inquiry/postModal';
 
+
 function Map() {
   const mapRef = useRef(null);
   const { naver } = window;
@@ -83,7 +84,7 @@ function Map() {
 
         const infoWindow = new naver.maps.InfoWindow({
           content: `
-            <div style="padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;" class="info-box">
+            <div style="padding: 10px; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;" class="info-box">
               <div style="font-weight: bold; margin-bottom: 5px;">${hospital.hosp_name}</div>
               <div style="font-size: 13px;">${hospital.hosp_add} ${hospital.hosp_post}</div>
               <div style="font-size: 13px;">${hospital.hosp_pn}</div>

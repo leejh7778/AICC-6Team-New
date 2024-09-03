@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaSquareFacebook } from 'react-icons/fa6';
+import { FaSquareFacebook, FaSquareXTwitter } from 'react-icons/fa6';
 import { FaInstagramSquare } from 'react-icons/fa';
 const Footer = () => {
   return (
@@ -7,8 +7,8 @@ const Footer = () => {
       <div className="w-[90%] h-8 px-5 flex justify-between items-center text-sm">
         <div>
           <a href="#">
-            <span className="font-semibold font-Kr"> 회사 </span>
-            <span className="font-En">Email : contact@patrasya.com</span>
+            <span className="font-semibold font-Kr"> 해피펫 </span>
+            <span className="font-En">Email : support@happypet.com</span>
           </a>
         </div>
         <div className="flex gap-x-5 text-xl">
@@ -17,6 +17,9 @@ const Footer = () => {
           </a>
           <a href="#">
             <FaInstagramSquare />
+          </a>
+          <a href="#">
+          <FaSquareXTwitter />
           </a>
         </div>
       </div>
