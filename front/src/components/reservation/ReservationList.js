@@ -11,7 +11,7 @@ function ReservationList() {
         const token = localStorage.getItem('token');
         if (token) {
           const response = await axios.get(
-            'http://localhost:8080/reservations',
+            'http://localhost:8080/reservations/',
             {
               headers: { Authorization: `Bearer ${token}` },
             }

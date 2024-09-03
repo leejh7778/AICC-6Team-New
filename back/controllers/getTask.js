@@ -31,7 +31,16 @@ exports.gethosp = async (req, res) => {
 
 // 예약 정보를 가져오는 함수
 exports.getReserv = async (req, res) => {
-  await getItemsByUserId(req, res, 'reserv'); // 'reserv' 테이블에서 조회
+  // await getItemsByUserId(req, res, 'reserv'); // 'reserv' 테이블에서 조회
+  const userid = req.params.userid; // JWT에서 추출된 로그인된 사용자의 userid
+
+  try {
+    const query = `SELECT * FROM reserv WHERE userid = $1`;
+    const result = await database.query(query, [userid]);
+    return res.status(200).json(result.rows);
+  } catch (error) {
+    return res.status(500).json({ msg: `Get Items Fail: ${error.message}` });
+  }
 };
 
 // 1:1 문의 정보를 가져오는 함수
