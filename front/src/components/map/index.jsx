@@ -62,7 +62,7 @@ function Map() {
           currentMyLocation.lng
         ),
         map: mapRef.current,
-        title: '현재 위치',
+        title: '멍냐옹',
         icon: {
           url: `${marker}`,
           size: new naver.maps.Size(100, 115),
@@ -170,6 +170,7 @@ function Map() {
   };
 
   const handleChange = (e) => {
+    e.preventDefault();
     setAddress(e.target.value); // address 상태 업데이트
   };
 
@@ -198,12 +199,13 @@ function Map() {
       <PageTitle title="Map" className="p-7 w-[80%]"/>
       <div id="map" className="w-full h-[600px] mb-10 rounded-lg" submodules={["geocoder"]} >
         <form>
-          <div style={buttonsStyle} className='border rounded-lg' >
+          <div style={buttonsStyle} >
             <input 
               type="text"
               placeholder="주소로 검색"
               onChange={handleChange}
               value={address} // 입력된 주소 상태에 따라 업데이트
+               className='border rounded-l-lg  '
             />
             <button
               style={buttonStyle}

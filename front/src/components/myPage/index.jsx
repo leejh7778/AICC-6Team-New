@@ -15,12 +15,12 @@ const MyPage = () => {
     const reservIdx = localStorage.getItem('reserv_idx');
     const inqIdx = localStorage.getItem('inq_idx');
 
-    if (!token) {
+    if (token == null) {
       // 로그인이 되어 있지 않으면 로그인 페이지로 이동
       navigate('/login');
       return;
     }
-
+ console.log(token)
     // 예약 데이터를 서버에서 받아옴
     const fetchReservations = async () => {
       try {
