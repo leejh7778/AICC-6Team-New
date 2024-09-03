@@ -23,10 +23,6 @@ const Login = ({ onLogin }) => {
       const data = await response.json();
 
       if (data.success) {
-        // 로그인 성공 시 토큰 또는 사용자 정보를 로컬 스토리지에 저장
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userid', userid);
-
         onLogin(); // 로그인 상태 변경
         navigate('/'); // 홈으로 이동
       } else {
@@ -34,12 +30,13 @@ const Login = ({ onLogin }) => {
       }
     } catch (error) {
       setErrorMessage('서버와 통신 중 오류가 발생했습니다.');
+      console.error('에러 발생:', error);
     }
   };
 
   return (
-    <div className="font-Kr w-72">
-      <h2 className="w-full flex justify-center px-2 text-4xl font-semibold">
+    <div className="font-Kr w-70   ">
+      <h2 className="w-full  flex justify-center  px-2  text-4xl font-semibold ">
         로그인
       </h2>
       <br />
@@ -48,7 +45,7 @@ const Login = ({ onLogin }) => {
         <div className="text-red-500 text-center mb-4">{errorMessage}</div>
       )}
       <form onSubmit={handleSubmit}>
-        <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
+        <div className="w-[500px] bg-gray-200 border-gray-500 bg-slate-white  px-1 py-3 text-xl mb-3">
           <label htmlFor="userid"></label>
           <input
             type="text"
@@ -56,11 +53,11 @@ const Login = ({ onLogin }) => {
             name="userid"
             value={userid}
             onChange={(e) => setUserid(e.target.value)}
-            className="form-control w-full text-center focus:inline focus:outline-blue-500"
+            className="box-border form-control w-full text-center focus:outline    focus:outline-blue-500 bg-gray-200"
           />
         </div>
-        <br />
-        <div className="w-full box-border border-2 md:box-content rounded-md border-gray-500 bg-slate-white flex justify-center px-2 py-2 text-xl">
+
+        <div className="w-[500px] bg-gray-200 border-gray-500 bg-slate-white  px-1 py-3 text-xl mb-6">
           <label htmlFor="password"></label>
           <input
             type="password"
@@ -68,13 +65,13 @@ const Login = ({ onLogin }) => {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="form-control w-full text-center focus:inline focus:outline-blue-500"
+            className="box-border form-control w-full text-center focus:outline    focus:outline-blue-500 bg-gray-200"
           />
         </div>
-        <br />
+
         <button
           type="submit"
-          className="btn cursor-pointer box-border border-2 md:box-content rounded-md border-solid border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea] hover:bg-[#f1f3ea] w-full flex justify-center px-2 py-2 text-xl"
+          className="btn cursor-pointer md:box-content  border-solid border-[#b7c8a6] bg-[#acbd9b] hover:border-[#f1f3ea] hover:bg-[#f1f3ea] w-full flex justify-center  py-2 text-xl"
         >
           로그인
         </button>
