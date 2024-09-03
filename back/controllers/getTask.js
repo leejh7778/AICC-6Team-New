@@ -10,6 +10,7 @@ const getItems = async (req, res, column, value) => {
   }
 };
 
+// 공통된 아이템 조회 함수
 const getItemsByUserId = async (req, res, tableName) => {
   const userid = req.user.userid; // JWT에서 추출된 로그인된 사용자의 userid
 

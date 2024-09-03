@@ -17,7 +17,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-router.get('/get_reserv/:reserv_idx', authenticateToken, getReserv); // 컨트롤러 함수 연결 - :은 정해지지 않은 문자열 표시
-router.get('/get_inquiry/:inq_idx', authenticateToken, getInq);
+router.get('/reservations', authenticateToken, getReserv); // 컨트롤러 함수 연결 - :은 정해지지 않은 문자열 표시
+router.get('/inquiries', authenticateToken, getInq);
 
 module.exports = router; // router 모듈 내보내기
