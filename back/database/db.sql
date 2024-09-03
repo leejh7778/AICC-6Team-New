@@ -22,7 +22,7 @@ CREATE TABLE hosp (
 -- 테이블 생성(예약)
 CREATE TABLE reserv (
     reserv_idx UUID PRIMARY KEY,
-    user_idx UUID REFERENCES hospUser(user_idx),
+    -- user_idx UUID REFERENCES hospUser(user_idx),
     username VARCHAR(100) NOT NULL,
     pn TEXT NOT NULL,
     date DATE NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE reserv (
 -- 테이블 생성(1대1문의)
 CREATE TABLE inquiry (
     inq_idx UUID PRIMARY KEY,
-    user_idx UUID REFERENCES hospUser(user_idx),
+    -- user_idx UUID REFERENCES hospUser(user_idx),
     username VARCHAR(100) NOT NULL,
     pn TEXT NOT NULL,
     descriptionI TEXT NOT NULL
