@@ -25,7 +25,7 @@ function ReservationList() {
         {reservationList.map((reservationList) => (
           <div
             key={reservationList.id}
-            className="bg-white p-4 rounded shadow hover:shadow-md transition-shadow"
+            className="bg-[#d5dfdb] p-4 rounded shadow hover:shadow-md transition-shadow"
           >
             <h2 className="text-xl font-semibold mb-2">
               {reservationList.username}
