@@ -129,7 +129,7 @@ function Map() {
       const handleMapUpdates = () => {
         checkForMarkersRendering(mapRef.current, markers);
       };
-
+      naver.maps.Event.addListener(mapRef.current, 'mousemove', handleMapUpdates);
       naver.maps.Event.addListener(mapRef.current, 'zoom_changed', handleMapUpdates);
       naver.maps.Event.addListener(mapRef.current, 'dragend', handleMapUpdates);
     } else if (!naver) {
@@ -198,7 +198,7 @@ function Map() {
       <PageTitle title="Map" className="p-7 w-[80%]"/>
       <div id="map" className="w-full h-[600px] mb-10 rounded-lg" submodules={["geocoder"]} >
         <form>
-          <div style={buttonsStyle}>
+          <div style={buttonsStyle} className='border rounded-lg' >
             <input 
               type="text"
               placeholder="주소로 검색"
