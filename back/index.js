@@ -111,6 +111,7 @@ proj4.defs(
 );
 
 // 병원 데이터 가져오기 엔드포인트
+
 app.get('/hospitals', async (req, res) => {
   try {
     console.log('Fetching hospital data...');
