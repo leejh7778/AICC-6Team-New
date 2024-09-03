@@ -20,7 +20,7 @@ const MyPage = () => {
       navigate('/login');
       return;
     }
-    console.log(token);
+    console.log(userid);
     // 예약 데이터를 서버에서 받아옴
     const fetchReservations = async () => {
       try {

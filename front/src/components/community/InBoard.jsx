@@ -10,7 +10,7 @@ const InBoard = () => {
   useEffect(() => {
     const fetchBoardData = () => {
       const index = parseInt(idx);
-      console.log(`Parsed index: ${index}`);
+      // console.log(`Parsed index: ${index}`);
       if (index >= 0 && index < commuData.length) {
         setBoard(commuData[index]);
       }
