@@ -17,6 +17,7 @@ import InBoard from './components/community/InBoard';
 import ReservationModal from './components/reservation/ReservationModal';
 import ReservationForm from './components/reservation/ReservationForm';
 import About from './components/about';
+import ReservationList from './components/myPage/reservation/ReservationList';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -65,6 +66,8 @@ function App() {
           <Route path="/ReservationModal" element={<ReservationModal />} />
           <Route path="/ReservationForm" element={<ReservationForm />} />
           <Route path="/About" element={<About />} />
+          <Route path="/ReservationList" element={<ReservationList />} />
+
         </Routes>
       </div>
       <footer className="footer translate-y-[-100%] h-5 w-full mt-2 relative-">

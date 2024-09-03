@@ -5,6 +5,7 @@ function ReservationList() {
   const [reservations, setReservations] = useState([]);
   const [error, setError] = useState(null);
 
+
   useEffect(() => {
     const fetchReservations = async () => {
       try {
@@ -26,7 +27,6 @@ function ReservationList() {
 
     fetchReservations();
   }, []);
-
   const handleEdit = (id) => {
     // 수정 버튼 클릭 시 동작 구현
     console.log(`Edit reservation with ID: ${id}`);
