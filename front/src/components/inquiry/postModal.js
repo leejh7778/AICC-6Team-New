@@ -1,31 +1,37 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const PostModal = ({ onClose, setPosts }) => {
-  const [name, setName] = useState('');
-  const [pn, setpn] = useState('');
-  const [summary, setSummary] = useState('');
+function PostModal({ onClose, setPosts }) {
+  // 컴포넌트 이름을 대문자로 시작
+  const [formData, setFormData] = useState({
+    username: '',
+    pn: '',
+    descriptionI: '',
+  });
 
-  const validatepn = (pn) => {
-    const pnRegex = /^01[016789]-?\d{3,4}-?\d{4}$/;
-    return pnRegex.test(pn);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const handleSavePost = () => {
-    if (name.trim() === '' || pn.trim() === '' || summary.trim() === '') {
-      alert('빈칸이 없는지 확인해주세요!');
-      return;
-    }
-    if (!validatepn(pn)) {
-      alert('유효한 연락처를 입력해주세요.');
-      return;
-    }
+  const handleSubmit = async () => {
+    try {
+      if (!formData.username || !formData.pn || !formData.descriptionI) {
+        alert('모든 필수 필드를 입력해주세요.');
+        return;
+      }
 
-    setPosts((prevPosts) => [
-      ...prevPosts,
-      { id: prevPosts.length + 1, name, pn, summary },
-    ]);
-
-    onClose(); // 모달 닫기
+      await axios.post('http://localhost:8080/post_inq', formData);
+      alert('문의가 성공적으로 등록되었습니다.');
+      onClose();
+      window.location.reload();
+    } catch (error) {
+      console.error('문의 등록 실패:', error);
+      alert('문의 등록 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -33,35 +39,38 @@ const PostModal = ({ onClose, setPosts }) => {
       {/* 모달 배경 */}
       <div
         className="fixed inset-0 bg-black opacity-50"
-        onClick={onClose} // 배경 클릭 시 모달 닫기
+        onClick={onClose}
       ></div>
 
       {/* 모달 내용 */}
-      <div className="relative bg-white text-xl p-6 rounded-lg w-1/3 shadow-lg z-10 font-kr ">
-        <h2 className="font-Kr font-bold mb-4 text-4xl justify-center">
-          Contack Us
+      <div className="relative bg-white text-xl p-6 rounded-lg w-1/3 shadow-lg z-10 font-kr">
+        <h2 className="font-Kr font-bold mb-4 text-4xl text-center">
+          Contact Us
         </h2>
         <input
           type="text"
           placeholder="이름을 입력하세요"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
           className="w-full p-2 mb-4 border border-gray-300 rounded"
         />
         <input
-          type="pn"
+          type="tel"
           placeholder="연락처를 입력하세요"
-          value={pn}
-          onChange={(e) => setpn(e.target.value)}
+          name="pn"
+          value={formData.pn}
+          onChange={handleChange}
           className="w-full p-2 mb-4 border border-gray-300 rounded"
         />
         <textarea
           placeholder="문의 내용을 입력하세요."
-          value={summary}
-          onChange={(e) => setSummary(e.target.value)}
+          name="descriptionI"
+          value={formData.descriptionI}
+          onChange={handleChange}
           className="w-full h-[260px] p-2 mb-4 border border-gray-300 rounded"
         ></textarea>
-        <div className="flex justify-end ">
+        <div className="flex justify-end">
           <button
             onClick={onClose}
             className="px-3 py-1.5 bg-gray-300 text-gray-800 text-xl rounded mr-2"
@@ -69,8 +78,8 @@ const PostModal = ({ onClose, setPosts }) => {
             닫기
           </button>
           <button
-            onClick={handleSavePost}
-            className="px-3 py-1.5  bg-[#acbd9b] text-white  text-xl rounded mr-2"
+            onClick={handleSubmit}
+            className="px-3 py-1.5 bg-[#acbd9b] text-white text-xl rounded"
           >
             저장하기
           </button>
@@ -78,6 +87,6 @@ const PostModal = ({ onClose, setPosts }) => {
       </div>
     </div>
   );
-};
+}
 
-export default PostModal; // 반드시 default export 사용
+export default PostModal;
