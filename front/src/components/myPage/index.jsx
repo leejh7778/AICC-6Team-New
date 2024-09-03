@@ -20,12 +20,12 @@ const MyPage = () => {
       navigate('/login');
       return;
     }
- console.log(token)
+    console.log(token);
     // 예약 데이터를 서버에서 받아옴
     const fetchReservations = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/get_reserv/${reservIdx}`, // 예약 엔드포인트
+          `http://localhost:8080/get_reserv/`, // 예약 엔드포인트
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ const MyPage = () => {
     const fetchInquiries = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/get_inquiry/${inqIdx}`, // 문의 엔드포인트
+          `http://localhost:8080/get_inquiry/`, // 문의 엔드포인트
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 exports.postReserv = async (req, res) => {
   const reserv_idx = uuid4();
-  const { username, pn, date, dog, cat, etc, descriptionR } = req.body;
+  const { userid, username, pn, date, dog, cat, etc, descriptionR } = req.body;
 
   if (!username || !pn || !date) {
     return res.status(400).json({ message: 'Required fields are missing' });
@@ -20,8 +20,8 @@ exports.postReserv = async (req, res) => {
 
   try {
     await pool.query(
-      'INSERT INTO reserv (reserv_idx, username, pn, date, dog, cat, etc, descriptionR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
-      [reserv_idx, username, pn, date, dog, cat, etc, descriptionR]
+      'INSERT INTO reserv (reserv_idx, userid, username, pn, date, dog, cat, etc, descriptionR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+      [reserv_idx, userid, username, pn, date, dog, cat, etc, descriptionR]
     );
     return res
       .status(201)

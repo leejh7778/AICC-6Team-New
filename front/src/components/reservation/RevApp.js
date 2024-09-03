@@ -25,13 +25,13 @@ function App() {
                 <strong>이름:</strong> {reservation.name}
               </p>
               <p>
-                <strong>이메일:</strong> {reservation.email}
+                <strong>전화번호:</strong> {reservation.email}
               </p>
               <p>
                 <strong>날짜:</strong> {reservation.date}
               </p>
               <p>
-                <strong>반련동물:</strong> {reservation.petType}
+                <strong>반려동물:</strong> {reservation.petType}
               </p>
               <p>
                 <strong>메모:</strong> {reservation.notes}

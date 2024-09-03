@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './modal.css';
 
-function ReservationForm({ onClose, hospitalId, hospitalName }) {
+function ReservationForm({ onClose, hospitalName }) {
   const [formData, setFormData] = useState({
     username: '',
     pn: '',
@@ -12,6 +12,18 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
     etc: false,
     descriptionR: '',
   });
+
+  const [userid, setUserid] = useState(null); // 로그인한 사용자 ID 저장
+
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const token = localStorage.getItem('token');
+    if (token) {
+      // 토큰을 디코딩하여 사용자 ID 가져오기
+      const decodedToken = JSON.parse(atob(token.split('.')[1])); // JWT 디코딩
+      setUserid(decodedToken.userid);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -25,7 +37,7 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
     try {
       await axios.post('http://localhost:8080/post_reserv', {
         ...formData,
-        user_idx: hospitalId,
+        userid, // 자동으로 로그인한 사용자 ID 포함
       });
       alert('예약이 성공적으로 완료되었습니다.');
       onClose(); // 모달 닫기
@@ -35,6 +47,7 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
       alert('예약 중 오류가 발생했습니다.');
     }
   };
+
   let today = new Date();
   let year = today.getFullYear();
   let month = today.getMonth() + 1;
@@ -46,11 +59,12 @@ function ReservationForm({ onClose, hospitalId, hospitalName }) {
     day = '0' + day;
   }
   let availabaleDay = `${year}-${month}-${day}`;
+
   return (
     <div className="modal font-Kr">
       <div className="modal-content min-h-[476px] max-w-[550px]">
         <h2 className="text-3xl font-semibold pb-5">예약하기</h2>
-        <div className="">
+        <div>
           <h2 className="font-semibold text-lg pb-5 text-center">
             {hospitalName}
           </h2>
