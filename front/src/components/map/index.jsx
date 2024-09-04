@@ -6,7 +6,6 @@ import PageTitle from '../PageTitle';
 import marker from '../../assets/image/marker.png';
 import PostModal from '../inquiry/postModal';
 
-
 function Map() {
   const mapRef = useRef(null);
   const { naver } = window;
@@ -17,7 +16,7 @@ function Map() {
   const [isModalOpenR, setIsModalOpenR] = useState(false);
   const [isModalOpenI, setIsModalOpenI] = useState(false);
   const infoWindowRef = useRef(null);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState('');
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
 
@@ -41,7 +40,11 @@ function Map() {
   }, []);
 
   useEffect(() => {
-    if (naver && currentMyLocation.lat !== null && currentMyLocation.lng !== null) {
+    if (
+      naver &&
+      currentMyLocation.lat !== null &&
+      currentMyLocation.lng !== null
+    ) {
       const initialLat = lat !== null ? lat : currentMyLocation.lat;
       const initialLng = lng !== null ? lng : currentMyLocation.lng;
       const mapOptions = {
@@ -57,7 +60,7 @@ function Map() {
       mapRef.current = new naver.maps.Map('map', mapOptions);
 
       // 현재 위치 마커 추가
-       new naver.maps.Marker({
+      new naver.maps.Marker({
         position: new naver.maps.LatLng(
           currentMyLocation.lat,
           currentMyLocation.lng
@@ -68,13 +71,9 @@ function Map() {
           url: `${marker}`,
           size: new naver.maps.Size(100, 115),
           origin: new naver.maps.Point(0, 0),
-          anchor: new naver.maps.Point(25, 26)
-        }
+          anchor: new naver.maps.Point(25, 26),
+        },
       });
-
-
-
-
 
       // 병원 마커 추가
       const markers = hospitals.map((hospital) => {
@@ -112,16 +111,18 @@ function Map() {
 
         const contentElement = infoWindowRef.current.getContentElement();
 
-        const clickableElementsR = contentElement.querySelectorAll('.reserv-button');
-        const clickableElementsI = contentElement.querySelectorAll('.inquiry-button');
+        const clickableElementsR =
+          contentElement.querySelectorAll('.reserv-button');
+        const clickableElementsI =
+          contentElement.querySelectorAll('.inquiry-button');
 
-        clickableElementsR.forEach(element => {
-          element.addEventListener('click', function() {
+        clickableElementsR.forEach((element) => {
+          element.addEventListener('click', function () {
             handleReservationClickR(hospital);
           });
         });
-        clickableElementsI.forEach(element => {
-          element.addEventListener('click', function() {
+        clickableElementsI.forEach((element) => {
+          element.addEventListener('click', function () {
             handleReservationClickI(hospital);
           });
         });
@@ -134,8 +135,16 @@ function Map() {
       const handleMapUpdates = () => {
         checkForMarkersRendering(mapRef.current, markers);
       };
-      naver.maps.Event.addListener(mapRef.current, 'mousemove', handleMapUpdates);
-      naver.maps.Event.addListener(mapRef.current, 'zoom_changed', handleMapUpdates);
+      naver.maps.Event.addListener(
+        mapRef.current,
+        'mousemove',
+        handleMapUpdates
+      );
+      naver.maps.Event.addListener(
+        mapRef.current,
+        'zoom_changed',
+        handleMapUpdates
+      );
       naver.maps.Event.addListener(mapRef.current, 'dragend', handleMapUpdates);
     } else if (!naver) {
       alert('Naver Maps API를 불러오지 못했습니다.');
@@ -145,15 +154,21 @@ function Map() {
   }, [naver, currentMyLocation, hospitals, lat, lng]); // lat, lng 의존성 추가
   const token = localStorage.getItem('token');
   const handleReservationClickR = (hospital) => {
-    if(token){  setSelectedHospital(hospital);
-      setIsModalOpenR(true);} else {alert("로그인")}
-  
+    if (token) {
+      setSelectedHospital(hospital);
+      setIsModalOpenR(true);
+    } else {
+      alert('로그인');
+    }
   };
 
   const handleReservationClickI = (hospital) => {
-    if(token){ 
-    setSelectedHospital(hospital);
-    setIsModalOpenI(true);} else {alert("로그인")}
+    if (token) {
+      setSelectedHospital(hospital);
+      setIsModalOpenI(true);
+    } else {
+      alert('로그인');
+    }
   };
 
   const buttonsStyle = {
@@ -181,43 +196,57 @@ function Map() {
     setAddress(e.target.value); // address 상태 업데이트
   };
 
+  const handleSearchClick = () => {
+    if (!address) {
+      alert('주소를 입력해주세요');
+      return;
+    }
+    searchAddressToCoordinate(address);
+  };
+
   function searchAddressToCoordinate(address) {
-    naver.maps.Service.geocode({
-      query: address,
-    }, function(status, res) {
-      if (status !== naver.maps.Service.Status.OK) {
-        return alert("Something Wrong!");
+    naver.maps.Service.geocode(
+      {
+        query: address,
+      },
+      function (status, res) {
+        if (status !== naver.maps.Service.Status.OK) {
+          return alert('Something Wrong!');
+        }
+        const items = res.v2.addresses;
+        if (items.length > 0) {
+          const x = parseFloat(items[0].x);
+          const y = parseFloat(items[0].y);
+          setLat(y);
+          setLng(x);
+        } else {
+          alert('주소를 찾을 수 없습니다.');
+        }
       }
-      const items = res.v2.addresses;
-      if (items.length > 0) {
-        const x = parseFloat(items[0].x);
-        const y = parseFloat(items[0].y);
-        setLat(y);
-        setLng(x);
-   
-      } else {
-        alert("주소를 찾을 수 없습니다.");
-      }
-    });
+    );
   }
 
   return (
     <div className="container flex flex-col  justify-center  w-full mt-3">
-      <PageTitle title="Map" className="p-7 w-[80%]"/>
-      <div id="map" className="w-full h-[600px] mb-10 rounded-lg" submodules={["geocoder"]} >
+      <PageTitle title="Map" className="p-7 w-[80%]" />
+      <div
+        id="map"
+        className="w-full h-[600px] mb-10 rounded-lg"
+        submodules={['geocoder']}
+      >
         <form>
-          <div style={buttonsStyle} >
-            <input 
+          <div style={buttonsStyle}>
+            <input
               type="text"
               placeholder="주소로 검색"
               onChange={handleChange}
               value={address} // 입력된 주소 상태에 따라 업데이트
-               className='border rounded-l-lg  '
+              className="border rounded-l-lg  "
             />
             <button
               style={buttonStyle}
               type="button"
-              onClick={() => searchAddressToCoordinate(address)}
+              onClick={handleSearchClick} // handleSearchClick 함수 호출
             >
               검색
             </button>

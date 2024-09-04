@@ -1,7 +1,7 @@
 -- 테이블 생성(회원가입)
 CREATE TABLE hospuser (
     user_idx UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    userid VARCHAR(100) NOT NULL,
+    userid VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     username VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE
