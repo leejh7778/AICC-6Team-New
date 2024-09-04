@@ -4,7 +4,7 @@ import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 import ReservModal from './ReservModal';
 import PageTitle from '../PageTitle';
 import marker from '../../assets/image/marker.png';
-import PostModal from '../inquiry/postModal';
+import PostModal from '../map/postModal';
 
 function Map() {
   const mapRef = useRef(null);
@@ -309,7 +309,7 @@ function Map() {
 
   return (
     <div className="container flex flex-col  justify-center  w-full mt-3">
-      <PageTitle title="Map" className="p-7 w-[70%]" />
+      <PageTitle title="Map" className="p-7 w-[80%]" />
       <div id="nomap" className="flex">
         <div
           id="map"
@@ -351,7 +351,7 @@ function Map() {
             hospitalPn={selectedHospital.hosp_pn}
           />
         )}
-        <div className="scroll-smooth overflow-y-auto w-[30%] h-[600px] font-Aa">
+        <div className="scroll-smooth overflow-y-auto h-[600px]">
           <ul>
             {filteredHospitals.map((hospital) => (
               <li

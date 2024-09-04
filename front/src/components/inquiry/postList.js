@@ -1,55 +1,80 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { FaTrashAlt } from 'react-icons/fa';
+function PostList() {
+  const userid = localStorage.getItem('userid');
+  const [postList, setPostList] = useState([]);
 
-function PostList({ posts, onSelectPost }) {
-  if (posts.length === 0) {
-    return <div>게시글이 없습니다.</div>;
-  }
+  useEffect(() => {
+    const getPostList = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/get_Inq/${userid}`
+        );
+        setPostList(response.data);
+      } catch (error) {
+        console.error('문의 목록을 가져오는 중 오류가 발생했습니다:', error);
+      }
+    };
 
+    getPostList();
+  }, [userid]);
+
+  const deleteInq = async () => {
+    const confirmDeletion = window.confirm('정말로 삭제하시겠습니까?');
+    if (confirmDeletion) {
+      try {
+        console.log(postList.inq_idx); // 값을 확인하는 로그
+        await axios.delete(
+          `http://localhost:8080/delete_inq`
+          // ${postList.inq_idx}
+        );
+        alert('삭제되었습니다.');
+
+        // 삭제된 예약을 화면에서 제거
+        setPostList((prevList) =>
+          prevList.filter((item) => item.inq_idx !== postList.inq_idx)
+        );
+      } catch (error) {
+        console.error('삭제 중 오류가 발생했습니다:', error);
+        alert('삭제에 실패했습니다.');
+      }
+    }
+  };
+
+  console.log(postList);
   return (
-    <div>
-      <h2 className=" font-Kr  border-b-black border-b-2 p-3 font-semibold ">
-        {' '}
-        1:1 문의
-      </h2>
-      <ul style={styles.list}>
-        {posts.map((post) => (
-          <li
-            key={post.id}
-            style={styles.listItem}
-            onClick={() => onSelectPost(post.id)}
-          >
-            <h3 style={styles.title}>{post.title}</h3>
-            <p style={styles.summary}>{post.summary}</p>
-          </li>
-        ))}
-      </ul>
+    <div className="text-sm font-Aa min-w-[845px]">
+      {postList.map((postList) => (
+        <div key={postList.id} className="flex flex-col m-3 ">
+          <div className="bg-[#f1f3ea] flex justify-between items-center py-5 rounded-lg">
+            <div className="flex items-center px-5">
+              <div className="px-5 ">
+                <p>
+                  <span className="font-bold text-green-900">병원 : </span>{' '}
+                  {postList.hosp_name}
+                </p>
+                <p>
+                  <span className="font-bold text-green-700">병원 번호 : </span>{' '}
+                  {postList.hosp_pn}
+                </p>
+              </div>
+              {/* {reservationList.username} */}
+
+              <p className="text-gray-700 px-3">내 번호: {postList.pn}</p>
+            </div>
+            <p className="text-gray-700 px-3">문의 날짜: {postList.date}</p>
+
+            <div className=" rounded-lg flex justify-center items-center ">
+              <button onClick={() => deleteInq(postList)} className="w-10 h-10">
+                <FaTrashAlt className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
-
-const styles = {
-  list: {
-    listStyleType: 'none',
-    padding: 0,
-    margin: 0,
-    // fontSize: '20px',
-  },
-  listItem: {
-    padding: '10px',
-    margin: '5px 0',
-    border: '1px solid #ddd',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontSize: '17px',
-  },
-  title: {
-    margin: '0 0 3px 0',
-    fontSize: '20px',
-  },
-  summary: {
-    margin: 0,
-    color: '#555',
-  },
-};
 
 export default PostList;

@@ -30,22 +30,29 @@ function PostModal({ onClose, hospitalName, hospitalPn }) {
   };
 
   const handleSubmit = async () => {
-    try {
-      if (!formData.username || !formData.pn || !formData.descriptionI) {
-        alert('모든 필수 필드를 입력해주세요.');
-        return;
-      }
+    // 유효성 검사: 필수 필드 확인
+    if (!formData.username || !formData.pn || !formData.descriptionI) {
+      alert('모든 필수 필드를 입력해주세요.');
+      return;
+    }
 
-      // userid를 formData에 포함시켜 요청
-      await axios.post('http://localhost:8080/post_inq', {
+    try {
+      // 서버로 요청 보내기
+      await axios.post(`http://localhost:8080/post_inq`, {
         ...formData,
         userid,
       });
+
+      // 성공 시 처리
       alert('문의가 성공적으로 등록되었습니다.');
       onClose();
       window.location.reload();
     } catch (error) {
-      console.error('문의 등록 실패:', error);
+      // 오류 시 처리
+      console.error(
+        '문의 등록 실패:',
+        error.response ? error.response.data : error.message
+      );
       alert('문의 등록 중 오류가 발생했습니다.');
     }
   };
