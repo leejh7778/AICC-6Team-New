@@ -48,6 +48,18 @@ const Register = () => {
       })
       .catch((error) => {
         console.log(error);
+
+        // 서버로부터 받은 에러 메시지를 확인하여 처리
+        if (error.response && error.response.status === 409) {
+          const errorMessage = error.response.data.message;
+          if (errorMessage === '이미 존재하는 아이디입니다.') {
+            alert('이미 존재하는 아이디입니다.');
+          } else if (errorMessage === '이미 존재하는 이메일입니다.') {
+            alert('이미 존재하는 이메일입니다.');
+          }
+        } else {
+          alert('회원가입에 실패했습니다.');
+        }
       });
   };
 

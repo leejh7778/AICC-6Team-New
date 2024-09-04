@@ -94,9 +94,11 @@ exports.postUser = async (req, res) => {
   } catch (error) {
     console.error(error); // 서버 오류 로그
     if (error.code === '23505') {
-      return res
-        .status(409)
-        .json({ message: '이미 존재하는 아이디와 이메일입니다.' });
+      if (error.detail.includes('userid')) {
+        return res.status(409).json({ message: '이미 존재하는 아이디입니다.' });
+      } else if (error.detail.includes('email')) {
+        return res.status(409).json({ message: '이미 존재하는 이메일입니다.' });
+      }
     }
     return res.status(500).json({ message: 'Failed to create account' });
   }
