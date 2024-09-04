@@ -12,15 +12,13 @@ const MyPage = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userid = localStorage.getItem('userid');
-    const reservIdx = localStorage.getItem('reserv_idx');
-    const inqIdx = localStorage.getItem('inq_idx');
 
     if (token == null) {
       // 로그인이 되어 있지 않으면 로그인 페이지로 이동
       navigate('/login');
       return;
     }
-    console.log(userid);
+
     // 예약 데이터를 서버에서 받아옴
     const fetchReservations = async () => {
       try {
@@ -64,6 +62,28 @@ const MyPage = () => {
     fetchReservations();
     fetchInquiries();
   }, [navigate]);
+
+  // 탈퇴 처리 함수
+  const handleAccountDeletion = async () => {
+    const token = localStorage.getItem('token');
+    const userid = localStorage.getItem('userid');
+
+    try {
+      await axios.delete(`http://localhost:8080/delete_account/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: { userid },
+      });
+
+      // 로그아웃 처리
+      localStorage.removeItem('token');
+      localStorage.removeItem('userid');
+      navigate('/login');
+    } catch (error) {
+      console.error('회원 탈퇴 처리에 실패했습니다:', error);
+    }
+  };
 
   return (
     <div className="font-Kr max-w-4xl mx-auto p-6">
@@ -119,6 +139,16 @@ const MyPage = () => {
             )}
           </div>
         </a>
+      </div>
+
+      {/* 탈퇴 버튼 */}
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={handleAccountDeletion}
+          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+        >
+          회원 탈퇴
+        </button>
       </div>
     </div>
   );
