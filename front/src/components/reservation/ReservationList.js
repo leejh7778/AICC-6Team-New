@@ -9,7 +9,7 @@ function ReservationList() {
     const getReservationList = async () => {
       try {
         const resp = await axios.get(
-          `http://localhost:8080/reservations/${userid}`
+          `http://localhost:8080/get_reserv/${userid}`
         );
         setReservationList(resp.data);
       } catch (error) {
