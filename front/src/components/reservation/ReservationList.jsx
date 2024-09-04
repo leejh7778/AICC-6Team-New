@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { FaTrashAlt } from "react-icons/fa";
 function ReservationList() {
   const userid = localStorage.getItem('userid');
   const [reservationList, setReservationList] = useState([]);
@@ -45,36 +45,33 @@ function ReservationList() {
 
 console.log(reservationList)
   return (
-    <div className="">
+    <div className="text-sm font-Aa min-w-[845px]">
         {reservationList.map((reservationList) => (
-          <div
+        <div
             key={reservationList.id}
-            className="block m-3"
+            className="flex flex-col m-3 "
           >
-            <div className='bg-[#f1f3ea] flex py-5 rounded-lg'>
-
-            <h2 className="text-xl font-semibold mb-2">
-            {reservationList.hosp_name}
-            {reservationList.hosp_pn}
-
-              {reservationList.username}
-            </h2>
-            <p className="text-gray-700">전화번호: {reservationList.pn}</p>
-            
-            <p className="text-gray-700">날짜: {reservationList.date}</p>
-            <p className="text-gray-700">
+          <div className='bg-[#f1f3ea] flex justify-between items-center py-5 rounded-lg'>
+<div className='flex items-center px-5'>
+           <div className='px-5 '>
+            <p><span className='font-bold text-green-900'>병원 : </span> {reservationList.hosp_name}</p>
+            <p><span className='font-bold text-green-700'>병원 번호 : </span> {reservationList.hosp_pn}</p>
+           </div>
+                  {/* {reservationList.username} */}
+               
+            <p className="text-gray-700 px-3">내 번호: {reservationList.pn}</p>
+            <p className="text-gray-700 px-3">
               반려동물: {reservationList.dog ? '강아지 ' : ''}
               {reservationList.cat ? '고양이 ' : ''}
               {reservationList.etc ? '기타 ' : ''}
             </p>
-            <p className="text-gray-700">
-              메모: {reservationList.descriptionr}
-            </p>
-            <div className="mt-4"></div>
-            <div  className=' bg-black text-white'>
-        <button onClick={() => deleteReserv(reservationList)}>삭제하기</button>
-      </div>
+            </div>
+            <p className="text-gray-700 px-3">예약 날짜: {reservationList.date}</p>
 
+            <div  className=' rounded-lg flex justify-center items-center '>
+        <button onClick={() => deleteReserv(reservationList)} className='w-10 h-10'><FaTrashAlt className='w-5 h-5' /></button>
+      </div>
+    
             </div>
           </div>
         ))}

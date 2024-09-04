@@ -74,8 +74,6 @@ function Map() {
 
 
 
-
-
       // 병원 마커 추가
       const markers = hospitals.map((hospital) => {
         const latlng = new naver.maps.LatLng(hospital.hosp_y, hospital.hosp_x);
@@ -180,7 +178,7 @@ function Map() {
     e.preventDefault();
     setAddress(e.target.value); // address 상태 업데이트
   };
-
+  console.log(handleChange)
   function searchAddressToCoordinate(address) {
     naver.maps.Service.geocode({
       query: address,
@@ -194,7 +192,6 @@ function Map() {
         const y = parseFloat(items[0].y);
         setLat(y);
         setLng(x);
-   
       } else {
         alert("주소를 찾을 수 없습니다.");
       }
@@ -204,7 +201,8 @@ function Map() {
   return (
     <div className="container flex flex-col  justify-center  w-full mt-3">
       <PageTitle title="Map" className="p-7 w-[80%]"/>
-      <div id="map" className="w-full h-[600px] mb-10 rounded-lg" submodules={["geocoder"]} >
+      <div id='nomap'>
+      <div id="map" className="w-[80%] h-[600px] mb-10 rounded-lg" submodules={["geocoder"]} >
         <form>
           <div style={buttonsStyle} >
             <input 
@@ -240,6 +238,7 @@ function Map() {
           hospitalPn={selectedHospital.hosp_pn}
         />
       )}
+      </div>
     </div>
   );
 }

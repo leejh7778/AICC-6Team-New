@@ -8,6 +8,7 @@ module.exports = {
     fontFamily: {
       En:['"Noto Sans"', 'monospace'],
       Kr: ['"Noto Sans KR"', 'sans-serif'],
+      Aa: ['"Noto Sans KR"','"Noto Sans"', 'sans-serif','monospace'],
     },
     screens: {
       mb: '390px',
