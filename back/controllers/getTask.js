@@ -62,7 +62,19 @@ exports.getInq = async (req, res) => {
   const userid = req.params.userid; // JWT에서 추출된 로그인된 사용자의 userid
 
   try {
-    const query = `SELECT * FROM inquiry WHERE userid = $1`;
+    const query = `
+      SELECT 
+        inq_idx, 
+        userid, 
+        username, 
+        hosp_name, 
+        hosp_pn, 
+        pn, 
+        TO_CHAR(date, 'YYYY-MM-DD') AS date, 
+        descriptionI 
+      FROM inquiry 
+      WHERE userid = $1
+    `;
     const result = await database.query(query, [userid]);
     return res.status(200).json(result.rows);
   } catch (error) {
