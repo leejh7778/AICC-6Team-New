@@ -16,7 +16,6 @@ import Footer from './components/Footer';
 import InBoard from './components/community/InBoard';
 import About from './components/about';
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -54,18 +53,15 @@ function App() {
           <Route path="/community" element={<Community />} />
           <Route path="/community/:idx" element={<InBoard />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
-          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/mypage" element={<Mypage onLogout={handleLogout} />} />
           <Route path="/inquiry" element={<Inquiry />} />
           <Route path="/postDetail" element={<PostDetail />} />
           <Route path="/postForm" element={<PostForm />} />
           <Route path="/edit/:id" element={<PostForm />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reservation" element={<Reservation />} />
-     
-      
-          <Route path="/About" element={<About />} />
-         
 
+          <Route path="/About" element={<About />} />
         </Routes>
       </div>
       <footer className="footer translate-y-[-100%] h-5 w-full mt-2 relative-">

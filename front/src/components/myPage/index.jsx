@@ -4,7 +4,7 @@ import { BsCalendarCheck } from 'react-icons/bs';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const MyPage = () => {
+const MyPage = ({ onLogout }) => {
   const [reservations, setReservations] = useState([]);
   const [inquiries, setInquiries] = useState([]);
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const MyPage = () => {
     const token = localStorage.getItem('token');
     const userid = localStorage.getItem('userid');
 
-    if (token == null) {
+    if (!token) {
       // 로그인이 되어 있지 않으면 로그인 페이지로 이동
       navigate('/login');
       return;
@@ -65,23 +65,27 @@ const MyPage = () => {
 
   // 탈퇴 처리 함수
   const handleAccountDeletion = async () => {
-    const token = localStorage.getItem('token');
-    const userid = localStorage.getItem('userid');
+    const confirmDeletion = window.confirm('정말로 탈퇴하시겠습니까?');
 
-    try {
-      await axios.delete(`http://localhost:8080/delete_account/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: { userid },
-      });
+    if (confirmDeletion) {
+      const token = localStorage.getItem('token');
+      const userid = localStorage.getItem('userid');
 
-      // 로그아웃 처리
-      localStorage.removeItem('token');
-      localStorage.removeItem('userid');
-      navigate('/login');
-    } catch (error) {
-      console.error('회원 탈퇴 처리에 실패했습니다:', error);
+      try {
+        await axios.delete(`http://localhost:8080/delete_account/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          data: { userid },
+        });
+
+        // 로그아웃 처리
+        if (onLogout) {
+          onLogout(); // 로그아웃 함수 호출
+        }
+      } catch (error) {
+        console.error('회원 탈퇴 처리에 실패했습니다:', error);
+      }
     }
   };
 
