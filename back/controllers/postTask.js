@@ -34,7 +34,7 @@ exports.postReserv = async (req, res) => {
 
 exports.postInq = async (req, res) => {
   const inq_idx = uuid4();
-  const { username, pn, descriptionI } = req.body;
+  const { userid, username, pn, descriptionI } = req.body;
 
   if (!username || !pn || !descriptionI) {
     return res.status(400).json({ message: 'Required fields are missing' });
@@ -42,8 +42,8 @@ exports.postInq = async (req, res) => {
 
   try {
     await pool.query(
-      'INSERT INTO inquiry (inq_idx, username, pn, descriptionI) VALUES ($1, $2, $3, $4)',
-      [inq_idx, username, pn, descriptionI]
+      'INSERT INTO inquiry (inq_idx, userid, username, pn, descriptionI) VALUES ($1, $2, $3, $4, $5)',
+      [inq_idx, userid, username, pn, descriptionI]
     );
     return res.status(201).json({ message: 'Inquiry Created Successfully' });
   } catch (error) {

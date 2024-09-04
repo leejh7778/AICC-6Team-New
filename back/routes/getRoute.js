@@ -17,7 +17,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-router.get('/reservations/:userid', getReserv); // 컨트롤러 함수 연결 - :은 정해지지 않은 문자열 표시
-router.get('/inquiries', authenticateToken, getInq);
+router.get('/reservations/:userid', getReserv); // 예약내역 조회
+router.get('/inquiries/:userid', getInq); // 1대1문의내역 조회
 
 module.exports = router; // router 모듈 내보내기

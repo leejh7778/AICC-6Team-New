@@ -6,21 +6,23 @@ function ReservationList() {
   const [reservationList, setReservationList] = useState([]);
 
   useEffect(() => {
-      const getReservationList = async () => {
-          try {
-              const resp = await axios.get(`http://localhost:8080/reservations/${userid}`);
-              setReservationList(resp.data);
-          } catch (error) {
-              console.error('예약 목록을 가져오는 중 오류가 발생했습니다:', error);
-          }
-      };
+    const getReservationList = async () => {
+      try {
+        const resp = await axios.get(
+          `http://localhost:8080/reservations/${userid}`
+        );
+        setReservationList(resp.data);
+      } catch (error) {
+        console.error('예약 목록을 가져오는 중 오류가 발생했습니다:', error);
+      }
+    };
 
-      getReservationList();
+    getReservationList();
   }, [userid]);
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">나의 예약 목록</h1>
-    
+
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {reservationList.map((reservationList) => (
           <div
@@ -38,10 +40,10 @@ function ReservationList() {
               {reservationList.cat ? '고양이 ' : ''}
               {reservationList.etc ? '기타 ' : ''}
             </p>
-            <p className="text-gray-700">메모: {reservationList.descriptionR}</p>
-            <div className="mt-4">
-             
-            </div>
+            <p className="text-gray-700">
+              메모: {reservationList.descriptionr}
+            </p>
+            <div className="mt-4"></div>
           </div>
         ))}
       </div>

@@ -45,5 +45,13 @@ exports.getReserv = async (req, res) => {
 
 // 1:1 문의 정보를 가져오는 함수
 exports.getInq = async (req, res) => {
-  await getItemsByUserId(req, res, 'inquiry'); // 'inquiry' 테이블에서 조회
+  const userid = req.params.userid; // JWT에서 추출된 로그인된 사용자의 userid
+
+  try {
+    const query = `SELECT * FROM inquiry WHERE userid = $1`;
+    const result = await database.query(query, [userid]);
+    return res.status(200).json(result.rows);
+  } catch (error) {
+    return res.status(500).json({ msg: `Get Items Fail: ${error.message}` });
+  }
 };
