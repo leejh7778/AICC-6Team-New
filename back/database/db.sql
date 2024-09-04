@@ -36,6 +36,7 @@ CREATE TABLE reserv (
 CREATE TABLE inquiry (
     inq_idx UUID PRIMARY KEY,
     -- user_idx UUID REFERENCES hospUser(user_idx),
+    userid VARCHAR(100) NOT NULL,
     username VARCHAR(100) NOT NULL,
     pn TEXT NOT NULL,
     descriptionI TEXT NOT NULL

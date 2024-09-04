@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function PostModal({ onClose, setPosts }) {
-  // 컴포넌트 이름을 대문자로 시작
+  // 초기 상태 설정
   const [formData, setFormData] = useState({
     username: '',
     pn: '',
     descriptionI: '',
   });
+  const [userid, setUserid] = useState(null);
+
+  // useEffect를 통해 컴포넌트가 마운트될 때 userid 설정
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1])); // JWT 디코딩
+      setUserid(decodedToken.userid);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,7 +34,11 @@ function PostModal({ onClose, setPosts }) {
         return;
       }
 
-      await axios.post('http://localhost:8080/post_inq', formData);
+      // userid를 formData에 포함시켜 요청
+      await axios.post('http://localhost:8080/post_inq', {
+        ...formData,
+        userid,
+      });
       alert('문의가 성공적으로 등록되었습니다.');
       onClose();
       window.location.reload();
