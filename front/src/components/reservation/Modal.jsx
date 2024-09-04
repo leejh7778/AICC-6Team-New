@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './modal.css';
 
-function ReservationForm({ onClose, hospitalName }) {
+function ReservationForm({ onClose, hospitalName,hospitalPn }) {
   const [formData, setFormData] = useState({
     username: '',
     pn: '',
@@ -11,6 +11,8 @@ function ReservationForm({ onClose, hospitalName }) {
     cat: false,
     etc: false,
     descriptionR: '',
+    hosp_name:hospitalName,
+    hosp_pn:hospitalPn,
   });
 
   const [userid, setUserid] = useState(null); // 로그인한 사용자 ID 저장

@@ -143,15 +143,17 @@ function Map() {
       alert('현재 위치 정보를 가져오는 데 실패했습니다.');
     }
   }, [naver, currentMyLocation, hospitals, lat, lng]); // lat, lng 의존성 추가
-
+  const token = localStorage.getItem('token');
   const handleReservationClickR = (hospital) => {
-    setSelectedHospital(hospital);
-    setIsModalOpenR(true);
+    if(token){  setSelectedHospital(hospital);
+      setIsModalOpenR(true);} else {alert("로그인")}
+  
   };
 
   const handleReservationClickI = (hospital) => {
+    if(token){ 
     setSelectedHospital(hospital);
-    setIsModalOpenI(true);
+    setIsModalOpenI(true);} else {alert("로그인")}
   };
 
   const buttonsStyle = {
@@ -227,12 +229,15 @@ function Map() {
           onClose={() => setIsModalOpenR(false)}
           hospitalId={selectedHospital.hosp_id}
           hospitalName={selectedHospital.hosp_name}
+          hospitalPn={selectedHospital.hosp_pn}
         />
       )}
       {isModalOpenI && selectedHospital && (
         <PostModal
           onClose={() => setIsModalOpenI(false)}
           setPosts={selectedHospital.hosp_name}
+          hospitalName={selectedHospital.hosp_name}
+          hospitalPn={selectedHospital.hosp_pn}
         />
       )}
     </div>

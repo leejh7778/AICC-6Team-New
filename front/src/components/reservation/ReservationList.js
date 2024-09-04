@@ -30,10 +30,13 @@ function ReservationList() {
             className="bg-[#d5dfdb] p-4 rounded shadow hover:shadow-md transition-shadow"
           >
             <h2 className="text-xl font-semibold mb-2">
+            {reservationList.hosp_name}
+            {reservationList.hosp_pn}
+
               {reservationList.username}
             </h2>
             <p className="text-gray-700">전화번호: {reservationList.pn}</p>
-            <p className="text-gray-700">이메일: {reservationList.email}</p>
+            
             <p className="text-gray-700">날짜: {reservationList.date}</p>
             <p className="text-gray-700">
               반려동물: {reservationList.dog ? '강아지 ' : ''}
