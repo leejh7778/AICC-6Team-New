@@ -26,6 +26,10 @@ function ReservationList() {
 
 
   const deleteReserv = async (reservationList) => {
+    const confirmDeletion = window.confirm('정말로 삭제하시겠습니까?');
+    if(confirmDeletion){
+
+   
     try {
       console.log(reservationList.reserv_idx); // 값을 확인하는 로그
       await axios.delete(`http://localhost:8080/delete_reserv/${reservationList.reserv_idx}`);
@@ -39,6 +43,7 @@ function ReservationList() {
       console.error('삭제 중 오류가 발생했습니다:', error);
       alert('삭제에 실패했습니다.');
     }
+  }
   };
 
 
