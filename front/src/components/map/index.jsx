@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useGeolocation from '../../hooks/useGeolocation';
 import checkForMarkersRendering from '../../util/checkForMarkersRendering';
-import ReservationForm from '../reservation/Modal';
+import ReservModal from './ReservModal';
 import PageTitle from '../PageTitle';
 import marker from '../../assets/image/marker.png';
 import PostModal from '../inquiry/postModal';
@@ -225,7 +225,7 @@ function Map() {
         </form>
       </div>
       {isModalOpenR && selectedHospital && (
-        <ReservationForm
+        <ReservModal
           onClose={() => setIsModalOpenR(false)}
           hospitalId={selectedHospital.hosp_id}
           hospitalName={selectedHospital.hosp_name}

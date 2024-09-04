@@ -14,10 +14,8 @@ import Header from './components/Header';
 import Navibar from './components/Navibar';
 import Footer from './components/Footer';
 import InBoard from './components/community/InBoard';
-import ReservationModal from './components/reservation/ReservationModal';
-import ReservationForm from './components/reservation/ReservationForm';
 import About from './components/about';
-import ReservationList from './components/myPage/reservation/ReservationList';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -63,10 +61,10 @@ function App() {
           <Route path="/edit/:id" element={<PostForm />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reservation" element={<Reservation />} />
-          <Route path="/ReservationModal" element={<ReservationModal />} />
-          <Route path="/ReservationForm" element={<ReservationForm />} />
+     
+      
           <Route path="/About" element={<About />} />
-          <Route path="/ReservationList" element={<ReservationList />} />
+         
 
         </Routes>
       </div>

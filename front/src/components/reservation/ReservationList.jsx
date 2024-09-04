@@ -43,17 +43,16 @@ function ReservationList() {
 
 
 
-
+console.log(reservationList)
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">나의 예약 목록</h1>
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="">
         {reservationList.map((reservationList) => (
           <div
             key={reservationList.id}
-            className="bg-[#d5dfdb] p-4 rounded shadow hover:shadow-md transition-shadow"
+            className="block m-3"
           >
+            <div className='bg-[#f1f3ea] flex py-5 rounded-lg'>
+
             <h2 className="text-xl font-semibold mb-2">
             {reservationList.hosp_name}
             {reservationList.hosp_pn}
@@ -75,13 +74,15 @@ function ReservationList() {
             <div  className=' bg-black text-white'>
         <button onClick={() => deleteReserv(reservationList)}>삭제하기</button>
       </div>
+
+            </div>
           </div>
         ))}
 
         
       </div>
     
-    </div>
+  
   );
 }
 

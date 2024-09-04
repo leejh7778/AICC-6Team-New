@@ -15,7 +15,7 @@ const BoardList = () => {
         <Link to={`/community/${idx}`}>
       <div className='block m-3 cursor-pointer  '>
    
-        <div className=' flex bg-[#f1f3ea] py-5 rounded-lg '>
+       <div className=' flex bg-[#f1f3ea] py-5 rounded-lg '>
 
         
        <div className='px-5'>

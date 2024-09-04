@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './modal.css';
 
-function ReservationForm({ onClose, hospitalName,hospitalPn }) {
+function ReservModal({ onClose, hospitalName,hospitalPn }) {
   const [formData, setFormData] = useState({
     username: '',
     pn: '',
@@ -149,4 +149,4 @@ function ReservationForm({ onClose, hospitalName,hospitalPn }) {
   );
 }
 
-export default ReservationForm;
+export default ReservModal;
