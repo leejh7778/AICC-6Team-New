@@ -17,7 +17,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-router.get('/reservations/:userid', getReserv); // 예약내역 조회
-router.get('/inquiries/:userid', getInq); // 1대1문의내역 조회
+router.get('/get_reserv/:userid', getReserv); // 예약내역 조회
+router.get('/get_inq/:userid', getInq); // 1대1문의내역 조회
 
 module.exports = router; // router 모듈 내보내기

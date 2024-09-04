@@ -12,7 +12,18 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 exports.postReserv = async (req, res) => {
   const reserv_idx = uuid4();
-  const { userid, username, pn, date, dog, cat, etc, descriptionR } = req.body;
+  const {
+    userid,
+    username,
+    pn,
+    hosp_name,
+    hosp_pn,
+    date,
+    dog,
+    cat,
+    etc,
+    descriptionR,
+  } = req.body;
 
   if (!username || !pn || !date) {
     return res.status(400).json({ message: 'Required fields are missing' });
@@ -20,8 +31,20 @@ exports.postReserv = async (req, res) => {
 
   try {
     await pool.query(
-      'INSERT INTO reserv (reserv_idx, userid, username, pn, date, dog, cat, etc, descriptionR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
-      [reserv_idx, userid, username, pn, date, dog, cat, etc, descriptionR]
+      'INSERT INTO reserv (reserv_idx, userid, username, pn, hosp_name, hosp_pn, date, dog, cat, etc, descriptionR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
+      [
+        reserv_idx,
+        userid,
+        username,
+        pn,
+        hosp_name,
+        hosp_pn,
+        date,
+        dog,
+        cat,
+        etc,
+        descriptionR,
+      ]
     );
     return res
       .status(201)
@@ -34,7 +57,7 @@ exports.postReserv = async (req, res) => {
 
 exports.postInq = async (req, res) => {
   const inq_idx = uuid4();
-  const { userid, username, pn, descriptionI } = req.body;
+  const { userid, username, hosp_name, hosp_pn, pn, descriptionI } = req.body;
 
   if (!username || !pn || !descriptionI) {
     return res.status(400).json({ message: 'Required fields are missing' });
@@ -42,8 +65,8 @@ exports.postInq = async (req, res) => {
 
   try {
     await pool.query(
-      'INSERT INTO inquiry (inq_idx, userid, username, pn, descriptionI) VALUES ($1, $2, $3, $4, $5)',
-      [inq_idx, userid, username, pn, descriptionI]
+      'INSERT INTO inquiry (inq_idx, userid, username, pn, hosp_name, hosp_pn, descriptionI) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+      [inq_idx, userid, username, pn, hosp_name, hosp_pn, descriptionI]
     );
     return res.status(201).json({ message: 'Inquiry Created Successfully' });
   } catch (error) {
