@@ -57,7 +57,7 @@ function Map() {
       mapRef.current = new naver.maps.Map('map', mapOptions);
 
       // 현재 위치 마커 추가
-      new naver.maps.Marker({
+       new naver.maps.Marker({
         position: new naver.maps.LatLng(
           currentMyLocation.lat,
           currentMyLocation.lng
@@ -71,6 +71,10 @@ function Map() {
           anchor: new naver.maps.Point(25, 26)
         }
       });
+
+
+
+
 
       // 병원 마커 추가
       const markers = hospitals.map((hospital) => {

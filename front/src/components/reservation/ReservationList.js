@@ -38,7 +38,7 @@ function ReservationList() {
               {reservationList.cat ? '고양이 ' : ''}
               {reservationList.etc ? '기타 ' : ''}
             </p>
-            <p className="text-gray-700">메모: {reservationList.descriptionR}</p>
+            <p className="text-gray-700">메모: {reservationList.descriptionr}</p>
             <div className="mt-4">
              
             </div>
