@@ -5,6 +5,10 @@ function ReservationList() {
   const userid = localStorage.getItem('userid');
   const [reservationList, setReservationList] = useState([]);
 
+
+
+
+
   useEffect(() => {
     const getReservationList = async () => {
       try {
@@ -19,6 +23,27 @@ function ReservationList() {
 
     getReservationList();
   }, [userid]);
+
+
+  const deleteReserv = async (reservationList) => {
+    try {
+      console.log(reservationList.reserv_idx); // 값을 확인하는 로그
+      await axios.delete(`http://localhost:8080/delete_reserv/${reservationList.reserv_idx}`);
+      alert('삭제되었습니다.');
+
+      // 삭제된 예약을 화면에서 제거
+      setReservationList((prevList) =>
+        prevList.filter((item) => item.reserv_idx !== reservationList.reserv_idx)
+      );
+    } catch (error) {
+      console.error('삭제 중 오류가 발생했습니다:', error);
+      alert('삭제에 실패했습니다.');
+    }
+  };
+
+
+
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">나의 예약 목록</h1>
@@ -47,9 +72,15 @@ function ReservationList() {
               메모: {reservationList.descriptionr}
             </p>
             <div className="mt-4"></div>
+            <div  className=' bg-black text-white'>
+        <button onClick={() => deleteReserv(reservationList)}>삭제하기</button>
+      </div>
           </div>
         ))}
+
+        
       </div>
+    
     </div>
   );
 }
