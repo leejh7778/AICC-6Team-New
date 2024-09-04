@@ -196,7 +196,8 @@ function Map() {
     setAddress(e.target.value); // address 상태 업데이트
   };
 
-  const handleSearchClick = () => {
+  const handleSearchClick = (e) => {
+    e.preventDefault();
     if (!address) {
       alert('주소를 입력해주세요');
       return;
@@ -229,7 +230,7 @@ function Map() {
   return (
     <div className="container flex flex-col  justify-center  w-full mt-3">
       <PageTitle title="Map" className="p-7 w-[80%]"/>
-      <div id='nomap'>
+      <div id='nomap' className='flex'>
       <div id="map" className="w-[80%] h-[600px] mb-10 rounded-lg" submodules={["geocoder"]} >
         <form>
           <div style={buttonsStyle}>
@@ -238,11 +239,11 @@ function Map() {
               placeholder="주소로 검색"
               onChange={handleChange}
               value={address} // 입력된 주소 상태에 따라 업데이트
-              className="border rounded-l-lg  "
+              className="border rounded-l-lg "
             />
             <button
               style={buttonStyle}
-              type="button"
+              type="submit"
               onClick={handleSearchClick} // handleSearchClick 함수 호출
             >
               검색
@@ -266,6 +267,7 @@ function Map() {
           hospitalPn={selectedHospital.hosp_pn}
         />
       )}
+      <div>아</div>
       </div>
     </div>
   );
