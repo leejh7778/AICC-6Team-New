@@ -46,28 +46,28 @@ CREATE TABLE inquiry (
     descriptionI TEXT NOT NULL
 );
 
--- 테이블 생성(마이페이지-예약정보 조회)
-CREATE TABLE reservInfo (
-    rInfo_idx UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_idx UUID REFERENCES hospUser(user_idx),
-    username VARCHAR(100) NOT NULL,
-    pn TEXT NOT NULL,
-    date DATE NOT NULL,                                   
-    hosp_idx UUID REFERENCES hosp(hosp_idx),
-    dog BOOLEAN NOT NULL DEFAULT false,
-    cat BOOLEAN NOT NULL DEFAULT false,
-    etc BOOLEAN NOT NULL DEFAULT false,
-    descriptionr TEXT NOT NULL
-);
+-- -- 테이블 생성(마이페이지-예약정보 조회)
+-- CREATE TABLE reservInfo (
+--     rInfo_idx UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     user_idx UUID REFERENCES hospUser(user_idx),
+--     username VARCHAR(100) NOT NULL,
+--     pn TEXT NOT NULL,
+--     date DATE NOT NULL,                                   
+--     hosp_idx UUID REFERENCES hosp(hosp_idx),
+--     dog BOOLEAN NOT NULL DEFAULT false,
+--     cat BOOLEAN NOT NULL DEFAULT false,
+--     etc BOOLEAN NOT NULL DEFAULT false,
+--     descriptionr TEXT NOT NULL
+-- );
 
--- 테이블 생성(마이페이지-1대1문의 조회)
-CREATE TABLE inquiryInfo (
-    iInfo_idx UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_idx UUID REFERENCES hospUser(user_idx),
-    username VARCHAR(100) NOT NULL,
-    pn TEXT NOT NULL,
-    hosp_idx UUID REFERENCES hosp(hosp_idx),                
-    descriptioni TEXT NOT NULL
-);
+-- -- 테이블 생성(마이페이지-1대1문의 조회)
+-- CREATE TABLE inquiryInfo (
+--     iInfo_idx UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     user_idx UUID REFERENCES hospUser(user_idx),
+--     username VARCHAR(100) NOT NULL,
+--     pn TEXT NOT NULL,
+--     hosp_idx UUID REFERENCES hosp(hosp_idx),                
+--     descriptioni TEXT NOT NULL
+-- );
 
 

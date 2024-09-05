@@ -56,7 +56,7 @@ console.log(reservationList)
             key={reservationList.id}
             className="flex flex-col m-3 "
           >
-          <div className='bg-[#f1f3ea] flex justify-between items-center py-5 rounded-lg'>
+          <div className='bg-[#f1f3ea] w-full flex justify-between items-center py-5 rounded-lg'>
 <div className='flex items-center px-5'>
            <div className='px-5 '>
             <p><span className='font-bold text-green-900'>병원 : </span> {reservationList.hosp_name}</p>
@@ -70,10 +70,14 @@ console.log(reservationList)
               {reservationList.cat ? '고양이 ' : ''}
               {reservationList.etc ? '기타 ' : ''}
             </p>
+          
             </div>
             <p className="text-gray-700 px-3">예약 날짜: {reservationList.date}</p>
 
+       
+
             <div  className=' rounded-lg flex justify-center items-center '>
+            <div className='px-6'>버튼</div>
         <button onClick={() => deleteReserv(reservationList)} className='w-10 h-10'><FaTrashAlt className='w-5 h-5' /></button>
       </div>
     
