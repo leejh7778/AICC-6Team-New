@@ -100,12 +100,70 @@ function Map() {
 
         const infoWindow = new naver.maps.InfoWindow({
           content: `
-            <div style="padding: 10px; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;" class="info-box">
-              <div style="font-weight: bold; margin-bottom: 5px;">${hospital.hosp_name}</div>
-              <div style="font-size: 13px;">${hospital.hosp_add} ${hospital.hosp_post}</div>
-              <div style="font-size: 13px;">${hospital.hosp_pn}</div>
-              <button class="reserv-button">예약하기</button>
-              <button class="inquiry-button">1대1 문의</button>
+            <div style="
+              padding: 15px;
+              border-radius: 12px;
+              box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px;
+              background-color: #ffffff;
+              font-family: 'Noto Sans KR', sans-serif;
+              max-width: 300px;
+              position: relative;
+            " class="info-box">
+              <div style="
+                font-weight: 700;
+                font-size: 16px;
+                margin-bottom: 8px;
+                color: #333;
+              ">
+                ${hospital.hosp_name}
+              </div>
+              <div style="
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 5px;
+              ">
+                ${hospital.hosp_add} ${hospital.hosp_post}
+              </div>
+              <div style="
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 15px;
+              ">
+                ${hospital.hosp_pn}
+              </div>
+              <div style="
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px; /* 버튼 간 간격 */
+                margin-top: 10px;
+              ">
+                <button class="reserv-button" style="
+                  padding: 8px 12px;
+                  background-color: #4A90E2;
+                  color: white;
+                  border: none;
+                  border-radius: 8px;
+                  cursor: pointer;
+                  font-size: 14px;
+                  font-weight: 600;
+                  transition: background-color 0.3s ease;
+                ">
+                  예약하기
+                </button>
+                <button class="inquiry-button" style="
+                  padding: 8px 12px;
+                  background-color: #e0e0e0;
+                  color: #333;
+                  border: none;
+                  border-radius: 8px;
+                  cursor: pointer;
+                  font-size: 14px;
+                  font-weight: 600;
+                  transition: background-color 0.3s ease;
+                ">
+                  1대1 문의
+                </button>
+              </div>
             </div>`,
           maxWidth: 300,
           anchorSize: { width: 12, height: 14 },
@@ -140,9 +198,6 @@ function Map() {
           });
         });
 
-
-
-
         return marker;
       });
       setHospitalMarkers(markers);
@@ -152,8 +207,16 @@ function Map() {
         filterHospitalsByMapBounds(); // 지도가 변경될 때마다 병원 필터링
         checkForMarkersRendering(mapRef.current, markers);
       };
-      naver.maps.Event.addListener(mapRef.current, 'bounds_changed', handleMapUpdates);
-      naver.maps.Event.addListener(mapRef.current, 'zoom_changed', handleMapUpdates);
+      naver.maps.Event.addListener(
+        mapRef.current,
+        'bounds_changed',
+        handleMapUpdates
+      );
+      naver.maps.Event.addListener(
+        mapRef.current,
+        'zoom_changed',
+        handleMapUpdates
+      );
       naver.maps.Event.addListener(mapRef.current, 'dragend', handleMapUpdates);
 
       // 초기 렌더링 시 병원 필터링
@@ -164,10 +227,6 @@ function Map() {
       alert('현재 위치 정보를 가져오는 데 실패했습니다.');
     }
   }, [naver, currentMyLocation, hospitals, lat, lng]);
-
-
-
-
 
   const token = localStorage.getItem('token');
   const handleReservationClickR = (hospital) => {
@@ -247,8 +306,12 @@ function Map() {
   return (
     <div className="container flex flex-col  justify-center  w-full mt-3">
       <PageTitle title="Map" className="p-7 w-[80%]" />
-      <div id='nomap' className='flex'>
-        <div id="map" className="w-[80%] h-[600px] mb-10 rounded-lg" submodules={["geocoder"]}>
+      <div id="nomap" className="flex">
+        <div
+          id="map"
+          className="w-[80%] h-[600px] mb-10 rounded-lg"
+          submodules={['geocoder']}
+        >
           <form>
             <div style={buttonsStyle}>
               <input
@@ -284,7 +347,7 @@ function Map() {
             hospitalPn={selectedHospital.hosp_pn}
           />
         )}
-        <div className='scroll-smooth overflow-y-auto h-[600px]'>
+        <div className="scroll-smooth overflow-y-auto h-[600px]">
           <ul>
             {filteredHospitals.map((hospital) => (
               <li
@@ -301,7 +364,9 @@ function Map() {
                 }}
               >
                 <div className="font-bold">{hospital.hosp_name}</div>
-                <div className="text-sm">{hospital.hosp_add} {hospital.hosp_post}</div>
+                <div className="text-sm">
+                  {hospital.hosp_add} {hospital.hosp_post}
+                </div>
                 <div className="text-sm">전화번호: {hospital.hosp_pn}</div>
               </li>
             ))}
@@ -313,4 +378,3 @@ function Map() {
 }
 
 export default Map;
-
