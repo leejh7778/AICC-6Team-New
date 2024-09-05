@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function PostModal({ onClose,hospitalName,hospitalPn  }) {
+function PostModal({ onClose, hospitalName, hospitalPn }) {
   // 초기 상태 설정
   const [formData, setFormData] = useState({
     username: '',
     pn: '',
     descriptionI: '',
-    hosp_name:hospitalName,
-    hosp_pn:hospitalPn,
+    hosp_name: hospitalName,
+    hosp_pn: hospitalPn,
   });
   const [userid, setUserid] = useState(null);
-  
+
   // useEffect를 통해 컴포넌트가 마운트될 때 userid 설정
   useEffect(() => {
     const token = localStorage.getItem('token');
