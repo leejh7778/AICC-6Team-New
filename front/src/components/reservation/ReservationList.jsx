@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaTrashAlt } from "react-icons/fa";
+import ReservModal from '../map/ReservModal';
 function ReservationList() {
   const userid = localStorage.getItem('userid');
   const [reservationList, setReservationList] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
 
@@ -45,6 +47,24 @@ function ReservationList() {
     }
   }
   };
+  const reReserv = async (reservationList) => {
+    const confirmDeletion = window.confirm('수정하시겠습니까?')
+    if(confirmDeletion){
+      try{
+        await axios.patch(`http://localhost:8080/update_reserv/${reservationList.reserv_idx}`)
+        alert('수정되었습니다.')
+      } catch(error){
+        console.error('수정 오류: ',error);
+        alert('수정에 실패했습니다.')
+      }
+    }
+  }
+
+  const handleReservationClick = (reservationList) => {
+      setReservationList(reservationList);
+      setIsModalOpen(true);
+  };
+
 
 
 
@@ -84,7 +104,14 @@ console.log(reservationList)
             </div>
           </div>
         ))}
-
+          {isModalOpen && reservationList && (
+          <ReservModal
+            onClose={() => setIsModalOpen(false)}
+            hospitalId={reservationList.hosp_id}
+            hospitalName={reservationList.hosp_name}
+            hospitalPn={reservationList.hosp_pn}
+          />
+        )}
         
       </div>
     

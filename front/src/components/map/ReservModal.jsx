@@ -15,6 +15,8 @@ function ReservModal({ onClose, hospitalName,hospitalPn }) {
     hosp_pn:hospitalPn,
   });
 
+
+
   const [userid, setUserid] = useState(null); // 로그인한 사용자 ID 저장
 
   useEffect(() => {

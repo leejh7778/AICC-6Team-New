@@ -51,7 +51,7 @@ function PostModal({ onClose, hospitalName, hospitalPn }) {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 flex items-center justify-center z-[10000]">
       {/* 모달 배경 */}
       <div
         className="fixed inset-0 bg-black opacity-50"
