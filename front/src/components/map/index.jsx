@@ -247,24 +247,37 @@ function Map() {
     }
   };
 
-  const buttonsStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 1000,
-    padding: '5px',
-  };
-
-  const buttonStyle = {
-    margin: '0 5px 5px 0',
-    WebkitAppearance: 'button',
-    cursor: 'pointer',
-    color: '#555',
-    padding: '2px 6px',
-    background: '#fff',
-    border: 'solid 1px #333',
-    borderRadius: '5px',
-    boxShadow: '2px 2px 1px 1px rgba(0, 0, 0, 0.5)',
+  const styles = {
+    searchForm: {
+      position: 'absolute', // 지도 위에 검색창이 표시되도록 절대 위치 설정
+      top: '10px', // 위에서 20px 아래에 배치
+      left: '50%',
+      transform: 'translateX(-50%)', // 가로 방향 가운데 정렬
+      display: 'flex',
+      justifyContent: 'center',
+      backgroundColor: 'white',
+      padding: '6px', // 위아래 padding 값을 줄여 높이 조절
+      borderRadius: '8px',
+      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)', // 그림자 효과
+      zIndex: 1000, // 지도 위에 표시되도록 z-index 설정
+    },
+    searchInput: {
+      padding: '6px', // 위아래 padding 값을 줄여 입력 필드 높이 조절
+      fontSize: '14px', // 텍스트 크기를 약간 줄임
+      borderRadius: '8px 0 0 8px',
+      border: '1px solid #ccc',
+      outline: 'none',
+      width: '250px', // 입력 필드 너비 조정
+    },
+    searchButton: {
+      padding: '6px 12px', // 위아래 padding 값을 줄여 버튼 높이 조절
+      backgroundColor: '#4CAF50',
+      color: 'white',
+      border: 'none',
+      borderRadius: '0 8px 8px 0',
+      cursor: 'pointer',
+      fontSize: '14px',
+    },
   };
 
   const handleChange = (e) => {
@@ -316,19 +329,21 @@ function Map() {
           className="w-[80%] h-[600px] mb-10 rounded-lg"
           submodules={['geocoder']}
         >
-          <form>
-            <div style={buttonsStyle}>
+          <form style={styles.searchForm}>
+            <div style={styles.searchContainer}>
               <input
                 type="text"
                 placeholder="주소로 검색"
                 onChange={handleChange}
-                value={address} // 입력된 주소 상태에 따라 업데이트
-                className="border rounded-l-lg "
+                value={address}
+                style={styles.searchInput}
+                className="search-input" // className 유지
               />
               <button
-                style={buttonStyle}
                 type="submit"
-                onClick={handleSearchClick} // handleSearchClick 함수 호출
+                onClick={handleSearchClick}
+                style={styles.searchButton}
+                className="search-button" // className 유지
               >
                 검색
               </button>
@@ -351,7 +366,9 @@ function Map() {
           />
         )}
         <div className="scroll-smooth overflow-y-auto w-[30%] h-[600px]">
-          <div className='w-full font-Aa flex justify-center items-center border rounded-lg bg-gray-300'>주변 병원 리스트</div>
+          <div className="w-full font-Aa flex justify-center items-center border rounded-lg bg-gray-300">
+            주변 병원 리스트
+          </div>
           <ul>
             {filteredHospitals.map((hospital) => (
               <li
