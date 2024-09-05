@@ -48,7 +48,7 @@ function PostList() {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setCurrentPost(null); // 모달 닫기 시 현재 문의 초기화
+    setCurrentPost(null); // 모달 닫기 시 현재 문의초기화
   };
 
   return (

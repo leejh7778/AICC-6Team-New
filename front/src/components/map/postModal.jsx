@@ -12,7 +12,7 @@ function PostModal({ onClose, post }) {
   const [userid, setUserid] = useState(null);
   const [isEdit, setIsEdit] = useState(false); // 수정 여부 확인
 
-  // useEffect를 통해 컴포넌트가 마운트될 때 userid 설정 및 초기 데이터 설정
+  // useEffect를 통해 컴포넌트가 마운트될 때 userid 설정 및 초기 데이터설정
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
