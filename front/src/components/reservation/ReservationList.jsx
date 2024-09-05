@@ -56,8 +56,8 @@ function ReservationList() {
             <div className="flex items-center px-5">
               <div className="px-5">
                 <p>
-                  <span className="font-bold text-green-900">병원 : </span>{' '}
-                  {reservation.hosp_name}
+                  <span className="font-bold text-green-900">병원 :     {reservation.hosp_name} </span>
+              
                 </p>
                 <p>
                   <span className="font-bold text-green-700">병원 번호 : </span>{' '}
