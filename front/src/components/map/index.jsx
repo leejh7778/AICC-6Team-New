@@ -296,6 +296,10 @@ function Map() {
           const y = parseFloat(items[0].y);
           setLat(y);
           setLng(x);
+
+          // 검색할 때마다 지도 중심을 설정
+          const newCenter = new naver.maps.LatLng(y, x);
+          mapRef.current.setCenter(newCenter); // 지도 중심을 해당 좌표로 이동
         } else {
           alert('주소를 찾을 수 없습니다.');
         }
