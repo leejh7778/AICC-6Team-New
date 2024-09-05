@@ -163,8 +163,8 @@ function ReservModal({ onClose, reservation }) {
                 />
               </div>
             </div>
-            <div className="modal-actions font-semibold flex justify-end">
-              <button className=' mx-5' type="button" onClick={handleSubmit}>
+            <div className="modal-actions font-semibold">
+              <button type="button" onClick={handleSubmit}>
                 {isEdit ? '수정하기' : '예약하기'}
               </button>
               <button type="button" onClick={onClose}>

@@ -346,13 +346,12 @@ function Map() {
         {isModalOpenI && selectedHospital && (
           <PostModal
             onClose={() => setIsModalOpenI(false)}
-            hospitalId={selectedHospital.hosp_id}
+            setPosts={selectedHospital.hosp_name}
             hospitalName={selectedHospital.hosp_name}
             hospitalPn={selectedHospital.hosp_pn}
           />
         )}
-        <div className="scroll-smooth overflow-y-auto w-[30%] h-[600px]">
-          <div className='flex justify-center items-center font-Aa border border-spacing-0 bg-gray-300 rounded-lg'>주변 병원 리스트</div>
+        <div className="scroll-smooth overflow-y-auto h-[600px]">
           <ul>
             {filteredHospitals.map((hospital) => (
               <li
