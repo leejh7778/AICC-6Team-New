@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './modal.css';
 
-function ReservModal({ onClose, reservation }) {
+function ReservModal({ onClose, reservation,hospitalName,hospitalPn }) {
   const [formData, setFormData] = useState({
     username: '',
     pn: '',
@@ -11,8 +11,8 @@ function ReservModal({ onClose, reservation }) {
     cat: false,
     etc: false,
     descriptionR: '',
-    hosp_name: '',
-    hosp_pn: '',
+    hosp_name: hospitalName,
+    hosp_pn: hospitalPn,
   });
 
   const [userid, setUserid] = useState(null); // 로그인한 사용자 ID 저장
@@ -163,8 +163,8 @@ function ReservModal({ onClose, reservation }) {
                 />
               </div>
             </div>
-            <div className="modal-actions font-semibold">
-              <button type="button" onClick={handleSubmit}>
+            <div className="modal-actions font-semibold justify-end">
+              <button className='mx-5' type="button" onClick={handleSubmit}>
                 {isEdit ? '수정하기' : '예약하기'}
               </button>
               <button type="button" onClick={onClose}>

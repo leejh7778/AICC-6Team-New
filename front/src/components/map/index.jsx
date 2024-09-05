@@ -4,7 +4,7 @@ import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 import ReservModal from './ReservModal';
 import PageTitle from '../PageTitle';
 import marker from '../../assets/image/marker.png';
-import PostModal from '../map/postModal';
+import PostModal from './postModal';
 
 function Map() {
   const mapRef = useRef(null);
@@ -346,12 +346,12 @@ function Map() {
         {isModalOpenI && selectedHospital && (
           <PostModal
             onClose={() => setIsModalOpenI(false)}
-            setPosts={selectedHospital.hosp_name}
             hospitalName={selectedHospital.hosp_name}
             hospitalPn={selectedHospital.hosp_pn}
           />
         )}
-        <div className="scroll-smooth overflow-y-auto h-[600px]">
+        <div className="scroll-smooth overflow-y-auto w-[30%] h-[600px]">
+          <div className='w-full font-Aa flex justify-center items-center border rounded-lg bg-gray-300'>주변 병원 리스트</div>
           <ul>
             {filteredHospitals.map((hospital) => (
               <li

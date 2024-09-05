@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaTrashAlt } from 'react-icons/fa';
 import ReservModal from '../map/ReservModal';
+import { LuArrowBigUpDash } from "react-icons/lu";
 
 function ReservationList() {
   const userid = localStorage.getItem('userid');
@@ -76,9 +77,9 @@ function ReservationList() {
               <div className="px-6">
                 <button
                   onClick={() => handleEditClickR(reservation)}
-                  className="w-10 h-10"
+                  className="w-10 h-10 flex justify-center items-center"
                 >
-                  수정
+                  <LuArrowBigUpDash className="w-7 h-7" />
                 </button>
               </div>
               <button
