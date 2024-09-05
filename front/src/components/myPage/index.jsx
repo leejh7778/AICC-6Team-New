@@ -67,7 +67,7 @@ const MyPage = ({ onLogout }) => {
   };
 
   return (
-    <div className="font-Aa max-w-4xl mx-auto p-6">
+    <div className="font-Kr max-w-4xl mx-auto p-6">
       <h1 className="flex justify-center text-4xl font-semibold">마이페이지</h1>
       <br />
 

@@ -67,9 +67,11 @@ function PostList() {
                   {post.hosp_pn}
                 </p>
               </div>
-               </div>
-               <p className="text-gray-700  overflow-y-auto w-[300px] h-12 justify-start ">{post.descriptioni}</p>
-           
+            </div>
+            <p className="text-gray-700  overflow-y-auto w-[300px] h-10 justify-start ">
+              {post.descriptioni}
+            </p>
+
             <div className="rounded-lg flex justify-center items-center">
               <div className="px-6">
                 <button

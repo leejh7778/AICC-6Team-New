@@ -65,16 +65,13 @@ function ReservationList() {
                   {reservation.hosp_pn}
                 </p>
               </div>
+              <p className="text-gray-700 px-3">내 번호: {reservation.pn}</p>
               <p className="text-gray-700 px-3">
                 반려동물: {reservation.dog ? '강아지 ' : ''}
                 {reservation.cat ? '고양이 ' : ''}
                 {reservation.etc ? '기타 ' : ''}
               </p>
             </div>
-            <div className='flex justify-center items-center'>
-            진료희망내역 : <p className="text-gray-700 px-3 justify-center items-center overflow-y-auto w-52 h-10">{reservation.descriptionr}</p>
-            </div>
-            
             <p className="text-gray-700 px-3">예약 날짜: {reservation.date}</p>
             <div className="rounded-lg flex justify-center items-center">
               <div className="px-6">
