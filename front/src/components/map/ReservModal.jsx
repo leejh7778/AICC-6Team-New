@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './modal.css';
 
-function ReservModal({ onClose, hospitalName,hospitalPn }) {
+function ReservModal({ onClose, reservation }) {
   const [formData, setFormData] = useState({
     username: '',
     pn: '',
@@ -11,23 +11,35 @@ function ReservModal({ onClose, hospitalName,hospitalPn }) {
     cat: false,
     etc: false,
     descriptionR: '',
-    hosp_name:hospitalName,
-    hosp_pn:hospitalPn,
+    hosp_name: '',
+    hosp_pn: '',
   });
 
-
-
   const [userid, setUserid] = useState(null); // 로그인한 사용자 ID 저장
+  const [isEdit, setIsEdit] = useState(false); // 수정 여부 확인
 
   useEffect(() => {
-    // 로컬 스토리지에서 토큰 가져오기
     const token = localStorage.getItem('token');
     if (token) {
-      // 토큰을 디코딩하여 사용자 ID 가져오기
-      const decodedToken = JSON.parse(atob(token.split('.')[1])); // JWT 디코딩
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
       setUserid(decodedToken.userid);
     }
-  }, []);
+    if (reservation) {
+      // 전달받은 예약 데이터로 formData를 설정
+      setFormData({
+        username: reservation.username,
+        pn: reservation.pn,
+        date: reservation.date,
+        dog: reservation.dog,
+        cat: reservation.cat,
+        etc: reservation.etc,
+        descriptionR: reservation.descriptionr,
+        hosp_name: reservation.hosp_name,
+        hosp_pn: reservation.hosp_pn,
+      });
+      setIsEdit(true); // 수정 모드로 설정
+    }
+  }, [reservation]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -39,13 +51,26 @@ function ReservModal({ onClose, hospitalName,hospitalPn }) {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('http://localhost:8080/post_reserv', {
-        ...formData,
-        userid, // 자동으로 로그인한 사용자 ID 포함
-      });
-      alert('예약이 성공적으로 완료되었습니다.');
+      if (isEdit) {
+        // 예약 수정
+        await axios.patch(
+          `http://localhost:8080/update_reserv/${reservation.reserv_idx}`,
+          {
+            ...formData,
+            userid,
+          }
+        );
+        alert('예약이 수정되었습니다.');
+      } else {
+        // 새로운 예약
+        await axios.post('http://localhost:8080/post_reserv', {
+          ...formData,
+          userid,
+        });
+        alert('예약이 성공적으로 완료되었습니다.');
+      }
       onClose(); // 모달 닫기
-      window.location.reload(); // 페이지를 새로고침하여 예약 목록을 갱신
+      window.location.reload(); // 페이지 새로고침
     } catch (error) {
       console.error('예약 실패:', error);
       alert('예약 중 오류가 발생했습니다.');
@@ -67,10 +92,12 @@ function ReservModal({ onClose, hospitalName,hospitalPn }) {
   return (
     <div className="modal font-Kr">
       <div className="modal-content min-h-[476px] max-w-[550px]">
-        <h2 className="text-3xl font-semibold pb-5">예약하기</h2>
+        <h2 className="text-3xl font-semibold pb-5">
+          {isEdit ? '예약 수정' : '예약하기'}
+        </h2>
         <div>
           <h2 className="font-semibold text-lg pb-5 text-center">
-            {hospitalName}
+            {formData.hosp_name}
           </h2>
           <form className="flex flex-col justify-start">
             <div className="inputLabel flex flex-col">
@@ -138,7 +165,7 @@ function ReservModal({ onClose, hospitalName,hospitalPn }) {
             </div>
             <div className="modal-actions font-semibold">
               <button type="button" onClick={handleSubmit}>
-                예약하기
+                {isEdit ? '수정하기' : '예약하기'}
               </button>
               <button type="button" onClick={onClose}>
                 취소
