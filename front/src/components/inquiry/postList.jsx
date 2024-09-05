@@ -67,16 +67,18 @@ function PostList() {
                   {post.hosp_pn}
                 </p>
               </div>
-               </div>
-               <p className="text-gray-700  overflow-y-auto w-[300px] h-10 justify-start ">{post.descriptioni}</p>
-           
+            </div>
+            <p className="text-gray-700  overflow-y-auto w-[300px] h-10 justify-start ">
+              {post.descriptioni}
+            </p>
+
             <div className="rounded-lg flex justify-center items-center">
               <div className="px-6">
                 <button
                   onClick={() => handleEditClickI(post)}
                   className="w-10 h-10 flex justify-center items-center"
-                  >
-                    <LuArrowBigUpDash className="w-7 h-7" />
+                >
+                  <LuArrowBigUpDash className="w-7 h-7" />
                 </button>
               </div>
               <button

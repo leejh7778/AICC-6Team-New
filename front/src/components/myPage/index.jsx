@@ -85,9 +85,7 @@ const MyPage = ({ onLogout }) => {
             {inquiries.length > 0 ? (
               <ul>
                 {inquiries.map((inquiry, index) => (
-                  <li key={index} className="mb-2">
-                    {inquiry.date} - {inquiry.title}
-                  </li>
+                  <li key={index} className="mb-2"></li>
                 ))}
               </ul>
             ) : (
@@ -109,10 +107,7 @@ const MyPage = ({ onLogout }) => {
             {reservations.length > 0 ? (
               <ul>
                 {reservations.map((reservation, index) => (
-                  <li key={index} className="mb-2">
-                    {reservation.date} - {reservation.hospitalName} -{' '}
-                    {reservation.descriptionR}
-                  </li>
+                  <li key={index} className="mb-2"></li>
                 ))}
               </ul>
             ) : (
