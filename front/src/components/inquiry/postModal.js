@@ -88,16 +88,16 @@ function PostModal({ onClose, hospitalName, hospitalPn }) {
         ></textarea>
         <div className="flex justify-end">
           <button
-            onClick={onClose}
-            className="px-3 py-1.5 bg-gray-300 text-gray-800 text-xl rounded mr-2"
-          >
-            닫기
-          </button>
-          <button
             onClick={handleSubmit}
-            className="px-3 py-1.5 bg-[#acbd9b] text-white text-xl rounded"
+            className="px-3 py-1.5 bg-[#acbd9b] text-white text-xl rounded mr-2"
           >
             저장하기
+          </button>
+          <button
+            onClick={onClose}
+            className="px-3 py-1.5 bg-gray-300 text-gray-800 text-xl rounded "
+          >
+            닫기
           </button>
         </div>
       </div>
