@@ -347,11 +347,7 @@ function Map() {
             hospitalPn={selectedHospital.hosp_pn}
           />
         )}
-<<<<<<< HEAD
         <div className='scroll-smooth overflow-y-auto h-[600px] font-Aa'>
-=======
-        <div className="scroll-smooth overflow-y-auto h-[600px]">
->>>>>>> e5928f891e097fd0060ad9a0582fa5bd9631406b
           <ul>
             {filteredHospitals.map((hospital) => (
               <li
