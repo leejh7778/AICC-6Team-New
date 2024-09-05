@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function PostModal({ onClose, post }) {
-  // 초기 상태 설정 (post 값이 있을 때 기본 값 설정)
   const [formData, setFormData] = useState({
-    username: post ? post.username : '',
-    pn: post ? post.pn : '',
-    descriptionI: post ? post.descriptionI : '',
-    hosp_name: post ? post.hosp_name : '',
-    hosp_pn: post ? post.hosp_pn : '',
+    username: '',
+    pn: '',
+    descriptionI: '',
+    hosp_name: '',
+    hosp_pn: '',
   });
   const [userid, setUserid] = useState(null);
+  const [isEdit, setIsEdit] = useState(false); // 수정 여부 확인
 
   // useEffect를 통해 컴포넌트가 마운트될 때 userid 설정 및 초기 데이터 설정
   useEffect(() => {
@@ -29,6 +29,7 @@ function PostModal({ onClose, post }) {
         hosp_name: post.hosp_name,
         hosp_pn: post.hosp_pn,
       });
+      setIsEdit(true); // 수정 모드로 설정
     }
   }, [post]);
 
@@ -48,30 +49,26 @@ function PostModal({ onClose, post }) {
     }
 
     try {
-      if (post) {
-        // 수정 요청 (post가 존재할 경우)
+      if (isEdit) {
+        // 예약 수정
         await axios.patch(`http://localhost:8080/update_inq/${post.inq_idx}`, {
           ...formData,
           userid,
         });
-        alert('문의가 성공적으로 수정되었습니다.');
+        alert('예약이 수정되었습니다.');
       } else {
-        // 신규 문의 등록 요청
-        await axios.post(`http://localhost:8080/post_inq`, {
+        // 새로운 예약
+        await axios.post('http://localhost:8080/post_inq', {
           ...formData,
           userid,
         });
-        alert('문의가 성공적으로 등록되었습니다.');
+        alert('예약이 성공적으로 완료되었습니다.');
       }
-
-      onClose();
-      window.location.reload();
+      onClose(); // 모달 닫기
+      window.location.reload(); // 페이지 새로고침
     } catch (error) {
-      console.error(
-        '문의 등록 실패:',
-        error.response ? error.response.data : error.message
-      );
-      alert('문의 등록 중 오류가 발생했습니다.');
+      console.error('예약 실패:', error);
+      alert('예약 중 오류가 발생했습니다.');
     }
   };
 
@@ -86,7 +83,7 @@ function PostModal({ onClose, post }) {
       {/* 모달 내용 */}
       <div className="relative bg-white text-xl p-6 rounded-lg w-1/3 shadow-lg z-10 font-kr">
         <h2 className="font-Kr font-bold mb-4 text-4xl text-center">
-          {post ? '문의 수정' : 'Contact Us'}
+          {isEdit ? '문의 수정' : 'Contact Us'}
         </h2>
         <input
           type="text"
@@ -116,7 +113,7 @@ function PostModal({ onClose, post }) {
             onClick={handleSubmit}
             className="px-3 py-1.5 bg-[#acbd9b] text-white text-xl rounded mr-2"
           >
-            저장하기
+            {isEdit ? '수정하기' : '문의하기'}
           </button>
           <button
             onClick={onClose}

@@ -75,8 +75,8 @@ function PostList() {
                 <button
                   onClick={() => handleEditClickI(post)}
                   className="w-10 h-10 flex justify-center items-center"
-                  >
-                    <LuArrowBigUpDash className="w-7 h-7" />
+                >
+                  <LuArrowBigUpDash className="w-7 h-7" />
                 </button>
               </div>
               <button
