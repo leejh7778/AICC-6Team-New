@@ -66,9 +66,9 @@ function PostList() {
                   {post.hosp_pn}
                 </p>
               </div>
-              <p className="text-gray-700 px-3">내 번호: {post.pn}</p>
+         
             </div>
-
+<div>     <p className="text-gray-700 px-3">내 번호: {post.pn}</p></div>
             <div className="rounded-lg flex justify-center items-center">
               <div className="px-6">
                 <button
