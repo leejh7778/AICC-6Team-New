@@ -113,7 +113,7 @@ function PostModal({ onClose, post }) {
             onClick={handleSubmit}
             className="px-3 py-1.5 bg-[#acbd9b] text-white text-xl rounded mr-2"
           >
-            {isEdit ? '수정하기' : '예약하기'}
+            {isEdit ? '수정하기' : '문의하기'}
           </button>
           <button
             onClick={onClose}

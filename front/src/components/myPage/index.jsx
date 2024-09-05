@@ -72,28 +72,6 @@ const MyPage = ({ onLogout }) => {
       <br />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-9 mt-20">
-        {/* 1:1 문의 카드 */}
-        <a
-          href="/inquiry"
-          className="flex flex-col p-8 bg-[#f1f3ea] rounded-lg shadow-lg hover:shadow-2xl transition-shadow w-300 h-48"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold">1:1 문의</h2>
-            <PiChatDots className="w-14 h-14" />
-          </div>
-          <div className="mt-4">
-            {inquiries.length > 0 ? (
-              <ul>
-                {inquiries.map((inquiry, index) => (
-                  <li key={index} className="mb-2"></li>
-                ))}
-              </ul>
-            ) : (
-              <p>문의 내역이 없습니다.</p>
-            )}
-          </div>
-        </a>
-
         {/* 나의 예약 카드 */}
         <a
           href="/reservation"
@@ -112,6 +90,28 @@ const MyPage = ({ onLogout }) => {
               </ul>
             ) : (
               <p>예약 내역이 없습니다.</p>
+            )}
+          </div>
+        </a>
+
+        {/* 1:1 문의 카드 */}
+        <a
+          href="/inquiry"
+          className="flex flex-col p-8 bg-[#f1f3ea] rounded-lg shadow-lg hover:shadow-2xl transition-shadow w-300 h-48"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold">1:1 문의</h2>
+            <PiChatDots className="w-14 h-14" />
+          </div>
+          <div className="mt-4">
+            {inquiries.length > 0 ? (
+              <ul>
+                {inquiries.map((inquiry, index) => (
+                  <li key={index} className="mb-2"></li>
+                ))}
+              </ul>
+            ) : (
+              <p>문의 내역이 없습니다.</p>
             )}
           </div>
         </a>
