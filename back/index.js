@@ -24,7 +24,6 @@ app.use(bodyParser.json());
 // 로그인 API 엔드포인트
 app.post('/login', async (req, res) => {
   const { userid, password } = req.body;
-  console.log(userid, password);
 
   try {
     const result = await pool.query(
@@ -32,11 +31,8 @@ app.post('/login', async (req, res) => {
       [userid]
     );
 
-    // console.log(result);
-
     if (result.rows.length > 0) {
       const user = result.rows[0];
-      // console.log(user);
       const match = await bcrypt.compare(password, user.password);
 
       if (match) {

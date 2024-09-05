@@ -20,7 +20,6 @@
     "express": "^4.19.2",
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
-    "module": "^1.2.5",
     "nodemon": "^3.1.4",
     "pg": "^8.12.0",
     "proj4": "^2.12.0",

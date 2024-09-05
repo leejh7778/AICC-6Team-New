@@ -9,7 +9,7 @@ function PostList() {
     const getPostList = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/get_Inq/${userid}`
+          `http://localhost:8080/get_inq/${userid}`
         );
         setPostList(response.data);
       } catch (error) {
@@ -20,7 +20,7 @@ function PostList() {
     getPostList();
   }, [userid]);
 
-  const deleteInq = async () => {
+  const deleteInq = async (postList) => {
     const confirmDeletion = window.confirm('정말로 삭제하시겠습니까?');
     if (confirmDeletion) {
       try {

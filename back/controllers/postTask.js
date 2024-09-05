@@ -115,8 +115,6 @@ exports.loginUser = [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    console.log(req.body);
-
     const { userid, password } = req.body;
 
     try {
