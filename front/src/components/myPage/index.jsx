@@ -18,49 +18,6 @@ const MyPage = ({ onLogout }) => {
       navigate('/login');
       return;
     }
-
-    // 예약 데이터를 서버에서 받아옴
-    const fetchReservations = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/get_reserv/`, // 예약 엔드포인트
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            params: {
-              user_id: userid,
-            },
-          }
-        );
-        setReservations(response.data);
-      } catch (error) {
-        console.error('예약 데이터를 불러오는데 실패했습니다:', error);
-      }
-    };
-
-    // 1:1 문의 데이터를 서버에서 받아옴
-    const fetchInquiries = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/get_inquiry/`, // 문의 엔드포인트
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            params: {
-              user_id: userid,
-            },
-          }
-        );
-        setInquiries(response.data);
-      } catch (error) {
-        console.error('문의 데이터를 불러오는데 실패했습니다:', error);
-      }
-    };
-
-    fetchReservations();
-    fetchInquiries();
   }, [navigate]);
 
   // 탈퇴 처리 함수

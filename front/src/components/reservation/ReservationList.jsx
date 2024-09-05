@@ -78,7 +78,7 @@ console.log(reservationList)
           >
           <div className='bg-[#f1f3ea] w-full flex justify-between items-center py-5 rounded-lg'>
 <div className='flex items-center px-5'>
-           <div className='px-5 '>
+           <div className='px-5'>
             <p><span className='font-bold text-green-900'>병원 : </span> {reservationList.hosp_name}</p>
             <p><span className='font-bold text-green-700'>병원 번호 : </span> {reservationList.hosp_pn}</p>
            </div>

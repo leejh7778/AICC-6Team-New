@@ -309,7 +309,7 @@ function Map() {
 
   return (
     <div className="container flex flex-col  justify-center  w-full mt-3">
-      <PageTitle title="Map" className="p-7 w-[80%]" />
+      <PageTitle title="Map" className="p-7 w-[70%]" />
       <div id="nomap" className="flex">
         <div
           id="map"
@@ -351,7 +351,7 @@ function Map() {
             hospitalPn={selectedHospital.hosp_pn}
           />
         )}
-        <div className="scroll-smooth overflow-y-auto h-[600px] font-Aa">
+        <div className="scroll-smooth overflow-y-auto w-[30%] h-[600px] font-Aa">
           <ul>
             {filteredHospitals.map((hospital) => (
               <li
