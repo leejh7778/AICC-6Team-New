@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import PostModal from '../map/PostModal'; // 수정 모달 컴포넌트
+import { LuArrowBigUpDash } from 'react-icons/lu';
 
 function PostList() {
   const userid = localStorage.getItem('userid');
@@ -53,10 +54,10 @@ function PostList() {
   return (
     <div className="text-sm font-Aa min-w-[845px]">
       {PostList.map((post) => (
-        <div key={post.inq_idx} className="flex flex-col m-3">
-          <div className="bg-[#f1f3ea] flex justify-between items-center py-5 rounded-lg">
-            <div className="flex items-center px-5">
-              <div className="px-5">
+        <div key={post.inq_idx} className="flex flex-col my-3">
+          <div className="bg-[#f1f3ea] flex px-3 justify-between items-center py-5 rounded-lg">
+            <div className="flex items-center">
+              <div className="">
                 <p>
                   <span className="font-bold text-green-900">병원 : </span>
                   {post.hosp_name}
@@ -66,16 +67,16 @@ function PostList() {
                   {post.hosp_pn}
                 </p>
               </div>
-         
-            </div>
-<div>     <p className="text-gray-700 px-3">내 번호: {post.pn}</p></div>
+               </div>
+               <p className="text-gray-700  overflow-y-auto w-[300px] h-10 justify-start ">{post.descriptioni}</p>
+           
             <div className="rounded-lg flex justify-center items-center">
               <div className="px-6">
                 <button
                   onClick={() => handleEditClickI(post)}
-                  className="w-10 h-10"
-                >
-                  수정
+                  className="w-10 h-10 flex justify-center items-center"
+                  >
+                    <LuArrowBigUpDash className="w-7 h-7" />
                 </button>
               </div>
               <button
