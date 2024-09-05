@@ -296,6 +296,10 @@ function Map() {
           const y = parseFloat(items[0].y);
           setLat(y);
           setLng(x);
+
+          // 검색할 때마다 지도 중심을 설정
+          const newCenter = new naver.maps.LatLng(y, x);
+          mapRef.current.setCenter(newCenter); // 지도 중심을 해당 좌표로 이동
         } else {
           alert('주소를 찾을 수 없습니다.');
         }
@@ -347,11 +351,7 @@ function Map() {
             hospitalPn={selectedHospital.hosp_pn}
           />
         )}
-<<<<<<< HEAD
-        <div className='scroll-smooth overflow-y-auto h-[600px] font-Aa'>
-=======
-        <div className="scroll-smooth overflow-y-auto h-[600px]">
->>>>>>> e5928f891e097fd0060ad9a0582fa5bd9631406b
+        <div className="scroll-smooth overflow-y-auto h-[600px] font-Aa">
           <ul>
             {filteredHospitals.map((hospital) => (
               <li
