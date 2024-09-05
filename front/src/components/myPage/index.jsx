@@ -67,7 +67,7 @@ const MyPage = ({ onLogout }) => {
   };
 
   return (
-    <div className="font-Kr max-w-4xl mx-auto p-6">
+    <div className="font-Aa max-w-4xl mx-auto p-6">
       <h1 className="flex justify-center text-4xl font-semibold">마이페이지</h1>
       <br />
 
@@ -82,15 +82,9 @@ const MyPage = ({ onLogout }) => {
             <PiChatDots className="w-14 h-14" />
           </div>
           <div className="mt-4">
-            {inquiries.length > 0 ? (
-              <ul>
-                {inquiries.map((inquiry, index) => (
-                  <li key={index} className="mb-2">
-                    {inquiry.date} - {inquiry.title}
-                  </li>
-                ))}
-              </ul>
-            ) : (
+            {inquiries.length > 0 ? ( <div>문의 내역이 있습니다.</div>)
+   
+            : (
               <p>문의 내역이 없습니다.</p>
             )}
           </div>
@@ -106,16 +100,8 @@ const MyPage = ({ onLogout }) => {
             <BsCalendarCheck className="w-12 h-12" />
           </div>
           <div className="mt-4">
-            {reservations.length > 0 ? (
-              <ul>
-                {reservations.map((reservation, index) => (
-                  <li key={index} className="mb-2">
-                    {reservation.date} - {reservation.hospitalName} -{' '}
-                    {reservation.descriptionR}
-                  </li>
-                ))}
-              </ul>
-            ) : (
+            {reservations.length > 0 ? (<div>문의 내역이 있습니다.</div>
+            ): (
               <p>예약 내역이 없습니다.</p>
             )}
           </div>
