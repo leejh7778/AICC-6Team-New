@@ -4,7 +4,7 @@ import checkForMarkersRendering from '../../util/checkForMarkersRendering';
 import ReservModal from './ReservModal';
 import PageTitle from '../PageTitle';
 import marker from '../../assets/image/marker.png';
-import PostModal from '../map/postModal';
+import PostModal from '../map/PostModal';
 
 function Map() {
   const mapRef = useRef(null);

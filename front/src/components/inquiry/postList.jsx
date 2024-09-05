@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import PostModal from '../map/postModal'; // 수정 모달 컴포넌트
+import PostModal from '../map/PostModal'; // 수정 모달 컴포넌트
 
 function PostList() {
   const userid = localStorage.getItem('userid');
@@ -12,10 +12,8 @@ function PostList() {
   useEffect(() => {
     const getPostList = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/get_inq/${userid}`
-        );
-        setPostList(response.data);
+        const resp = await axios.get(`http://localhost:8080/get_inq/${userid}`);
+        setPostList(resp.data);
       } catch (error) {
         console.error('문의 목록을 가져오는 중 오류가 발생했습니다:', error);
       }
@@ -42,7 +40,7 @@ function PostList() {
     }
   };
 
-  const handleEditClick = (post) => {
+  const handleEditClickI = (post) => {
     setCurrentPost(post); // 현재 선택된 문의를 상태에 저장
     setIsModalOpen(true); // 모달 열기
   };
@@ -70,15 +68,16 @@ function PostList() {
               </div>
               <p className="text-gray-700 px-3">내 번호: {post.pn}</p>
             </div>
-            <p className="text-gray-700 px-3">문의 날짜: {post.date}</p>
 
             <div className="rounded-lg flex justify-center items-center">
-              <button
-                onClick={() => handleEditClick(post)}
-                className="w-10 h-10"
-              >
-                <FaEdit className="w-5 h-5" />
-              </button>
+              <div className="px-6">
+                <button
+                  onClick={() => handleEditClickI(post)}
+                  className="w-10 h-10"
+                >
+                  수정
+                </button>
+              </div>
               <button
                 onClick={() => deleteInq(post)}
                 className="w-10 h-10 ml-2"
@@ -90,13 +89,7 @@ function PostList() {
         </div>
       ))}
       {isModalOpen && currentPost && (
-        <PostModal
-          onClose={handleModalClose}
-          hospitalName={currentPost.hosp_name}
-          hospitalPn={currentPost.hosp_pn}
-          postDetails={currentPost} // 수정할 문의 세부 사항 전달
-          setPostList={setPostList} // 업데이트된 목록을 반영하기 위한 함수 전달
-        />
+        <PostModal onClose={handleModalClose} post={currentPost} />
       )}
     </div>
   );

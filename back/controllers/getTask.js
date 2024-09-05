@@ -70,9 +70,8 @@ exports.getInq = async (req, res) => {
         hosp_name, 
         hosp_pn, 
         pn, 
-        TO_CHAR(date, 'YYYY-MM-DD') AS date, 
         descriptionI 
-      FROM inquiry 
+      FROM inquiry
       WHERE userid = $1
     `;
     const result = await database.query(query, [userid]);
