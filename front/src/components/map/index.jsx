@@ -129,7 +129,7 @@ function Map() {
                 color: #666;
                 margin-bottom: 15px;
               ">
-                ${hospital.hosp_pn}
+                 ${hospital.hosp_pn ? hospital.hosp_pn : ''}
               </div>
               <div style="
                 display: flex;
@@ -351,7 +351,7 @@ function Map() {
             hospitalPn={selectedHospital.hosp_pn}
           />
         )}
-        <div className='scroll-smooth overflow-y-auto h-[600px] font-Aa'>
+        <div className="scroll-smooth overflow-y-auto h-[600px] font-Aa">
           <ul>
             {filteredHospitals.map((hospital) => (
               <li
