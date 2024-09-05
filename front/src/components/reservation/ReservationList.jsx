@@ -43,7 +43,7 @@ function ReservationList() {
   };
 
   // 수정 버튼 클릭 시 실행되는 함수
-  const handleEditClick = (reservation) => {
+  const handleEditClickR = (reservation) => {
     setCurrentReservation(reservation); // 현재 선택된 예약을 상태에 저장
     setIsModalOpen(true); // 모달 열기
   };
@@ -75,7 +75,7 @@ function ReservationList() {
             <div className="rounded-lg flex justify-center items-center">
               <div className="px-6">
                 <button
-                  onClick={() => handleEditClick(reservation)}
+                  onClick={() => handleEditClickR(reservation)}
                   className="w-10 h-10"
                 >
                   수정

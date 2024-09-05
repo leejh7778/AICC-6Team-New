@@ -10,17 +10,37 @@ const MyPage = ({ onLogout }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userid = localStorage.getItem('userid');
+    const fetchData = async () => {
+      const token = localStorage.getItem('token');
+      const userid = localStorage.getItem('userid');
 
-    if (!token) {
-      // 로그인이 되어 있지 않으면 로그인 페이지로 이동
-      navigate('/login');
-      return;
-    }
+      if (!token) {
+        // 로그인이 되어 있지 않으면 로그인 페이지로 이동
+        navigate('/login');
+        return;
+      }
+
+      try {
+        // API 호출로 예약 데이터와 문의 데이터를 가져옵니다.
+        const [reservationsResponse, inquiriesResponse] = await Promise.all([
+          axios.get(`http://localhost:8080/get_reserv/${userid}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          axios.get(`http://localhost:8080/get_inq/${userid}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+        ]);
+
+        setReservations(reservationsResponse.data);
+        setInquiries(inquiriesResponse.data);
+      } catch (error) {
+        console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
+      }
+    };
+
+    fetchData();
   }, [navigate]);
 
-  // 탈퇴 처리 함수
   const handleAccountDeletion = async () => {
     const confirmDeletion = window.confirm('정말로 탈퇴하시겠습니까?');
 

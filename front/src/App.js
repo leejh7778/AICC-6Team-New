@@ -6,7 +6,7 @@ import Register from './components/register/index';
 import Mypage from './components/myPage/index';
 import Map from './components/map';
 import Community from './components/community';
-import Inquiry from './components/inquiry';
+import Inquiry from './components/inquiry/index';
 import PostDetail from './components/inquiry/postDetail';
 import PostForm from './components/inquiry/postForm';
 import Reservation from './components/reservation/index';
