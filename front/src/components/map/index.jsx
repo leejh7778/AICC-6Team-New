@@ -120,6 +120,29 @@ function Map() {
           }
         });
 
+        infoWindowRef.current = infoWindow;
+
+        const contentElement = infoWindowRef.current.getContentElement();
+
+        const clickableElementsR =
+          contentElement.querySelectorAll('.reserv-button');
+        const clickableElementsI =
+          contentElement.querySelectorAll('.inquiry-button');
+
+        clickableElementsR.forEach((element) => {
+          element.addEventListener('click', function () {
+            handleReservationClickR(hospital);
+          });
+        });
+        clickableElementsI.forEach((element) => {
+          element.addEventListener('click', function () {
+            handleReservationClickI(hospital);
+          });
+        });
+
+
+
+
         return marker;
       });
       setHospitalMarkers(markers);
@@ -141,6 +164,10 @@ function Map() {
       alert('현재 위치 정보를 가져오는 데 실패했습니다.');
     }
   }, [naver, currentMyLocation, hospitals, lat, lng]);
+
+
+
+
 
   const token = localStorage.getItem('token');
   const handleReservationClickR = (hospital) => {
@@ -257,7 +284,7 @@ function Map() {
             hospitalPn={selectedHospital.hosp_pn}
           />
         )}
-        <div className='scroll-smooth'>
+        <div className='scroll-smooth overflow-y-auto h-[600px]'>
           <ul>
             {filteredHospitals.map((hospital) => (
               <li
