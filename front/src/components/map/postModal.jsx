@@ -1,25 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function PostModal({ onClose, hospitalName, hospitalPn }) {
-  // 초기 상태 설정
+function PostModal({ onClose, post }) {
+  // 초기 상태 설정 (post 값이 있을 때 기본 값 설정)
   const [formData, setFormData] = useState({
-    username: '',
-    pn: '',
-    descriptionI: '',
-    hosp_name: hospitalName,
-    hosp_pn: hospitalPn,
+    username: post ? post.username : '',
+    pn: post ? post.pn : '',
+    descriptionI: post ? post.descriptionI : '',
+    hosp_name: post ? post.hosp_name : '',
+    hosp_pn: post ? post.hosp_pn : '',
   });
   const [userid, setUserid] = useState(null);
 
-  // useEffect를 통해 컴포넌트가 마운트될 때 userid 설정
+  // useEffect를 통해 컴포넌트가 마운트될 때 userid 설정 및 초기 데이터 설정
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = JSON.parse(atob(token.split('.')[1])); // JWT 디코딩
       setUserid(decodedToken.userid);
     }
-  }, []);
+
+    // post가 존재할 경우 기존 데이터를 formData에 세팅
+    if (post) {
+      setFormData({
+        username: post.username,
+        pn: post.pn,
+        descriptionI: post.descriptioni,
+        hosp_name: post.hosp_name,
+        hosp_pn: post.hosp_pn,
+      });
+    }
+  }, [post]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,18 +48,25 @@ function PostModal({ onClose, hospitalName, hospitalPn }) {
     }
 
     try {
-      // 서버로 요청 보내기
-      await axios.post(`http://localhost:8080/post_inq`, {
-        ...formData,
-        userid,
-      });
+      if (post) {
+        // 수정 요청 (post가 존재할 경우)
+        await axios.patch(`http://localhost:8080/update_inq/${post.inq_idx}`, {
+          ...formData,
+          userid,
+        });
+        alert('문의가 성공적으로 수정되었습니다.');
+      } else {
+        // 신규 문의 등록 요청
+        await axios.post(`http://localhost:8080/post_inq`, {
+          ...formData,
+          userid,
+        });
+        alert('문의가 성공적으로 등록되었습니다.');
+      }
 
-      // 성공 시 처리
-      alert('문의가 성공적으로 등록되었습니다.');
       onClose();
       window.location.reload();
     } catch (error) {
-      // 오류 시 처리
       console.error(
         '문의 등록 실패:',
         error.response ? error.response.data : error.message
@@ -68,7 +86,7 @@ function PostModal({ onClose, hospitalName, hospitalPn }) {
       {/* 모달 내용 */}
       <div className="relative bg-white text-xl p-6 rounded-lg w-1/3 shadow-lg z-10 font-kr">
         <h2 className="font-Kr font-bold mb-4 text-4xl text-center">
-          Contact Us
+          {post ? '문의 수정' : 'Contact Us'}
         </h2>
         <input
           type="text"

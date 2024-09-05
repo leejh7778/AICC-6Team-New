@@ -7,8 +7,6 @@ import Mypage from './components/myPage/index';
 import Map from './components/map';
 import Community from './components/community';
 import Inquiry from './components/inquiry/index';
-import PostDetail from './components/inquiry/postDetail';
-import PostForm from './components/inquiry/postForm';
 import Reservation from './components/reservation/index';
 import Header from './components/Header';
 import Navibar from './components/Navibar';
@@ -55,9 +53,6 @@ function App() {
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/mypage" element={<Mypage onLogout={handleLogout} />} />
           <Route path="/inquiry" element={<Inquiry />} />
-          <Route path="/postDetail" element={<PostDetail />} />
-          <Route path="/postForm" element={<PostForm />} />
-          <Route path="/edit/:id" element={<PostForm />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reservation" element={<Reservation />} />
 
