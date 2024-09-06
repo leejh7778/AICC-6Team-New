@@ -83,13 +83,24 @@ const MyPage = ({ onLogout }) => {
           </div>
           <div className="mt-4">
             {reservations.length > 0 ? (
-              <ul>
-                {reservations.map((reservation, index) => (
-                  <li key={index} className="mb-2"></li>
-                ))}
-              </ul>
+              <div>
+                {' '}
+                {/* Wrap in a single container */}
+                <p className="font-medium font-Kr">예약 내역 보기</p>{' '}
+                {/* Display this only once */}
+                <ul>
+                  {inquiries.map((inquiry, index) => (
+                    <li key={index} className="mb-2">
+                      <a
+                        href={`/inquiries/${inquiry.id}`}
+                        className="text-blue-500 underline"
+                      ></a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ) : (
-              <p>예약 내역이 없습니다.</p>
+              <p className=" font-Kr font-medium">예약 내역이 없습니다.</p>
             )}
           </div>
         </a>
@@ -105,13 +116,24 @@ const MyPage = ({ onLogout }) => {
           </div>
           <div className="mt-4">
             {inquiries.length > 0 ? (
-              <ul>
-                {inquiries.map((inquiry, index) => (
-                  <li key={index} className="mb-2"></li>
-                ))}
-              </ul>
+              <div>
+                {' '}
+                {/* Wrap in a single container */}
+                <p className="font-medium font-Kr">문의 내역 보기</p>{' '}
+                {/* Display this only once */}
+                <ul>
+                  {inquiries.map((inquiry, index) => (
+                    <li key={index} className="mb-2">
+                      <a
+                        href={`/inquiries/${inquiry.id}`}
+                        className="text-blue-500 underline"
+                      ></a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ) : (
-              <p>문의 내역이 없습니다.</p>
+              <p className="font-Kr font-medium">문의 내역이 없습니다.</p>
             )}
           </div>
         </a>
